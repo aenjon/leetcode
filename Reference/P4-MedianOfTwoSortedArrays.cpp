@@ -21,6 +21,7 @@ public:
             return getkth(s, m, l + j, n - j, k - j);
         else
         	/*
+        	 *
         	 * All element before s[i-1] are less than l[i-1], for same reason
         	 * elements before s[i-1] will not be the kth element.
         	 */
