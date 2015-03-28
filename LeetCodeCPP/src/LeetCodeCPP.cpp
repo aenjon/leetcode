@@ -5,9 +5,11 @@
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
 //============================================================================
+using namespace std;
 
 #include <iostream>
-using namespace std;
+#include <string>
+
 
 class LeetCode{
 public:
@@ -70,13 +72,74 @@ public:
     		return getkth(A,m,B,n,l);
     }
 
+    /**
+     * Problem #5: Longest Palindromic Substring
+     */
+    char *longestPalindrome(char *s) {
+    	int start = 0;
+    	int maxlen = 1;
+    	int i = 1;
+    	while (*(s+i) != '\0'){
+    		findlongestpal(s,i, &start, &maxlen, 0);
+    		findlongestpal(s,i, &start, &maxlen, 1);
+    		i++;
+    	}
+    	s[start+maxlen] ='\0';
+    	return s+start;
+    }
+
+    string longestPalindrome(string s) {
+    	//if (s == NULL || s.length() <=1) return s;
+    	size_t start = 0, maxlen = 1;
+    	for (int i = 1; i<s.length(); i++){
+    		findlongestpalcpp(s, i, &start, &maxlen, 0);
+    		findlongestpalcpp(s, i, &start, &maxlen, 1);
+    	}
+    	return s.substr(start, maxlen);
+    }
+
+
+private:
+    void findlongestpal(char* s, int i, int* start, int* maxlen, int odd){
+    	int low = i-1;
+    	int high = odd == 1 ? i+1 : i;
+		while (i>=0 && *(s+high) != '\0' && *(s+low) == *(s+high)){
+			if (high-low+1 > *maxlen){
+				*start = low;
+				*maxlen = high-low+1;
+			}
+			low--;
+			high++;
+		}
+    }
+
+    void findlongestpalcpp(string s, int i, size_t* start, size_t* maxlen, int odd){
+    	int low = i-1;
+    	int high = odd == 1 ? i+1 : i;
+		while ( low>=0 && high < s.length()){
+			if (s.at(low) != s.at(high))
+				break;
+			if (high-low+1 > *maxlen){
+				*start = low;
+				*maxlen = high-low+1;
+			}
+			low--;
+			high++;
+		}
+    }
 };
 
 int main() {
 	LeetCode leetcode;
-	int A[] = {2, 5, 6, 10};
-	int B[] = {1, 4, 11, 12};
-	cout << leetcode.findMedianSortedArrays(A,4,B,4) << endl;
+	/* Problem #4: Median of Two Sorted Arrays */
+	// int A[] = {2, 5, 6, 10};
+	// int B[] = {1, 4, 11, 12};
+
+	/* Problem #5: longestPalindrome */
+	//char teststrint[] = "ccb";
+	string str = "baccae";
+	//printf("Result is %s\n", leetcode.longestPalindrome(str));
+	cout << leetcode.longestPalindrome(str) << endl;
 	return 0;
 
 }
