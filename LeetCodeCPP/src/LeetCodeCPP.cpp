@@ -100,6 +100,8 @@ public:
 
 
 private:
+
+
     void findlongestpal(char* s, int i, int* start, int* maxlen, int odd){
     	int low = i-1;
     	int high = odd == 1 ? i+1 : i;
