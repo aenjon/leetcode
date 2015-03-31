@@ -93,6 +93,47 @@ public class ArrowCode {
      * Problem No. 4
      * Median of two sorted arrays
      */
+    /* See LeetCode CPP */
+    
+    /**
+     * Longest Palindromic Substring 
+     */
+    public String longestPalindrome(String s) {
+    	if (s == null || s.isEmpty()) return s;
+    	int start = 0, maxlen = 1;
+    	int low, high;
+    	for(int i=1; i<s.length(); i++){
+    		/*
+    		 *  Start searching from the middle of the substring.
+    		 *  If the pair chars are same, move the low end backward and move the high end forward
+    		 *  Until it reaches the end of the string or the pair are different
+    		 *  
+    		 *  The first "while" loop tests the case of the substring's length is an even number, like "abba".
+    		 *  The second "while" loop tests the case of the substring's length is an odd number, like "abcba".
+    		 */    		
+    		low = i-1;
+    		high = i;
+    		while (low >=0 && high < s.length() && s.charAt(low) == s.charAt(high)){
+    			if (high - low + 1 > maxlen){
+    				start = low;
+    				maxlen = high-low+1;
+    			}
+    			low--;
+    			high++;
+    		}
+    		low = i-1;
+    		high = i+1;
+    		while (low >=0 && high < s.length() && s.charAt(low) == s.charAt(high)){
+    			if (high-low+1 > maxlen){
+    				start = low;
+    				maxlen = high-low+1;
+    			}
+    			low--;
+    			high++;
+    		}
+    	}
+    	return s.substring(start,start+maxlen);
+    }    
     
     /**
      * Problem No. 189
