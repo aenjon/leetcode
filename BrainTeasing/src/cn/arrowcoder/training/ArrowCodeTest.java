@@ -50,8 +50,15 @@ public class ArrowCodeTest {
 	     * Problem No. 3
 	     * Longest Substring Without Repeating Characters
 	     */
-		String s = "bvbf90daceb3";
-		System.out.println(arrowcode.lengthOfLongestSubstring(s));
+		//String s = "bvbf90daceb3";
+		//System.out.println(arrowcode.lengthOfLongestSubstring(s));
+		
+		/**
+		 * Problme No.5
+		 */
+		//String s = "eabcddcbaf";
+		String s = "e";
+		System.out.println(arrowcode.longestPalindromeN(s));
 		/**
 		 * Problem No.189
 		 * Rotate Array
