@@ -5,10 +5,10 @@
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
 //============================================================================
-using namespace std;
-
 #include <iostream>
 #include <string>
+
+using namespace std;
 
 
 class LeetCode{
@@ -98,9 +98,46 @@ public:
     	return s.substr(start, maxlen);
     }
 
+    string longestPalindromeN(string s) {
+    	string T = preProcess(s);
+    	int n = T.length();
+    	int* P = new int[n];
+    	int C = 0, R = 0;
+    	for (int i = 1; i<n-1; i++){
+    		int i_mirror = 2*C - i;
+    		P[i] = R > i ? min(R-i,P[i_mirror]) : 0;
+
+    		while (T[i+1+P[i]] == T[i-1-P[i]])
+    			P[i]++;
+    		if (P[i]+i > R){
+    			R = i + P[i];
+    			C = i;
+    		}
+    	}
+    	int maxlen = 0, indexcenter = 0;
+    	for (int i=1;i<n-1;i++){
+    		if(P[i] > maxlen){
+    			maxlen = P[i];
+    			indexcenter = i;
+    		}
+    	}
+        delete[] P;
+        return s.substr((indexcenter-1-maxlen)/2, maxlen);
+    }
+
 
 private:
 
+    string preProcess(string s){
+    	if (s.length() == 0)
+    		return "^$";
+    	string ret = "^";
+    	int n = s.length();
+    	for (int i=0; i<n; i++)
+    		ret += "#" + s.substr(i,1);
+    	ret += "#$";
+    	return ret;
+    }
 
     void findlongestpal(char* s, int i, int* start, int* maxlen, int odd){
     	int low = i-1;
@@ -118,7 +155,8 @@ private:
     void findlongestpalcpp(string s, int i, size_t* start, size_t* maxlen, int odd){
     	int low = i-1;
     	int high = odd == 1 ? i+1 : i;
-		while ( low>=0 && high < s.length()){
+    	int len = s.length();
+		while ( low>=0 && high < len){
 			if (s.at(low) != s.at(high))
 				break;
 			if (high-low+1 > *maxlen){
@@ -139,9 +177,9 @@ int main() {
 
 	/* Problem #5: longestPalindrome */
 	//char teststrint[] = "ccb";
-	string str = "baccae";
+	string str = "bbb";
 	//printf("Result is %s\n", leetcode.longestPalindrome(str));
-	cout << leetcode.longestPalindrome(str) << endl;
+	cout << leetcode.longestPalindromeN(str) << endl;
 	return 0;
 
 }
