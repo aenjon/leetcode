@@ -63,8 +63,17 @@ public class ArrowCodeTest {
 		/**
 		 * Problem No.6
 		 */
-		String s = "PAYPALISHIRING";
-		System.out.println(arrowcode.convert2(s, 4));
+		//String s = "PAYPALISHIRING";
+		//System.out.println(arrowcode.convert2(s, 4));
+		
+		/**
+		 * Problem No.7
+		 */
+		//2147483647 
+		int input = -1534236469;
+		//System.out.println( 1000 << 22);
+		//System.out.println(964632435 * 10 + 1);
+		System.out.println(arrowcode.reverse(input));
 		/**
 		 * Problem No.189
 		 * Rotate Array

@@ -267,6 +267,27 @@ public class ArrowCode {
     }
     
     /**
+     * Reverse Integer 
+     */
+    public int reverse(int x) {
+        int ret = 0;
+        boolean positive = x > 0 ? true : false;
+        do{
+        	if ( positive && (ret << 1 < 0 || ret << 2 < 0 || ret << 3 < 0))
+        		return 0;
+        	if ( !positive && (ret << 1 > 0 || ret << 2 > 0 || ret << 3 > 0))
+        		return 0;
+        	ret = ret * 10 + x % 10;
+        	if (positive && ret < 0)
+        		return 0;
+        	if (!positive && ret > 0)
+        		return 0;
+        	x /= 10;        	
+        } while (x != 0);
+        return ret;
+    }
+    
+    /**
      * Problem No. 189
      * Rotate Array
      */
