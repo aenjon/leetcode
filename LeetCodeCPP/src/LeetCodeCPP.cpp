@@ -5,10 +5,12 @@
 // Copyright   : Your copyright notice
 // Description : Hello World in C++, Ansi-style
 //============================================================================
+
 #include <iostream>
 #include <string>
 
 using namespace std;
+
 
 
 class LeetCode{
@@ -125,6 +127,40 @@ public:
         return s.substr((indexcenter-1-maxlen)/2, maxlen);
     }
 
+    /**
+     * Problem #6: ZigZag Conversion
+     */
+    string convert(string s, int nRows) {
+    	if (s.empty() || nRows <= 1) return s;
+    	string ret = "";
+    	int step = 2*nRows - 2;
+    	int len = s.length();
+    	for(int i=0; i<nRows; i++){
+    		if (i==0 || i == nRows-1){
+    			int curindex = i;
+    			while (curindex < len){
+    				ret += s.substr(curindex,1);
+    				curindex += step;
+    			}
+    		}else{
+    			int lindex = i;
+    			int rindex = 2*nRows-2-i;
+    			while(true){
+    				if (lindex < len){
+    					ret += s.substr(lindex,1);
+    					lindex += step;
+    				}else
+    					break;
+    				if (rindex < len){
+    					ret += s.substr(rindex,1);
+    					rindex += step;
+    				}else
+    					break;
+    			}
+    		}
+    	}
+    	return ret;
+    }
 
 private:
 
@@ -177,9 +213,9 @@ int main() {
 
 	/* Problem #5: longestPalindrome */
 	//char teststrint[] = "ccb";
-	string str = "bbb";
+	string str = "PAYPALISHIRING";
 	//printf("Result is %s\n", leetcode.longestPalindrome(str));
-	cout << leetcode.longestPalindromeN(str) << endl;
+	cout << leetcode.convert(str, 4) << endl;
 	return 0;
 
 }

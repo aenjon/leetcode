@@ -191,7 +191,7 @@ public class ArrowCode {
     }
     
     /**
-     * 
+     * Aux. function for Manacher algorithm. Insert "^#$" into the original string.
      * @param t
      * @return
      */
@@ -206,6 +206,64 @@ public class ArrowCode {
     	}
     	strb.append("#$");
     	return strb.toString();
+    }
+    
+    /**
+     * Problem #6: ZigZag Conversion 
+     */
+    public String convert(String s, int nRows) {
+    	if (s == null || nRows <= 1) return s;
+    	StringBuffer ret = new StringBuffer();
+    	int step = 2 * nRows - 2;
+    	int len = s.length();
+    	
+    	for (int i=0; i<nRows; i++){
+    		if (i==0 || i == nRows-1){
+    			int curindex = i;
+    			while (curindex < len){
+    				ret.append(s.charAt(curindex));
+    				curindex += step;
+    			}
+    		}
+    		else{
+        		int lindex = i;
+    			int rindex = 2*nRows-i-2;
+        		while(true){
+        			if (lindex < len){
+        				ret.append(s.charAt(lindex));
+            			lindex += step;
+        			}
+        			else
+        				break;
+        			if (rindex < len){
+        				ret.append(s.charAt(rindex));
+            			rindex += step;
+        			}
+        			else
+        				break;
+        		}    			
+    		}
+    	}
+    	return ret.toString();
+    }
+
+    public String convert2(String s, int nRows) {
+    	if (s == null || s.isEmpty() || nRows <=1) return s;
+    	int step = 2*nRows-2;
+    	StringBuffer[] buff = new StringBuffer[nRows];
+    	for(int i=0; i<nRows;i++)
+    		buff[i] = new StringBuffer();
+    	for(int i=0; i<s.length(); i++){
+    		int pos = i % step;
+    		if (pos < nRows)
+    			buff[pos].append(s.charAt(i));
+    		else
+    			buff[step-pos].append(s.charAt(i));
+    	}    	
+    	for (int i=1; i< nRows; i++)
+    		buff[0].append(buff[i].toString());
+    	return buff[0].toString();
+    	
     }
     
     /**

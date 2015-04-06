@@ -57,8 +57,14 @@ public class ArrowCodeTest {
 		 * Problme No.5
 		 */
 		//String s = "eabcddcbaf";
-		String s = "e";
-		System.out.println(arrowcode.longestPalindromeN(s));
+		//String s = "e";
+		//System.out.println(arrowcode.longestPalindromeN(s));
+		
+		/**
+		 * Problem No.6
+		 */
+		String s = "PAYPALISHIRING";
+		System.out.println(arrowcode.convert2(s, 4));
 		/**
 		 * Problem No.189
 		 * Rotate Array
