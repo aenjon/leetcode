@@ -70,10 +70,17 @@ public class ArrowCodeTest {
 		 * Problem No.7
 		 */
 		//2147483647 
-		int input = -1534236469;
+		//int input = 1534236469;
+		//int input = -8923;
 		//System.out.println( 1000 << 22);
 		//System.out.println(964632435 * 10 + 1);
-		System.out.println(arrowcode.reverse(input));
+		//System.out.println(arrowcode.reverse2(input));
+		
+		/**
+		 * Problem No. 8
+		 */
+		String str = "     -1";
+		System.out.println(arrowcode.atoi(str));
 		/**
 		 * Problem No.189
 		 * Rotate Array

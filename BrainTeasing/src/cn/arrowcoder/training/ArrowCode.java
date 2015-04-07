@@ -287,6 +287,55 @@ public class ArrowCode {
         return ret;
     }
     
+    public int reverse2(int x){
+    	long ret = 0;
+    	long number = (long)x;
+    	do{
+    		ret = ret * 10 + number % 10;
+    		if (ret > Integer.MAX_VALUE || ret < Integer.MIN_VALUE)
+    			return 0;
+    		number /= 10;
+    	}while (number != 0);
+    	return (int)ret;
+    }
+    
+    /**
+     * String to Integer (atoi) 
+     */
+    public int atoi(String str) {
+    	long ret = 0;
+    	if (str == null || str.isEmpty())
+    		return 0;
+    	int len = str.length();
+    	int i = 0;
+    	boolean sign=true;
+    	while (i < len && (str.charAt(i) == ' ' || str.charAt(i) == '\t' 
+    			|| str.charAt(i) == '\n' ))
+    		i++;
+    	if (i < len)
+    		if (str.charAt(i) == '-'){
+    			sign = false;
+    			i++;
+    		} else if (str.charAt(i) == '+') {
+    			sign = true;
+    			i++;
+    		}else{
+    			sign = true;
+    		}    	
+    	while (i < len){
+    		int curdigit = str.charAt(i) - 48;
+    		if (curdigit < 0 || curdigit > 9)
+    			break;
+    		ret = ret * 10 + curdigit;
+    		if (sign && ret >= Integer.MAX_VALUE){
+    			return Integer.MAX_VALUE;
+    		}else if (!sign && ret >= (long)Integer.MAX_VALUE + 1)
+    			return Integer.MIN_VALUE;
+    		i++;
+    	}    	
+    	return sign ? (int)ret : -(int)ret;
+    }
+    
     /**
      * Problem No. 189
      * Rotate Array

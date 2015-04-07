@@ -162,6 +162,47 @@ public:
     	return ret;
     }
 
+    /**
+     * Problem #8: String to Integer (atoi)
+     */
+    int atoi(string str) {
+    	if (str.empty()) return 0;
+    	int ret = 0;
+    	bool sign = true;
+    	int i = 0;
+    	int len = str.length();
+    	while (i<len){
+    		if (str[i] != ' ')
+    			break;
+    		i++;
+    	}
+
+    	if (i < len){
+    		if (str[i] == '+'){
+    			sign = true;
+    			i++;
+    		}else if (str[i] == '-'){
+    			sign = false;
+    			i++;
+    		}else
+    			sign = true;
+    	}
+
+    	while (i<len){
+    		int curdigit = str[i] - 48;
+    		//cout << "curdigit:" << curdigit << endl;
+    		if (curdigit < 0 || curdigit > 9)
+    			break;
+    		if (sign && (ret > INT_MAX/10 || (ret == INT_MAX/10 && curdigit > 7)))
+    			return INT_MAX;
+    		if (!sign && (ret > INT_MAX/10 || (ret == INT_MAX/10 && curdigit > 8)))
+    			return INT_MIN;
+    		ret = ret * 10 + curdigit;
+    		i++;
+    	}
+
+    	return sign ? ret : -ret;
+    }
 private:
 
     string preProcess(string s){
@@ -213,9 +254,9 @@ int main() {
 
 	/* Problem #5: longestPalindrome */
 	//char teststrint[] = "ccb";
-	string str = "PAYPALISHIRING";
+	string str = " -1";
 	//printf("Result is %s\n", leetcode.longestPalindrome(str));
-	cout << leetcode.convert(str, 4) << endl;
+	cout << leetcode.atoi(str) << endl;
 	return 0;
 
 }
