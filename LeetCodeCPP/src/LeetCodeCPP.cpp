@@ -190,7 +190,6 @@ public:
 
     	while (i<len){
     		int curdigit = str[i] - 48;
-    		//cout << "curdigit:" << curdigit << endl;
     		if (curdigit < 0 || curdigit > 9)
     			break;
     		if (sign && (ret > INT_MAX/10 || (ret == INT_MAX/10 && curdigit > 7)))
