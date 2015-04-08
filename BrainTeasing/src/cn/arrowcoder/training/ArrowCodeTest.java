@@ -79,8 +79,15 @@ public class ArrowCodeTest {
 		/**
 		 * Problem No. 8
 		 */
-		String str = "     -1";
-		System.out.println(arrowcode.atoi(str));
+		//String str = "     -1";
+		//System.out.println(arrowcode.atoi(str));
+		
+		/**
+		 * Problem #9
+		 * Palindrome Number 
+		 */
+		int x = 1;
+		System.out.println(arrowcode.isPalindrome2(x));
 		/**
 		 * Problem No.189
 		 * Rotate Array

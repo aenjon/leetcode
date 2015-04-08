@@ -267,6 +267,7 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #7
      * Reverse Integer 
      */
     public int reverse(int x) {
@@ -300,6 +301,7 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #8
      * String to Integer (atoi) 
      */
     public int atoi(String str) {
@@ -335,6 +337,40 @@ public class ArrowCode {
     	}    	
     	return sign ? (int)ret : -(int)ret;
     }
+    
+    /**
+     * Problem #9
+     * Palindrome Number 
+     */
+    public boolean isPalindrome(int x) {
+    	if (x<0) return false;
+    	int rev = 0;
+    	int dx = x;
+    	while (dx >= 10){
+    		rev = rev * 10 + dx % 10;
+    		dx /= 10;
+    	}
+    	return rev == x / 10 && dx == x % 10;        
+    }
+
+    public boolean isPalindrome2(int x) {
+    	if (x<0 || (x!=0 && x%10 == 0)) return false;
+    	int rev = 0;
+    	while (x > rev){
+    		rev = rev * 10 + x % 10;
+    		x /= 10;
+    	}
+    	return rev == x || x == rev/10;        
+    }
+
+    /**
+     * Problem #10
+     * Regular Expression Matching 
+     */
+    public boolean isMatch(String s, String p) {
+        return false;
+    }
+
     
     /**
      * Problem No. 189

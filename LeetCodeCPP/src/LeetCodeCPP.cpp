@@ -202,6 +202,20 @@ public:
 
     	return sign ? ret : -ret;
     }
+
+    /**
+     * Problem #9: Palindrome Number
+     */
+    bool isPalindrome(int x) {
+    	if (x<0 || (x != 0 && x % 10 == 0)) return false;
+    	int rev = 0;
+    	while (x > rev){
+    		rev = rev * 10 + x % 10;
+    		x /= 10;
+    	}
+    	return rev == x ||  x == rev / 10;
+    }
+
 private:
 
     string preProcess(string s){
@@ -253,9 +267,10 @@ int main() {
 
 	/* Problem #5: longestPalindrome */
 	//char teststrint[] = "ccb";
-	string str = " -1";
+	//string str = " -1";
+	int x = 3553;
 	//printf("Result is %s\n", leetcode.longestPalindrome(str));
-	cout << leetcode.atoi(str) << endl;
+	cout << leetcode.isPalindrome(x) << endl;
 	return 0;
 
 }
