@@ -91,7 +91,7 @@ public class LeetCode {
 		b[0][0] = true; 	// If both are empty, they match
 		
 		/*
-		 * If s is not empty but p is empty, then the result is empty.
+		 * If s is not empty but p is empty, then the result is No Match.
 		 * i.e. b[i][0] = false for i > 0
 		 */
 		for (i = 0; i < m; i++) 

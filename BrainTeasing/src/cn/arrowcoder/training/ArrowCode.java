@@ -368,6 +368,10 @@ public class ArrowCode {
      * Regular Expression Matching 
      */
     public boolean isMatch(String s, String p) {
+    	/**
+    	 * Basic idea: dynamic programming
+    	 * Create a boolean array b[i][j]. 
+    	 */
         return false;
     }
 
