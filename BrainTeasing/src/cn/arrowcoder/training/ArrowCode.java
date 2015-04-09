@@ -370,9 +370,39 @@ public class ArrowCode {
     public boolean isMatch(String s, String p) {
     	/**
     	 * Basic idea: dynamic programming
-    	 * Create a boolean array b[i][j]. 
+    	 * Create a boolean array b[i][j]. The value of b[i+1][j+1] means if the sub-string p[0..j] matches the sub-string s[0..i]
+    	 * Start with b[0][0], fill the special case of empty strings 
     	 */
-        return false;
+        if (s == null || p == null) return false;
+        int m = s.length(), n = p.length();
+        boolean b[][] = new boolean[m+1][n+1];
+        
+        // If both strings are empty, the result is true
+        b[0][0] = true;
+        
+        // if s is not empty but p is empty, then the result is not match
+        // i.e. b[i][0] = false;
+        for(int i=0; i<m; i++)
+            b[i+1][0] = false;
+        
+        // p[j] matches an empty (sub)string iff
+        // p[j] is '*' and p[j-2] matches. In this case, p[j-1] could be any char
+        // i.e. b[0][j-1] is true and p[j] is '*'
+        for (int j = 0; j < n; j++)
+            b[0][j+1] = j > 0 && b[0][j-1] && p.charAt(j) == '*';
+            
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                if (p.charAt(j) != '*')
+                    b[i+1][j+1] = b[i][j] && (s.charAt(i) == p.charAt(j) || p.charAt(j) == '.');
+                else
+                    b[i+1][j+1] = j > 0 && b[i+1][j-1] // p[j-2] matches and there is zero p[j-1] in s
+                    || b[i+1][j] // p[j-1] matches and there is at least one p[j-1] in s. For example "a" and "a*"
+                    || j>0 && b[i][j+1] && (p.charAt(j-1) == '.' || p.charAt(j-1) == s.charAt(i));
+                        // p[j] matches the substring of s till s[i-1] and p[j-1] is either '.' or equals to s[i]
+                        // for example, for the strings "aa" and "a*", "a*" matches "a", and then the second 'a' in s
+                        // matches the 'a' in p 
+        return b[m][n];                   	
     }
 
     

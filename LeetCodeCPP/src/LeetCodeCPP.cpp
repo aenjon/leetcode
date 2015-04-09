@@ -216,6 +216,40 @@ public:
     	return rev == x ||  x == rev / 10;
     }
 
+    /**
+     * Problem #10
+     * Regular Expression Matching
+     */
+    bool isMatch(const char *s, const char *p) {
+    	int i,j;
+    	int m = strlen(s);
+    	int n = strlen(p);
+    	bool** b = new bool*[m+1];
+    	for(i = 0; i <=m; ++i)
+    		b[i] = new bool[n+1];
+
+    	b[0][0] = true;
+    	for (i=0; i<m; i++)
+    		b[i+1][0] = false;
+    	for(j=0; j<n; j++)
+    		b[0][j+1] = j > 0 && b[0][j-1] && p[j] == '*';
+
+    	for(i=0; i<m; i++)
+    		for(j=0; j<n; j++)
+    			if (p[j] != '*')
+    				b[i+1][j+1] = b[i][j] && (s[i] == p[j] || p[j] == '.');
+    			else
+    				b[i+1][j+1] = (j>0 && b[i+1][j-1])
+    				              || b[i+1][j]
+    				              || (j > 0 && b[i][j+1] && (p[j-1] == '.' || p[j-1] == s[i]));
+    	bool ret = b[m][n];
+    	for (i=0; i<=m; ++i)
+    		delete[] b[i];
+    	delete [] b;
+    	return ret;
+    }
+
+
 private:
 
     string preProcess(string s){
@@ -268,9 +302,11 @@ int main() {
 	/* Problem #5: longestPalindrome */
 	//char teststrint[] = "ccb";
 	//string str = " -1";
-	int x = 3553;
+	//int x = 3553;
+	const char* s = "aab";
+	const char* p = "c*a*b";
 	//printf("Result is %s\n", leetcode.longestPalindrome(str));
-	cout << leetcode.isPalindrome(x) << endl;
+	cout << leetcode.isMatch(s, p) << endl;
 	return 0;
 
 }

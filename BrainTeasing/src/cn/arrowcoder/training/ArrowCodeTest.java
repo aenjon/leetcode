@@ -86,8 +86,16 @@ public class ArrowCodeTest {
 		 * Problem #9
 		 * Palindrome Number 
 		 */
-		int x = 1;
-		System.out.println(arrowcode.isPalindrome2(x));
+		//int x = 1;
+		//System.out.println(arrowcode.isPalindrome2(x));
+		
+		/**
+		 * Problem #10
+		 * Regular Expression Match
+		 */
+		String s = "aab";
+		String p = "c*a*b";
+		System.out.println(arrowcode.isMatch(s, p));
 		/**
 		 * Problem No.189
 		 * Rotate Array
