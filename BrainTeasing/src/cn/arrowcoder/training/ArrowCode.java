@@ -405,7 +405,31 @@ public class ArrowCode {
         return b[m][n];                   	
     }
 
-    
+    /**
+     * Problem #11
+     * Container With Most Water
+     * Basic idea: two points
+     * The area is determined by two bars and x-axis, and its value is the production of the height of 
+     * the short bar and the distance between the two bars.
+     * So, we are searching such two bars.
+     * Set two points, the first and the last bar (height),
+     * Calculate the area between the two points, then move the two points forward or backward.
+     * We always move the shorter bar because if we move the taller bar, we must get a smaller area,
+     * Move the two bars and record the maxium value, until they come across. 
+     */
+    public int maxArea(int[] height) {
+        if (height == null || height.length ==0) return 0;
+        int i = 0, j = height.length - 1;
+        int max = 0;
+        while (i<j){
+            max = Math.max(max, (j-i) * Math.min(height[i], height[j]));
+            if (height[i] < height[j])
+                ++i;
+            else
+                --j;
+        }
+        return max;
+    }
     /**
      * Problem No. 189
      * Rotate Array

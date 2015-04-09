@@ -7,7 +7,11 @@
 //============================================================================
 
 #include <iostream>
+#include <cstring>
 #include <string>
+//#include <cstdint>
+#include <climits>
+#include <vector>
 
 using namespace std;
 
@@ -93,7 +97,8 @@ public:
     string longestPalindrome(string s) {
     	//if (s == NULL || s.length() <=1) return s;
     	size_t start = 0, maxlen = 1;
-    	for (int i = 1; i<s.length(); i++){
+    	int len = s.length();
+    	for (int i = 1; i<len; i++){
     		findlongestpalcpp(s, i, &start, &maxlen, 0);
     		findlongestpalcpp(s, i, &start, &maxlen, 1);
     	}
@@ -247,6 +252,36 @@ public:
     		delete[] b[i];
     	delete [] b;
     	return ret;
+    }
+
+    /**
+     * Problem #11
+     * Container With Most Water
+     */
+    int maxArea(int height[], int n) {
+    	int i = 0, j = n-1;
+    	int maxarea = 0;
+    	while (i<j){
+    		maxarea = max(maxarea, (j-i)*min(height[i],height[j]));
+    		if (height[i] < height[j])
+    			++i;
+    		else
+    			--j;
+    	}
+    	return maxarea;
+    }
+
+    int maxAreacpp(vector<int> &height) {
+        size_t i = 0, j = height.size()-1;
+        int maxw = 0;
+        while (i < j){
+        	maxw = max(maxw, (int)(j-i) * min(height.at(j),height.at(i)));
+        	if (height.at(i) < height.at(j))
+        		++i;
+        	else
+        		--j;
+        }
+        return maxw;
     }
 
 
