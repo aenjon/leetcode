@@ -93,9 +93,20 @@ public class ArrowCodeTest {
 		 * Problem #10
 		 * Regular Expression Match
 		 */
+		/*
 		String s = "aab";
 		String p = "c*a*b";
 		System.out.println(arrowcode.isMatch(s, p));
+		 */
+		
+	    /**
+	     * Problem #12 & #13
+	     * Integer to Roman 
+	     * Roman to Integer 
+	     */
+		int x = 1689;
+		String rx = arrowcode.intToRoman(x);
+		System.out.println(x + "-" + rx + "-" + arrowcode.romanToInt2(rx));
 		/**
 		 * Problem No.189
 		 * Rotate Array

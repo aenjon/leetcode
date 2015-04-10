@@ -430,6 +430,100 @@ public class ArrowCode {
         }
         return max;
     }
+    
+    /**
+     * Problem #12
+     * Integer to Roman 
+     */
+    String intToRoman(int num) {
+        String[] romantable = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX",
+                             "", "X", "XX", "XXX", "LX", "L", "LX", "LXX", "LXXX", "XC",
+                             "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",
+                             "", "M", "MM", "MMM"};
+        return romantable[num/1000+30] + romantable[(num/100)%10+20] + romantable[(num/10)%10+10] + romantable[num%10]; 
+    }
+    /**
+	 * Problem #13
+     * Roman to Integer
+     * Approach 1: Add all numbers first, search the pattern of 4, 9, 40, 90, 400, 900, etc and minus the extra
+     * Pros: Easy to understand;
+     * Cons: Need search the string multiple times
+     */
+    public int romanToInt(String s) {
+        if (s == null || s.isEmpty()) return 0;
+        HashMap<Character, Integer> romantable = new HashMap<Character, Integer>();
+        romantable.put('M', 1000);
+        romantable.put('D', 500);
+        romantable.put('C', 100);
+        romantable.put('L', 50);
+        romantable.put('X', 10);
+        romantable.put('V', 5);
+        romantable.put('I', 1);
+        
+        int ret = 0;
+        for(int i=0; i<s.length(); ++i){
+            char c = s.charAt(i);
+            Integer value = romantable.get(Character.valueOf(c));
+            if (value != null)
+                ret += value.intValue();
+            else
+                return 0;
+        }
+        if (s.indexOf("CM") != -1)
+            ret -= 200;
+        if (s.indexOf("CD") != -1)
+            ret -= 200;
+        if (s.indexOf("XC") != -1)
+            ret -= 20;
+        if (s.indexOf("XL") != -1)
+            ret -= 20;
+        if (s.indexOf("IX") != -1)
+            ret -= 2;
+        if (s.indexOf("IV") != -1)
+            ret -= 2;
+            
+        return ret;
+    }
+    /**
+     * Approach 2: compare two neighboring letters, if the left one is smaller than the right one,
+     * 4s/9s pattern occurs. add or minus the left one accordingly.
+     * Pros: just one time. 
+     */
+    public int romanToInt2(String s) {
+        if (s == null || s.isEmpty()) return 0;
+        HashMap<Character, Integer> romantable = new HashMap<Character, Integer>();
+        romantable.put('M', 1000);
+        romantable.put('D', 500);
+        romantable.put('C', 100);
+        romantable.put('L', 50);
+        romantable.put('X', 10);
+        romantable.put('V', 5);
+        romantable.put('I', 1);
+        
+        int ret = 0;
+        Integer value = romantable.get(s.charAt(s.length()-1));
+        if (value != null)
+            ret = value.intValue();
+        else
+            return 0;
+        for(int i=s.length()-2; i>=0; --i){
+            Integer lv = romantable.get(s.charAt(i));
+            Integer rv = romantable.get(s.charAt(i+1));
+            if (lv == null || rv == null)
+            	return 0;
+            if (lv.intValue() < rv.intValue())
+            	ret -= lv.intValue();
+            else
+            	ret += lv.intValue();
+        }
+        return ret;
+    }
+    
+    /**
+     * Problem #13
+     * Longest Common Prefix 
+     */
+    
     /**
      * Problem No. 189
      * Rotate Array
