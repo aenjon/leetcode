@@ -1,5 +1,7 @@
 package cn.arrowcoder.training;
 
+import java.util.List;
+
 import cn.arrow.brainteasing.ListNode;
 import cn.arrow.brainteasing.TeasingUtil;
 
@@ -104,9 +106,25 @@ public class ArrowCodeTest {
 	     * Integer to Roman 
 	     * Roman to Integer 
 	     */
+		/*
 		int x = 1689;
 		String rx = arrowcode.intToRoman(x);
 		System.out.println(x + "-" + rx + "-" + arrowcode.romanToInt2(rx));
+		*/
+	    /**
+	     * Problem #13
+	     * Longest Common Prefix 
+	     */
+		String[] strs= {"abcf", "abced", "abca"};
+		System.out.println(arrowcode.longestCommonPrefix(strs));
+		
+	    /**
+	     * Problem #14
+	     * 3Sum  
+	     */
+		int[] nums = {-1, 0, 1, 2, -1, -4};
+		List<List<Integer>> ret = arrowcode.threeSum2(nums);
+		TeasingUtil.printIntegerPowerSet(ret);
 		/**
 		 * Problem No.189
 		 * Rotate Array

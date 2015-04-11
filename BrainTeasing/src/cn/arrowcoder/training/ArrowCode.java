@@ -1,6 +1,9 @@
 package cn.arrowcoder.training;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.ArrayList;
 import cn.arrow.brainteasing.ListNode;
 
 /*
@@ -522,8 +525,83 @@ public class ArrowCode {
     /**
      * Problem #13
      * Longest Common Prefix 
+     * String[] strs= {"abcf", "abced", "abca"}, the longest common prefix is "abc"
+     * O(n^2)
      */
-    
+    public String longestCommonPrefix(String[] strs) {
+    	if (strs == null || strs.length == 0) return "";
+    	for (int prefixlen = 0; prefixlen < strs[0].length(); prefixlen++){
+        	char c = strs[0].charAt(prefixlen);
+    		for(int i=1; i<strs.length; ++i){
+    			if (prefixlen >= strs[i].length() || c != strs[i].charAt(prefixlen))
+    				return strs[i].substring(0,prefixlen);
+    		}
+    	}
+    	return strs[0];
+    }
+
+    /**
+     * Problem #14
+     * 3Sum  
+     */
+
+    public List<List<Integer>> threeSum(int[] num) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        if (num == null || num.length < 3) return ret;
+        Arrays.sort(num);
+        HashMap<Integer, Integer> hm = new HashMap<Integer,Integer>();
+        // Keep the index of all numbers
+        for(int i=0; i<num.length; ++i)
+            hm.put(num[i],i);
+        for(int i=0; i<num.length; ++i){
+            if (i>0 && num[i] == num[i-1])
+            	// First step to avoid duplication
+            	// Same numbers can only be used forward, cannot be used backward
+            	continue;
+            for (int j = i+1; j<num.length; ++j){
+                if ( j > i+1 && num[j] == num[j-1])
+                	// Avoid duplication again
+                    continue;
+                if (hm.containsKey(0-num[i]-num[j])){
+                	// Avoid duplication again: the third item can only be "forward"
+                    if (hm.get(0-num[i]-num[j]) > j){
+                        ArrayList<Integer> item = new ArrayList<Integer>();
+                        item.add(num[i]);
+                        item.add(num[j]);
+                        item.add(0-num[i]-num[j]);
+                        ret.add(item);
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    public List<List<Integer>> threeSum2(int[] num) {
+    	List<List<Integer>> ret = new ArrayList<List<Integer>>();
+    	if (num == null || num.length < 3) return ret;
+    	Arrays.sort(num);
+    	for(int i=0; i<num.length; ++i){
+    		if (i>0 && num[i] == num[i-1])
+    			continue;
+    		int twosum = 0 - num[i];
+    		int low = i+1, high = num.length - 1;
+    		while(low < high){
+    			if (num[low] + num[high] == twosum){
+    				ret.add(Arrays.asList(num[i],num[low],num[high]));
+    				while(low < high && num[low] == num[++low]);
+    				while(low < high && num[high] == num[--high]);
+    				//++low;
+    				//--high;
+    			}else if (num[low]+num[high] > twosum){
+    				high--;
+    			}else{
+    				low++;
+    			}
+    		}
+    	}
+    	return ret;
+    }
     /**
      * Problem No. 189
      * Rotate Array
