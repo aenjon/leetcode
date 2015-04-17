@@ -115,16 +115,24 @@ public class ArrowCodeTest {
 	     * Problem #13
 	     * Longest Common Prefix 
 	     */
-		String[] strs= {"abcf", "abced", "abca"};
-		System.out.println(arrowcode.longestCommonPrefix(strs));
+		//String[] strs= {"abcf", "abced", "abca"};
+		//System.out.println(arrowcode.longestCommonPrefix(strs));
 		
 	    /**
 	     * Problem #14
 	     * 3Sum  
 	     */
+		/*
 		int[] nums = {-1, 0, 1, 2, -1, -4};
 		List<List<Integer>> ret = arrowcode.threeSum2(nums);
 		TeasingUtil.printIntegerPowerSet(ret);
+		*/
+	    /**
+	     * Problem No. 14
+	     * Letter Combinations of a Phone Number 
+	     */
+		String s = "23";
+		TeasingUtil.printListString(arrowcode.letterCombinations(s));
 		/**
 		 * Problem No.189
 		 * Rotate Array

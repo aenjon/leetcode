@@ -602,6 +602,29 @@ public class ArrowCode {
     	}
     	return ret;
     }
+    
+    /**
+     * Problem No. 14
+     * Letter Combinations of a Phone Number 
+     */
+    public List<String> letterCombinations(String digits) {
+    	List<String> ret = new ArrayList<String>();
+    	if (digits == null || digits.isEmpty()) return ret;
+    	String[] table = {" ", "", "abc", "def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    	ret.add("");
+    	for (int i=0; i<digits.length();++i){
+    		List<String> temp = new ArrayList<String>();
+    		for (String s : ret){
+    			int index = digits.charAt(i) - 48;
+    			for (int j = 0; j<table[index].length();++j){
+    				String newcombo = s + table[index].charAt(j);
+    				temp.add(newcombo);
+    			}
+    		}
+    		ret = temp;
+    	}
+    	return ret;
+    }
     /**
      * Problem No. 189
      * Rotate Array
