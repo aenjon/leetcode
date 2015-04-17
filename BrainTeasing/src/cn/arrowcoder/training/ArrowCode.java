@@ -576,7 +576,7 @@ public class ArrowCode {
         }
         return ret;
     }
-
+    /*Appoach 2: Two points */
     public List<List<Integer>> threeSum2(int[] num) {
     	List<List<Integer>> ret = new ArrayList<List<Integer>>();
     	if (num == null || num.length < 3) return ret;
@@ -589,8 +589,8 @@ public class ArrowCode {
     		while(low < high){
     			if (num[low] + num[high] == twosum){
     				ret.add(Arrays.asList(num[i],num[low],num[high]));
-    				while(low < high && num[low] == num[++low]);
-    				while(low < high && num[high] == num[--high]);
+    				while(low < high && num[low] == num[low+1]) ++low;
+    				while(low < high && num[high] == num[high-1]) --high;
     				//++low;
     				//--high;
     			}else if (num[low]+num[high] > twosum){
@@ -625,6 +625,39 @@ public class ArrowCode {
     	}
     	return ret;
     }
+    /**
+     * Problem #15
+     * 3Sum Closest
+     */
+    public int threeSumClosest(int[] num, int target) {
+        if (num == null || num.length < 3) return 0;
+        Arrays.sort(num);
+        int closest = target-num[0]-num[1]-num[2];
+        int ret = num[0] + num[1] + num[2];
+        for(int i=0; i<num.length; ++i){
+            if (i>0 && num[i] == num[i-1])
+                continue;
+            int low = i + 1;
+            int high = num.length-1;
+            while (low < high){
+                int cursum = num[i]+num[low]+num[high];
+                if ( cursum == target)
+                    return target;
+                if (Math.abs(target-cursum) < Math.abs(closest)){
+                    ret = num[i]+num[low]+num[high];
+                    closest = target-cursum;
+                    while (low < high && num[low] == num[low+1]) ++low;
+                    while (low < high && num[high] == num[high-1]) --high;
+                }
+                else if (cursum > target)
+                    --high;
+                else
+                    ++low;
+            }
+        }
+        return ret;        
+    }    
+    
     /**
      * Problem No. 189
      * Rotate Array

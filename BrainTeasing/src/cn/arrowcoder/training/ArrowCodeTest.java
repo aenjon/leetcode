@@ -119,11 +119,12 @@ public class ArrowCodeTest {
 		//System.out.println(arrowcode.longestCommonPrefix(strs));
 		
 	    /**
-	     * Problem #14
+	     * Problem #14 & #15
 	     * 3Sum  
 	     */
 		/*
 		int[] nums = {-1, 0, 1, 2, -1, -4};
+<<<<<<< Updated upstream
 		List<List<Integer>> ret = arrowcode.threeSum2(nums);
 		TeasingUtil.printIntegerPowerSet(ret);
 		*/
@@ -133,13 +134,19 @@ public class ArrowCodeTest {
 	     */
 		String s = "23";
 		TeasingUtil.printListString(arrowcode.letterCombinations(s));
+=======
+		//List<List<Integer>> ret = arrowcode.threeSum2(nums);
+		//TeasingUtil.printIntegerPowerSet(ret);
+		int ret = arrowcode.threeSumClosest(nums, -2);
+		System.out.println(ret);
+>>>>>>> Stashed changes
 		/**
 		 * Problem No.189
 		 * Rotate Array
 		 */
 		/*
 		int[] test = TeasingUtil.genList(100, 90, 1);
-		TeasingUtil.printList(test);
+		TeasingUtil.printList(test)
 		arrowcode.rotate2(test, 7);
 		TeasingUtil.printList(test);
 		*/
