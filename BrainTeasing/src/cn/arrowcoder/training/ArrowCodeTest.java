@@ -7,17 +7,31 @@ import cn.arrow.brainteasing.TeasingUtil;
 
 public class ArrowCodeTest {
 
-	static public ArrowCode arrowcode;
+	//public ArrowCode arrowcode;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ArrowCodeTest.arrowcode = new ArrowCode();		
 		ArrowCodeTest.test();
+		ArrowCodeTest.classictest();
 		
 	}
 	
+	static public void classictest(){
+		ArrowClassic arrowclassic = new ArrowClassic();
+
+		/**
+		 * Classic #1: insert sorting
+		 */
+		int nums[] = TeasingUtil.genList(15, 100);
+		TeasingUtil.printList(nums);
+		arrowclassic.insertSort(nums);
+		TeasingUtil.printList(nums);
+	}
+	
 	static public void test(){
+		ArrowCode arrowcode = new ArrowCode();		
+
 		/**
 		 *  Problem No. 1
 		 *  Two Sum
@@ -124,7 +138,6 @@ public class ArrowCodeTest {
 	     */
 		/*
 		int[] nums = {-1, 0, 1, 2, -1, -4};
-<<<<<<< Updated upstream
 		List<List<Integer>> ret = arrowcode.threeSum2(nums);
 		TeasingUtil.printIntegerPowerSet(ret);
 		*/
@@ -134,12 +147,10 @@ public class ArrowCodeTest {
 	     */
 		String s = "23";
 		TeasingUtil.printListString(arrowcode.letterCombinations(s));
-=======
 		//List<List<Integer>> ret = arrowcode.threeSum2(nums);
 		//TeasingUtil.printIntegerPowerSet(ret);
-		int ret = arrowcode.threeSumClosest(nums, -2);
-		System.out.println(ret);
->>>>>>> Stashed changes
+		//int ret = arrowcode.threeSumClosest(nums, -2);
+		//System.out.println(ret);
 		/**
 		 * Problem No.189
 		 * Rotate Array
@@ -163,5 +174,6 @@ public class ArrowCodeTest {
 	     */
 
 		//System.out.println("n = " + 7 + " with " + arrowcode.hammingWeight(7) + " 1s");
+		
 	}
 }
