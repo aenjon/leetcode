@@ -2,6 +2,7 @@ package cn.arrowcoder.training;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
 import cn.arrow.brainteasing.ListNode;
@@ -18,6 +19,8 @@ public class ListNode{
 */
 
 public class ArrowCode {
+	
+    static int counter4sum = 0;
 	/** 
 	 * Problem No. 1
 	 * Two Sum
@@ -523,7 +526,7 @@ public class ArrowCode {
     }
     
     /**
-     * Problem #13
+     * Problem #14
      * Longest Common Prefix 
      * String[] strs= {"abcf", "abced", "abca"}, the longest common prefix is "abc"
      * O(n^2)
@@ -541,7 +544,7 @@ public class ArrowCode {
     }
 
     /**
-     * Problem #14
+     * Problem #15
      * 3Sum  
      */
 
@@ -604,29 +607,7 @@ public class ArrowCode {
     }
     
     /**
-     * Problem No. 14
-     * Letter Combinations of a Phone Number 
-     */
-    public List<String> letterCombinations(String digits) {
-    	List<String> ret = new ArrayList<String>();
-    	if (digits == null || digits.isEmpty()) return ret;
-    	String[] table = {" ", "", "abc", "def","ghi","jkl","mno","pqrs","tuv","wxyz"};
-    	ret.add("");
-    	for (int i=0; i<digits.length();++i){
-    		List<String> temp = new ArrayList<String>();
-    		for (String s : ret){
-    			int index = digits.charAt(i) - 48;
-    			for (int j = 0; j<table[index].length();++j){
-    				String newcombo = s + table[index].charAt(j);
-    				temp.add(newcombo);
-    			}
-    		}
-    		ret = temp;
-    	}
-    	return ret;
-    }
-    /**
-     * Problem #15
+     * Problem #16
      * 3Sum Closest
      */
     public int threeSumClosest(int[] num, int target) {
@@ -658,7 +639,115 @@ public class ArrowCode {
         return ret;        
     }    
 
+    /**
+     * Problem No. 17
+     * Letter Combinations of a Phone Number 
+     */
+    public List<String> letterCombinations(String digits) {
+    	List<String> ret = new ArrayList<String>();
+    	if (digits == null || digits.isEmpty()) return ret;
+    	String[] table = {" ", "", "abc", "def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    	ret.add("");
+    	for (int i=0; i<digits.length();++i){
+    		List<String> temp = new ArrayList<String>();
+    		for (String s : ret){
+    			int index = digits.charAt(i) - 48;
+    			for (int j = 0; j<table[index].length();++j){
+    				String newcombo = s + table[index].charAt(j);
+    				temp.add(newcombo);
+    			}
+    		}
+    		ret = temp;
+    	}
+    	return ret;
+    }
+
+    /**
+     * Problem #18
+     * 4Sum
+     */
+    public List<List<Integer>> fourSum(int[] num, int target) {
+    	int counter = 0;
+    	List<List<Integer>> ret = new ArrayList<List<Integer>>();
+    	if (num == null || num.length < 4) return ret;
+    	Arrays.sort(num);
+    	for (int i = 0; i< num.length; ++i){
+    		if ( i>0 && num[i] == num[i-1])
+    			continue;
+    		for (int j = i+1; j < num.length; ++j){
+    			int itarget = target - num[i] - num[j];
+    			int low = j + 1;
+    			int high = num.length - 1;
+    			while (low < high){
+    				counter++;
+    				int i_sum = num[low] + num[high];
+    				if (i_sum < itarget)
+    					++low;
+    				else if (i_sum > itarget)
+    					--high;
+    				else{
+    					List<Integer> item = new ArrayList<Integer>();
+    					item.add(num[i]);
+    					item.add(num[j]);
+    					item.add(num[low]);
+    					item.add(num[high]);
+    					ret.add(item);
+    					int lowvalue = num[low];
+    					int highvalue = num[high];
+    					while (low < high && lowvalue == num[low]) ++low;
+    					while (low < high && highvalue == num[high]) --high;
+    				}
+    			}
+    			while ( j+1 < num.length && num[j+1] == num[j]) ++j;
+    		}
+			while (i + 1 < num.length && num[i + 1] == num[i]) ++i;
+    	}
+    	System.out.println("counter:" + counter);
+    	return ret;
+    }
     
+    public List<List<Integer>> fourSum2(int[] num, int target) {
+    	counter4sum = 0;
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        if (num == null) return result;
+        Arrays.sort(num);
+        for (int i = 0 ; i < num.length - 3; ++i)
+            for (int j = i+3; j < num.length; ++j)
+                check4Sum(num,i,j,target-num[i]-num[j],result);
+        System.out.println("old counter: " + counter4sum);
+        return result;
+    }
+
+    public void check4Sum(int[] num, int s, int e, int target, List<List<Integer>> result){
+        int lnum = num[s], rnum = num[e];
+        //HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>(
+        HashSet<Integer> hs = new HashSet<Integer>();
+        for(int k = s+1; k < e; ++k){
+        	counter4sum++;
+            if (hs.contains(target-num[k])){
+                List<Integer> q = new ArrayList<Integer>();
+                q.add(lnum);
+                q.add(target-num[k]);
+                q.add(num[k]);
+                q.add(rnum);
+                if (result.size() > 0){
+                	if (!checkDup(q,result.get(result.size()-1)))
+                		result.add(q);
+                }
+                else
+                	result.add(q);
+            }
+            else
+                hs.add(num[k]);
+        }
+    }   
+
+    public boolean checkDup(List<Integer> test, List<Integer> checked){
+    	for (int i=0; i<test.size(); ++i)
+    		if (test.get(i) != checked.get(i))
+    			return false;
+    	return true;
+    }    
     /**
      * Problem No. 189
      * Rotate Array

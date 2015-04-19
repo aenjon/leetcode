@@ -1,5 +1,6 @@
 package cn.arrowcoder.training;
 
+import java.util.Arrays;
 import java.util.List;
 
 import cn.arrow.brainteasing.ListNode;
@@ -13,7 +14,7 @@ public class ArrowCodeTest {
 	 */
 	public static void main(String[] args) {
 		ArrowCodeTest.test();
-		ArrowCodeTest.classictest();
+		//ArrowCodeTest.classictest();
 		
 	}
 	
@@ -23,10 +24,17 @@ public class ArrowCodeTest {
 		/**
 		 * Classic #1: insert sorting
 		 */
-		int nums[] = TeasingUtil.genList(15, 100);
+		int nums[] = TeasingUtil.genList(100, 100);
+		int nums2[] = Arrays.copyOf(nums, nums.length);
 		TeasingUtil.printList(nums);
-		arrowclassic.insertSort(nums);
+		TeasingUtil.printList(nums2);
+		int counter_insert = arrowclassic.insertSort(nums);
+		int counter_merge = arrowclassic.mergeSort(nums2);
 		TeasingUtil.printList(nums);
+		TeasingUtil.printList(nums2);
+		System.out.println("Array length:" + nums.length + " and " + nums2.length);
+		System.out.println("counter_insert:" + counter_insert);
+		System.out.println("counter_merger:" + counter_merge);
 	}
 	
 	static public void test(){
@@ -145,12 +153,23 @@ public class ArrowCodeTest {
 	     * Problem No. 14
 	     * Letter Combinations of a Phone Number 
 	     */
-		String s = "23";
-		TeasingUtil.printListString(arrowcode.letterCombinations(s));
+		//String s = "23";
+		//TeasingUtil.printListString(arrowcode.letterCombinations(s));
 		//List<List<Integer>> ret = arrowcode.threeSum2(nums);
 		//TeasingUtil.printIntegerPowerSet(ret);
 		//int ret = arrowcode.threeSumClosest(nums, -2);
 		//System.out.println(ret);
+		
+	    /**
+	     * Problem #18
+	     * 4Sum
+	     */
+		int[] num = {1, 0, 7,0, -1, 0, -2, 2, 0, 3, -4, 5, 4, 6};
+		int[] num2 = Arrays.copyOf(num, num.length);
+		List<List<Integer>> sol = arrowcode.fourSum(num, 0);
+		List<List<Integer>> sol1 = arrowcode.fourSum2(num2, 0);
+		TeasingUtil.printIntegerPowerSet(sol);
+		TeasingUtil.printIntegerPowerSet(sol1);
 		/**
 		 * Problem No.189
 		 * Rotate Array
