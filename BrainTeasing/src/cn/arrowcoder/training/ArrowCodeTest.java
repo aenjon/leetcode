@@ -164,12 +164,28 @@ public class ArrowCodeTest {
 	     * Problem #18
 	     * 4Sum
 	     */
-		int[] num = {1, 0, 7,0, -1, 0, -2, 2, 0, 3, -4, 5, 4, 6};
+		//int[] num = {1, 0, 7,0, -1, 0, -2, 2, 0, 3, -4, 5, 4, 6};
+		/*
+		int[] num = {0,0,0,0};
 		int[] num2 = Arrays.copyOf(num, num.length);
 		List<List<Integer>> sol = arrowcode.fourSum(num, 0);
 		List<List<Integer>> sol1 = arrowcode.fourSum2(num2, 0);
 		TeasingUtil.printIntegerPowerSet(sol);
 		TeasingUtil.printIntegerPowerSet(sol1);
+		*/
+	    /**
+	     * Problem #19
+	     * Remove Nth Node From End of List
+	     */
+		ListNode list = new ListNode(1);
+		list.next = new ListNode(2);
+		list.next.next = new ListNode(3);
+		list.next.next.next = new ListNode(4);
+		list.next.next.next.next = new ListNode(5);
+		TeasingUtil.printListNode(list);
+		ListNode removed = arrowcode.removeNthFromEnd(list, 5);
+		//TeasingUtil.printListNode(list);
+		TeasingUtil.printListNode(removed);
 		/**
 		 * Problem No.189
 		 * Rotate Array

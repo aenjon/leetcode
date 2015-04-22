@@ -8,15 +8,14 @@ import java.util.ArrayList;
 import cn.arrow.brainteasing.ListNode;
 
 /*
-public class ListNode{
+class ListNode{
 	int val;
 	ListNode next;
 	ListNode(int x){
 		val = x;
 		next = null;
 	}
-}
-*/
+}*/
 
 public class ArrowCode {
 	
@@ -675,6 +674,8 @@ public class ArrowCode {
     		if ( i>0 && num[i] == num[i-1])
     			continue;
     		for (int j = i+1; j < num.length; ++j){
+        		if ( j > i+1 && num[j] == num[j-1])
+        			continue;
     			int itarget = target - num[i] - num[j];
     			int low = j + 1;
     			int high = num.length - 1;
@@ -698,14 +699,17 @@ public class ArrowCode {
     					while (low < high && highvalue == num[high]) --high;
     				}
     			}
-    			while ( j+1 < num.length && num[j+1] == num[j]) ++j;
     		}
-			while (i + 1 < num.length && num[i + 1] == num[i]) ++i;
     	}
     	System.out.println("counter:" + counter);
     	return ret;
     }
-    
+    /**
+     * The old inefficient approach for 4Sum
+     * @param num
+     * @param target
+     * @return
+     */
     public List<List<Integer>> fourSum2(int[] num, int target) {
     	counter4sum = 0;
         List<List<Integer>> result = new ArrayList<List<Integer>>();
@@ -747,7 +751,30 @@ public class ArrowCode {
     		if (test.get(i) != checked.get(i))
     			return false;
     	return true;
-    }    
+    }
+    
+    /**
+     * Problem #19
+     * Remove Nth Node From End of List
+     */
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+    	if (head == null) return head;
+    	ListNode dummy = new ListNode(0);
+    	dummy.next = head;
+    	ListNode first = dummy;
+    	ListNode second = head;
+    	ListNode pre = dummy;
+    	while (n-- > 0) 
+    		first = first.next;
+    	while (first.next != null){
+    		first = first.next;
+    		pre = second;
+    		second = second.next;
+    	}
+    	pre.next = second.next;
+    	return dummy.next;
+    }
+    
     /**
      * Problem No. 189
      * Rotate Array

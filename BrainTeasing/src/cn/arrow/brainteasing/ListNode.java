@@ -6,7 +6,7 @@ public class ListNode {
 	
 	public ListNode(){
 		next = null;
-		val = Integer.MIN_VALUE;
+		val = 0;
 	}
 	
 	public ListNode(int x){
