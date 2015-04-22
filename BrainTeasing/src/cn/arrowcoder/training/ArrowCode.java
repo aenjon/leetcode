@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Stack;
+
 import cn.arrow.brainteasing.ListNode;
 
 /*
@@ -761,17 +763,65 @@ public class ArrowCode {
     	if (head == null) return head;
     	ListNode dummy = new ListNode(0);
     	dummy.next = head;
-    	ListNode first = dummy;
-    	ListNode second = head;
-    	ListNode pre = dummy;
+    	ListNode fast = dummy;
+    	ListNode slow = dummy;
     	while (n-- > 0) 
-    		first = first.next;
-    	while (first.next != null){
-    		first = first.next;
-    		pre = second;
-    		second = second.next;
+    		fast = fast.next;
+    	while (fast.next != null){
+    		fast = fast.next;
+    		slow = slow.next;
     	}
-    	pre.next = second.next;
+    	slow.next = slow.next.next;
+    	return dummy.next;
+    }
+    
+    /**
+     * Problem #20
+     * Valid Parentheses
+     */
+    public boolean isValid(String s) {
+    	Stack<Character> st = new Stack<Character>();
+    	boolean int_ret = true;
+    	for (int i=0; i<s.length(); i++){
+    		char c = s.charAt(i);
+    		if ( c == '(' || c == '[' || c == '{')
+    			st.push(c);
+    		else if (st.isEmpty())
+    			int_ret = false;
+    		else {
+    			char tc = st.pop().charValue();
+    			int_ret = (c == ')' && tc == '(')
+    						|| (c == ']' && tc == '[')
+    						|| (c == '}' && tc == '{');
+    		}
+    		if (!int_ret) break;
+    	}
+    	return st.isEmpty() && int_ret;
+    }
+    
+    /**
+     * Problem #21
+     * Merge Two Sorted Lists
+     */
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+    	if (l1 == null) return l2;
+    	if (l2 == null) return l1;
+    	ListNode dummy = new ListNode(0);
+    	ListNode cur = dummy;
+    	while (l1 != null && l2 != null){
+    		if (l1.val < l2.val){
+    			cur.next = l1;
+    			l1 = l1.next;
+    		}else{
+    			cur.next = l2;
+    			l2 = l2.next;
+    		}
+			cur = cur.next;
+    	}
+    	if (l1 == null)
+    		cur.next = l2;
+    	else
+    		cur.next = l1;
     	return dummy.next;
     }
     

@@ -177,6 +177,7 @@ public class ArrowCodeTest {
 	     * Problem #19
 	     * Remove Nth Node From End of List
 	     */
+		/*
 		ListNode list = new ListNode(1);
 		list.next = new ListNode(2);
 		list.next.next = new ListNode(3);
@@ -186,6 +187,30 @@ public class ArrowCodeTest {
 		ListNode removed = arrowcode.removeNthFromEnd(list, 5);
 		//TeasingUtil.printListNode(list);
 		TeasingUtil.printListNode(removed);
+		*/
+	    /**
+	     * Problem #20
+	     * Valid Parentheses
+	     */
+		//String ps = ")";
+		//System.out.println(arrowcode.isValid(ps));
+		
+	    /**
+	     * Problem #21
+	     * Merge Two Sorted Lists
+	     */
+		ListNode list = new ListNode(1);
+		list.next = new ListNode(5);
+		list.next.next = new ListNode(10);
+		//list.next.next.next = new ListNode(11);
+		//list.next.next.next.next = new ListNode(15);
+		
+		ListNode list2 = new ListNode(3);
+		list2.next = new ListNode(8);
+		list2.next.next = new ListNode(13);
+		
+		TeasingUtil.printListNode(arrowcode.mergeTwoLists(list, list2));
+		
 		/**
 		 * Problem No.189
 		 * Rotate Array
