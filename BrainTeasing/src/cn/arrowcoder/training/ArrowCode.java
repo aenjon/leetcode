@@ -848,7 +848,7 @@ public class ArrowCode {
     		getPar_aux(temp+"(", l+1, r, n, ret);
     	if (l > r)
     		getPar_aux(temp+")", l, r+1, n, ret);
-    	if (l == r && l < n)
+    	if (l == r)
     		getPar_aux(temp+"(", l+1, r, n, ret);
     }
     
