@@ -199,6 +199,7 @@ public class ArrowCodeTest {
 	     * Problem #21
 	     * Merge Two Sorted Lists
 	     */
+		/*
 		ListNode list = new ListNode(1);
 		list.next = new ListNode(5);
 		list.next.next = new ListNode(10);
@@ -210,7 +211,12 @@ public class ArrowCodeTest {
 		list2.next.next = new ListNode(13);
 		
 		TeasingUtil.printListNode(arrowcode.mergeTwoLists(list, list2));
-		
+		 */
+	    /**
+	     * Problem #22
+	     * Generate Parentheses 
+	     */
+		TeasingUtil.printStringList(arrowcode.generateParenthesis(4));
 		/**
 		 * Problem No.189
 		 * Rotate Array

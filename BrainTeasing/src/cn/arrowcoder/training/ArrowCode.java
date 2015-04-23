@@ -824,6 +824,33 @@ public class ArrowCode {
     		cur.next = l1;
     	return dummy.next;
     }
+    /**
+     * Problem #22
+     * Generate Parentheses 
+     */
+    private static int pc;
+    public List<String> generateParenthesis(int n) {
+    	pc = 0;
+    	List<String> ret = new ArrayList<String>();
+    	if (n <= 0 ) return ret;
+    	getPar_aux("(", 1, 0, n, ret);
+    	System.out.println("pc:" + pc);
+    	return ret;
+    }
+    
+    private void getPar_aux(String temp, int l, int r, int n, List<String> ret){
+    	pc++;
+    	if ( l == r && l == n){
+    		ret.add(temp);
+    		return;
+    	}
+    	if (l < n && l != r)
+    		getPar_aux(temp+"(", l+1, r, n, ret);
+    	if (l > r)
+    		getPar_aux(temp+")", l, r+1, n, ret);
+    	if (l == r && l < n)
+    		getPar_aux(temp+"(", l+1, r, n, ret);
+    }
     
     /**
      * Problem No. 189
