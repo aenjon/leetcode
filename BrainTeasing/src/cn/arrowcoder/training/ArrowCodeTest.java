@@ -216,7 +216,20 @@ public class ArrowCodeTest {
 	     * Problem #22
 	     * Generate Parentheses 
 	     */
-		TeasingUtil.printStringList(arrowcode.generateParenthesis(4));
+		//TeasingUtil.printStringList(arrowcode.generateParenthesis(4));
+		
+	    /**
+	     * Problem #24
+	     * Swap Nodes in Pairs 
+	     */
+		ListNode list = new ListNode(1);
+		list.next = new ListNode(5);
+		list.next.next = new ListNode(10);
+		list.next.next.next = new ListNode(11);
+		//list.next.next.next.next = new ListNode(15);
+		TeasingUtil.printListNode(list);
+		TeasingUtil.printListNode(arrowcode.swapPairs(list));
+		
 		/**
 		 * Problem No.189
 		 * Rotate Array

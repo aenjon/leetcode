@@ -853,6 +853,75 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #23
+     * Merge k Sorted Lists
+     * A naive solution is just to scan the first element of each list, find the smallest one and insert it to the
+     * result list. Each time it needs scan k nodes and scan n * k times, i.e O(n*k*k)
+     * In the solution below, we merge lists in pair, and merge the intermediate result in pair, 
+     * until we get the final list.
+     * All is completed in place, so space complexity is O(1) and time complexity is O(n*k*lg(k)).
+     */
+    public ListNode mergeKLists(ListNode[] lists) {
+    	if (lists == null || lists.length == 0) return null;
+    	if (lists.length == 1) return lists[0];
+    	int k = lists.length;
+    	double realheight = Math.log(k)/Math.log(2);
+    	int height = (int)realheight;
+    	height = height < realheight ? height+1 : height;
+    	int step = 1;
+    	for (int i =1 ; i <= height; ++i){
+    		step *= 2;
+    		for (int j = 0; j < k; j += step){
+    			int offset = step / 2;
+    			lists[j] = this.mergeTwoLists(lists[j], (j + offset >= k ? null : lists[j+offset]));
+    		}
+    	}
+    	return lists[0];
+    }
+    
+    /**
+     * Problem #24
+     * Swap Nodes in Pairs 
+     */
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy;
+        ListNode cur = head;
+        while (cur != null && cur.next != null){
+        	pre.next = cur.next;
+        	cur.next = cur.next.next;
+        	pre.next.next = cur;
+        	pre = cur;
+        	cur = cur.next;
+        }
+        return dummy.next;
+    }
+    
+    /**
+     * Problem #25
+     * Reverse Nodes in k-Group
+     */
+    public ListNode reverseKGroup(ListNode head, int k) {
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode fast = head;
+        ListNode prek = dummy;
+        while(fast != null){
+        	boolean done = false;
+        	for (int i = 0; i < k; ++i){
+        		if (fast == null){
+        			done = true;
+        			break;
+        		}
+        		fast = fast.next;
+        	}
+        	if (done) break;
+        	
+        }
+        return dummy.next;
+    }
+    /**
      * Problem No. 189
      * Rotate Array
      */
