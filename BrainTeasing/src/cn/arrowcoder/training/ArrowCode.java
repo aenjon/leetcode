@@ -917,10 +917,68 @@ public class ArrowCode {
         		fast = fast.next;
         	}
         	if (done) break;
-        	
+        	ListNode cur = prek.next;
+        	while (cur.next != fast){
+            	ListNode ln = cur.next.next;
+        		cur.next.next = prek.next;
+        		prek.next = cur.next;
+        		cur.next = ln;
+        	}
+        	prek = cur;        	
         }
         return dummy.next;
     }
+    
+    /**
+     * Problem #26
+     * Remove Duplicates from Sorted Array 
+     */
+    public int removeDuplicates(int[] A) {
+    	if (A == null || A.length == 0) return 0;
+    	int ret = 0;
+    	for(int i=1; i<A.length; ++i){
+    		if (A[i] != A[ret])
+    			A[++ret] = A[i];
+    	}
+    	return ret+1;
+    }
+    
+    /**
+     * Problem #27
+     * Remove Element
+     */
+    public int removeElement(int[] A, int elem) {
+    	if (A == null || A.length == 0) return 0;
+    	//int ret = 0;
+    	int len = A.length-1;
+    	for(int i=0; i <= len ;)
+    		if (A[i] == elem)
+    			A[i] = A[len--];
+    		else
+    			++i;
+    	return len+1;
+    }
+    
+    /**
+     * Problem #28
+     * Implement strStr() 
+     */
+    public int strStr(String haystack, String needle) {
+        if (haystack == null || needle == null) return -1;
+        if (needle.length() > haystack.length()) return -1;
+        if (needle.isEmpty()) return 0;
+        int i, j;
+        for(i = 0 ; i <= haystack.length() - needle.length(); ++i){
+        	for (j=0; j<needle.length(); ++j){
+        		if (haystack.charAt(i+j ) != needle.charAt(j))
+        			break;
+        	}
+        	if (j == needle.length())
+        		break;
+        }
+        return i > haystack.length() - needle.length() ? -1 : i;
+    }
+    
     /**
      * Problem No. 189
      * Rotate Array

@@ -3845,7 +3845,7 @@ public class LeetCode {
     				break;
     			}
     			else
-    			fast = fast.next;
+    				fast = fast.next;
     		}
     		if (done) break;
     		ListNode curk = prek.next;

@@ -222,6 +222,7 @@ public class ArrowCodeTest {
 	     * Problem #24
 	     * Swap Nodes in Pairs 
 	     */
+		/*
 		ListNode list = new ListNode(1);
 		list.next = new ListNode(5);
 		list.next.next = new ListNode(10);
@@ -229,6 +230,45 @@ public class ArrowCodeTest {
 		//list.next.next.next.next = new ListNode(15);
 		TeasingUtil.printListNode(list);
 		TeasingUtil.printListNode(arrowcode.swapPairs(list));
+		*/
+	    /**
+	     * Problem #25
+	     * Reverse Nodes in k-Group
+	     */
+		/*
+		ListNode list = new ListNode(1);
+		list.next = new ListNode(5);
+		list.next.next = new ListNode(10);
+		list.next.next.next = new ListNode(11);
+		list.next.next.next.next = new ListNode(15);
+		TeasingUtil.printListNode(list);
+		TeasingUtil.printListNode(arrowcode.reverseKGroup(list, 1));
+		*/
+	    /**
+	     * Problem #26
+	     * Remove Duplicates from Sorted Array 
+	     */
+		/*
+		int[] A = {1, 1, 2};
+		System.out.println(arrowcode.removeDuplicates(A));
+		TeasingUtil.printList(A);
+	    */
+	    /**
+	     * Problem #27
+	     * Remove Element
+	     */
+		/*
+		int[] A = {1, 1, 2, 4, 19, 0};
+		System.out.println(arrowcode.removeElement(A, 4));
+		TeasingUtil.printList(A);
+		 */
+	    /**
+	     * Problem #28
+	     * Implement strStr() 
+	     */
+		String h = "abbcedf9022";
+		String n = "22";
+		System.out.println(arrowcode.strStr(h, n));
 		
 		/**
 		 * Problem No.189
