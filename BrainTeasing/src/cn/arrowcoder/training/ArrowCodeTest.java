@@ -266,10 +266,18 @@ public class ArrowCodeTest {
 	     * Problem #28
 	     * Implement strStr() 
 	     */
+		/*
 		String h = "abbcedf9022";
 		String n = "22";
 		System.out.println(arrowcode.strStr(h, n));
-		
+		 */
+	    /**
+	     * Problem #29
+	     * Divide Two Integers 
+	     */
+		int a = 180;
+		int b = 29;
+		System.out.println(arrowcode.divide(a, b));
 		/**
 		 * Problem No.189
 		 * Rotate Array

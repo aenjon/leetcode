@@ -984,9 +984,29 @@ public class ArrowCode {
      * Divide Two Integers 
      */
     public int divide(int dividend, int divisor) {
+    	if (divisor == 0) return Integer.MIN_VALUE;
+    	int sign =(dividend > 0 && divisor < 0 || dividend < 0 && divisor > 0) ? -1 : 1; 
+    	//if (dividend == divisor) return 1; // Cover the cast that both numbers are INT_MAX or INT_MIN
+    	if (dividend == Integer.MIN_VALUE && Math.abs(divisor) == 1) return Integer.MAX_VALUE;
+    	//if (divisor == Integer.MIN_VALUE) return 0;
+    	//if (dividend == Integer.MIN_VALUE)
+    	//	dividend++;
+    	long premainder = Math.abs((long)dividend);
+    	long pdivisor = Math.abs((long)divisor);
     	int ret = 0;
-    	
-    	return ret;
+    	while (premainder >= pdivisor){
+    		int moves = -1;
+    		long tmp = pdivisor;
+    		while ( premainder >= tmp){
+    			++moves;
+    			tmp <<= 1;    			
+    		}
+    		if (moves >= 0){
+    			ret += 1 << moves;
+    			premainder -= (tmp >> 1);
+    		}
+    	}
+    	return sign > 0 ? ret : -ret;
     }
     
     
