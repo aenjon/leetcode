@@ -3,6 +3,7 @@ package cn.arrowcoder.training;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -986,12 +987,8 @@ public class ArrowCode {
     public int divide(int dividend, int divisor) {
     	if (divisor == 0) return Integer.MAX_VALUE;
     	int sign =(dividend > 0 && divisor < 0 || dividend < 0 && divisor > 0) ? -1 : 1; 
-    	//if (dividend == divisor) return 1; // Cover the cast that both numbers are INT_MAX or INT_MIN
     	if (dividend == Integer.MIN_VALUE && divisor == -1) return Integer.MAX_VALUE;
     	if (dividend == Integer.MIN_VALUE && divisor == 1) return Integer.MIN_VALUE;
-    	//if (divisor == Integer.MIN_VALUE) return 0;
-    	//if (dividend == Integer.MIN_VALUE)
-    	//	dividend++;
     	long premainder = Math.abs((long)dividend);
     	long pdivisor = Math.abs((long)divisor);
     	int ret = 0;
@@ -1010,6 +1007,182 @@ public class ArrowCode {
     	return sign > 0 ? ret : -ret;
     }
     
+    /**
+     * Problem #30
+     * Substring with Concatenation of All Words
+     */
+    public List<Integer> findSubstring(String s, String[] words) {
+    	List<Integer> ret = new LinkedList<Integer>();
+    	if (s == null || words == null || words.length == 0 || s.isEmpty())
+    		return ret;
+    	HashSet<String> wordset = new HashSet<String>();
+		resetWordset(words, wordset);
+    	int wordlen = words[0].length();
+    	for(int i=0; i<=s.length() - wordlen * words.length; ++i){
+    		int j;
+    		String curword;
+    		for (j = 0; j< wordlen * words.length; j+=wordlen){
+    			curword = s.substring(i+j, i + j + wordlen);
+    			if (wordset.contains(curword)){
+    				wordset.remove(curword);
+    			}else
+    				break;
+    		}
+    		if (wordset.isEmpty())
+    			ret.add(i);
+    		if (wordset.size() < words.length)
+    			resetWordset(words, wordset);
+    	}
+    	return ret;
+    }    
+
+    private void resetWordset(String[] words, HashSet<String> wordset){
+    	for(int i=0; i<words.length; ++i)
+    		wordset.add(words[i]);
+    }
+
+    /* Handle repeated words*/
+    /*
+    public List<Integer> findSubstring2(String s, String[] words) {
+    	List<Integer> ret = new LinkedList<Integer>();
+    	if (s == null || words == null || words.length == 0 || s.isEmpty())
+    		return ret;
+    	HashMap<String, Integer> wordsmap = new HashMap<String, Integer>();
+    	resetWordsMap(words, wordsmap);
+    	int wordlen = words[0].length();
+    	for(int i=0; i<=s.length() - wordlen * words.length; ++i){
+    		int j;
+    		String curword;
+    		for (j = 0; j< wordlen * words.length; j+=wordlen){
+    			curword = s.substring(i+j, i + j + wordlen);
+    			if (wordsmap.containsKey(curword)){
+    				int counter = wordsmap.get(curword).intValue();
+    				if (counter == 0)
+    					break;
+    				else
+    					wordsmap.put(curword, counter-1);
+    			}else
+    				break;
+    		}
+    		if (j==wordlen * words.length)
+    			ret.add(i);
+    		resetWordsMap(words, wordsmap);
+    	}
+    	return ret;
+    }    
+
+    private void resetWordsMap(String[] words, HashMap<String, Integer> wordsmap){
+    	for(int i=0; i<words.length; ++i)
+    		if (wordsmap.containsKey(words[i]))
+    			wordsmap.put(words[i], wordsmap.get(words[i]).intValue() + 1);
+    		else
+    			wordsmap.put(words[i], 1);
+    }
+	*/
+    public List<Integer> findSubstring3(String s, String[] words) {
+    	List<Integer> ret = new LinkedList<Integer>();
+    	HashMap<String, Integer> dict = new HashMap<String, Integer>();
+    	// Fill a dictionary, record the occurrence times of each word.
+    	for (int i = 0; i < words.length; ++i){
+    		if (dict.containsKey(words[i]))
+    			dict.put(words[i], dict.get(words[i]).intValue() + 1);
+    		else
+    			dict.put(words[i], 1);
+    	}
+    	int wlen = words[0].length();
+    	int slen = s.length();
+    	/**
+    	 * Search word by word, rather that char by char
+    	 * The offset is the length of a word
+    	 */
+    	for(int i=0; i<wlen; ++i){
+    		int left = i, count = 0;
+    		HashMap<String, Integer> tdict = new HashMap<String, Integer>();
+        	/**
+        	 * Each time, inspect combination of words starting with the offset i
+        	 */
+    		for (int j = i; j <= slen-wlen; j += wlen){
+    			String curword = s.substring(j, j + wlen);
+    			if (dict.containsKey(curword)){
+    				setDictCount(tdict,curword,1);
+    				if (tdict.get(curword).intValue() <= dict.get(curword).intValue()){
+    					/* The (duplicated) words appears only once */
+    					++count;
+    				}else{
+    					/**
+    					 * When the (duplicated) word appears more than once,
+    					 * Discard the first word in the current checking sequence
+    					 */
+    					while (tdict.get(curword).intValue() > dict.get(curword).intValue()){
+    						String head = s.substring(left, left + wlen);
+    						setDictCount(tdict,head,-1);
+    						/* if the first word is not the over-repeated word, decrease the count by one */
+    						if (tdict.get(head).intValue() < dict.get(head).intValue())
+    							--count;
+    						left += wlen;
+    					}
+    				}
+    				/* Find a match */
+    				if (count == words.length){
+    					ret.add(left);
+    					/* Discard the first word and shift one word */
+    					setDictCount(tdict, s.substring(left, left+wlen), -1);
+    					--count;
+    					left += wlen;
+    				}
+    			}else{ /* Invalid, start over with the next word */
+    	    		tdict.clear();
+    	    		count = 0;
+    	    		left = j + wlen;
+    			}    			
+    		}
+    	}
+    	return ret;
+    }
+    
+    private void setDictCount(HashMap<String, Integer> hm, String key, int offset){
+    	if (hm.containsKey(key))
+    		hm.put(key, hm.get(key).intValue() + offset);
+    	else
+    		hm.put(key, 1);
+    }
+    /**
+     * Problem #31
+     * Next Permutation
+     * The change should happen where a digit at position is smaller than the one at i+1
+     * The digit at i should be exchanged with the smallest digit after i, which is larger than i
+     * Then reverse the the digits following digit i 
+     */
+    public void nextPermutation(int[] num) {
+        if (num == null || num.length <=1) return;
+        int i, j;
+        for (i = num.length-2; i >= 0; --i)
+        	if (num[i] < num[i+1])
+        		break;
+        if (i>=0){
+        	for (j=num.length-1; j>i; --j)
+        		if (num[i] < num[j])
+        			break;
+        	int tmp = num[i];
+        	num[i] = num[j];
+        	num[j] = tmp;
+        }
+        reverseList(num,i+1,num.length-1);
+    }
+    
+    private void reverseList(int[] num, int start, int end){
+        int len = end-start+1;
+        for(int i=0;i<len/2; i++){
+        	int temp = num[start+i];
+        	num[start+i] = num[end-i];
+        	num[end-i] = temp;
+        }    	
+    }
+    /**
+     * Problem #32
+     * Longest Valid Parentheses 
+     */
+
     
     /**
      * Problem No. 189

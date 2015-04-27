@@ -275,9 +275,34 @@ public class ArrowCodeTest {
 	     * Problem #29
 	     * Divide Two Integers 
 	     */
+		/*
 		int a = 180;
 		int b = 29;
 		System.out.println(arrowcode.divide(a, b));
+		*/
+	    /**
+	     * Problem #30
+	     * Substring with Concatenation of All Words
+	     */
+		/*
+		String s = "wefoobarbarfoobar";
+		String[] words = {"foo", "bar"};
+		String s1 = "baaabababab";
+		String[] words1 = {"a","b","a"};
+		String s2 = "cbaccbcbbc";
+		String[] words2 = {"cb","bc"}; 
+		//TeasingUtil.printListInteger(arrowcode.findSubstring2(s2, words2));
+		TeasingUtil.printListInteger(arrowcode.findSubstring3(s, words));
+		TeasingUtil.printListInteger(arrowcode.findSubstring3(s1, words1));
+		TeasingUtil.printListInteger(arrowcode.findSubstring3(s2, words2));
+		*/
+	    /**
+	     * Problem #31
+	     * Next Permutation
+	     */
+		int[] num = {3, 7, 6, 6, 2, 1};
+		arrowcode.nextPermutation(num);
+		TeasingUtil.printList(num);
 		/**
 		 * Problem No.189
 		 * Rotate Array
