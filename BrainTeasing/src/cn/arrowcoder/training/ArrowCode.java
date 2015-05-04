@@ -1182,7 +1182,29 @@ public class ArrowCode {
      * Problem #32
      * Longest Valid Parentheses 
      */
-
+    public int longestValidParentheses(String s) {
+    	if (s == null || s.isEmpty()) return 0;
+    	int max = 0, cur = 0;
+    	boolean open = false;
+    	for (int i=0; i<s.length(); ++i){
+    		if ( s.charAt(i) == '('){
+    			if(open){
+    				max = max > cur ? max : cur;
+    				cur = 0;
+    			}
+    			open = true;
+    		} else if (s.charAt(i) == ')'){
+    			if (open){
+    				cur += 2;
+    			}else{
+    				max = max > cur ? max : cur;
+    				cur = 0;
+    			}
+    			open = false;
+    		}
+    	}
+    	return max > cur ? max : cur;
+    }
     
     /**
      * Problem No. 189

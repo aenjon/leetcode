@@ -300,9 +300,18 @@ public class ArrowCodeTest {
 	     * Problem #31
 	     * Next Permutation
 	     */
+		/*
 		int[] num = {3, 7, 6, 6, 2, 1};
 		arrowcode.nextPermutation(num);
 		TeasingUtil.printList(num);
+		*/
+	    /**
+	     * Problem #32
+	     * Longest Valid Parentheses 
+	     */
+		
+		String pstr = "()()()()(";
+		System.out.println(arrowcode.longestValidParentheses(pstr));
 		/**
 		 * Problem No.189
 		 * Rotate Array
