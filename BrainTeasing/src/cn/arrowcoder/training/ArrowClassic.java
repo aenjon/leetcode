@@ -72,5 +72,32 @@ public class ArrowClassic {
 			nums[k--] = temp[j--];
 		}
 		return count;
-	}	
+	}
+	
+	static private int qsort_counter;
+	public int quicksort(int nums[]){
+		qsort_counter = 0;
+		qsort_helper(nums, 0, nums.length-1);
+		return qsort_counter;
+	}
+	
+	private void qsort_helper(int nums[], int head, int tail){
+		if (head < tail){
+			int pindex = partition (nums, head, tail);
+			qsort_helper(nums,head, pindex-1);
+			qsort_helper(nums,pindex+1, tail);
+		}
+	}
+	
+	private int partition(int nums[], int head, int tail){
+		int pivot = nums[tail];
+		int pindex = head - 1;
+		for (int i = head; i<=tail-1; ++i){
+			if (nums[i] < pivot){
+				
+			}
+		}
+		return pindex;
+	}
 }
+
