@@ -72,6 +72,5 @@ public class ArrowClassic {
 			nums[k--] = temp[j--];
 		}
 		return count;
-	}
-	
+	}	
 }
