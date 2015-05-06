@@ -13,8 +13,8 @@ public class ArrowCodeTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ArrowCodeTest.test();
-		//ArrowCodeTest.classictest();
+		//ArrowCodeTest.test();
+		ArrowCodeTest.classictest();
 		
 	}
 	
@@ -24,6 +24,7 @@ public class ArrowCodeTest {
 		/**
 		 * Classic #1: insert sorting
 		 */
+		/*
 		int nums[] = TeasingUtil.genList(100, 100);
 		int nums2[] = Arrays.copyOf(nums, nums.length);
 		TeasingUtil.printList(nums);
@@ -35,6 +36,16 @@ public class ArrowCodeTest {
 		System.out.println("Array length:" + nums.length + " and " + nums2.length);
 		System.out.println("counter_insert:" + counter_insert);
 		System.out.println("counter_merger:" + counter_merge);
+		*/
+		
+		/**
+		 * Heap Sort
+		 */
+		int nums[] = TeasingUtil.genList(20, 100);
+		//Heap theap = new Heap(nums);
+		TeasingUtil.printList(nums);
+		Heap.heapSort(nums);
+		TeasingUtil.printList(nums);
 	}
 	
 	static public void test(){
