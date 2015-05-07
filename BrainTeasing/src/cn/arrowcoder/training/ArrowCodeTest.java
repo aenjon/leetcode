@@ -22,30 +22,40 @@ public class ArrowCodeTest {
 		ArrowClassic arrowclassic = new ArrowClassic();
 
 		/**
-		 * Classic #1: insert sorting
+		 * Classic #1: sorting
 		 */
-		/*
-		int nums[] = TeasingUtil.genList(100, 100);
+		
+		int nums[] = TeasingUtil.genList(400, 200);
 		int nums2[] = Arrays.copyOf(nums, nums.length);
+		int nums3[] = Arrays.copyOf(nums, nums.length);
+		int nums4[] = Arrays.copyOf(nums, nums.length);
+		TeasingUtil.printList(nums);
+		//TeasingUtil.printList(nums2);
+		int ctr_insert = arrowclassic.insertSort(nums);
+		int ctr_merge = arrowclassic.mergeSort(nums2);
+		int ctr_quick = arrowclassic.quickSort(nums3);
+		int ctr_counter = arrowclassic.counterSort(nums4, 200);
 		TeasingUtil.printList(nums);
 		TeasingUtil.printList(nums2);
-		int counter_insert = arrowclassic.insertSort(nums);
-		int counter_merge = arrowclassic.mergeSort(nums2);
-		TeasingUtil.printList(nums);
-		TeasingUtil.printList(nums2);
-		System.out.println("Array length:" + nums.length + " and " + nums2.length);
-		System.out.println("counter_insert:" + counter_insert);
-		System.out.println("counter_merger:" + counter_merge);
-		*/
+		TeasingUtil.printList(nums3);
+		TeasingUtil.printList(nums4);
+		System.out.println("Array length:" + nums.length);
+		System.out.println("counter_insert:" + ctr_insert);
+		System.out.println("counter_merger:" + ctr_merge);
+		System.out.println("counter_quick:" + ctr_quick);
+		System.out.println("counter_counter:" + ctr_counter);
+		
 		
 		/**
 		 * Heap Sort
 		 */
+		/*
 		int nums[] = TeasingUtil.genList(20, 100);
 		//Heap theap = new Heap(nums);
 		TeasingUtil.printList(nums);
 		Heap.heapSort(nums);
 		TeasingUtil.printList(nums);
+		*/
 	}
 	
 	static public void test(){

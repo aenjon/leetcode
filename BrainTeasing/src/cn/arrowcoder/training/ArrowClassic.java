@@ -75,7 +75,7 @@ public class ArrowClassic {
 	}
 	
 	static private int qsort_counter;
-	public int quicksort(int nums[]){
+	public int quickSort(int nums[]){
 		qsort_counter = 0;
 		qsort_helper(nums, 0, nums.length-1);
 		return qsort_counter;
@@ -94,10 +94,46 @@ public class ArrowClassic {
 		int pindex = head - 1;
 		for (int i = head; i<=tail-1; ++i){
 			if (nums[i] < pivot){
-				
+				++pindex;
+				++qsort_counter;
+				int temp = nums[pindex];
+				nums[pindex] = nums[i];
+				nums[i] = temp;
 			}
 		}
-		return pindex;
+		++qsort_counter;
+		int temp = nums[pindex+1];
+		nums[pindex+1] = nums[tail];
+		nums[tail] = temp;
+		return pindex+1;
+	}
+	
+	public int counterSort(int nums[], int max){
+		int csort_ctr = 0;
+		int[] nums_back = Arrays.copyOf(nums, nums.length);
+		int nums_ctr[] = new int[max+1];
+		// Initialize the counter array.
+		for (int i=0; i<nums_ctr.length; ++i){
+			csort_ctr++;
+			nums_ctr[i] = 0;
+		}
+		for (int i=0; i<nums_back.length; ++i){
+			nums_ctr[nums_back[i]]++;
+			csort_ctr++;
+		}
+		for (int i=1; i<nums_ctr.length; ++i){
+			nums_ctr[i] = nums_ctr[i] + nums_ctr[i-1];
+			csort_ctr++;
+		}
+		for (int i = nums.length-1; i>=0; --i){
+			System.out.println("i:" + i);
+			System.out.println("nums_back[i]:" + nums_back[i]);
+			System.out.println("nums_ctr[nums_back[i]]" + nums_ctr[nums_back[i]]);
+			nums[nums_ctr[nums_back[i]]-1] = nums_back[i];
+			nums_ctr[nums_back[i]]--;
+			csort_ctr++;
+		}
+		return csort_ctr;
 	}
 }
 
