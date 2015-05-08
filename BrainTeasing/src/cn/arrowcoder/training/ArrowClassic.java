@@ -125,10 +125,11 @@ public class ArrowClassic {
 			nums_ctr[i] = nums_ctr[i] + nums_ctr[i-1];
 			csort_ctr++;
 		}
-		for (int i = nums.length-1; i>=0; --i){
-			System.out.println("i:" + i);
-			System.out.println("nums_back[i]:" + nums_back[i]);
-			System.out.println("nums_ctr[nums_back[i]]" + nums_ctr[nums_back[i]]);
+		//for (int i = nums.length-1; i>=0; --i){
+		for (int i=0; i<nums.length; ++i){
+			//System.out.println("i:" + i);
+			//System.out.println("nums_back[i]:" + nums_back[i]);
+			//System.out.println("nums_ctr[nums_back[i]]" + nums_ctr[nums_back[i]]);
 			nums[nums_ctr[nums_back[i]]-1] = nums_back[i];
 			nums_ctr[nums_back[i]]--;
 			csort_ctr++;
