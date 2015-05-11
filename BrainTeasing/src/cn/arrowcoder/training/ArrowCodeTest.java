@@ -1,6 +1,7 @@
 package cn.arrowcoder.training;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import cn.arrow.brainteasing.ListNode;
@@ -14,6 +15,11 @@ public class ArrowCodeTest {
 	 */
 	public static void main(String[] args) {
 		//ArrowCodeTest.test();
+		/*
+		String[] argss = {"a", "b"};
+		System.out.println("main...");
+		main(argss);
+		*/
 		ArrowCodeTest.classictest();
 		
 	}
@@ -24,7 +30,7 @@ public class ArrowCodeTest {
 		/**
 		 * Classic #1: sorting
 		 */
-		
+		/*
 		int nums[] = TeasingUtil.genList(400, 200);
 		int nums2[] = Arrays.copyOf(nums, nums.length);
 		int nums3[] = Arrays.copyOf(nums, nums.length);
@@ -44,7 +50,7 @@ public class ArrowCodeTest {
 		System.out.println("counter_merger:" + ctr_merge);
 		System.out.println("counter_quick:" + ctr_quick);
 		System.out.println("counter_counter:" + ctr_counter);
-		
+		*/
 		
 		/**
 		 * Heap Sort
@@ -55,6 +61,73 @@ public class ArrowCodeTest {
 		TeasingUtil.printList(nums);
 		Heap.heapSort(nums);
 		TeasingUtil.printList(nums);
+		*/
+		
+		/**
+		 * Binary Search Tree
+		 */
+		BSTree root = new BSTree(15);
+		root.left = new BSTree(6);
+		root.left.parent = root;
+		root.right = new BSTree(18);
+		root.right.parent = root;
+		
+		root.left.left = new BSTree(3);
+		root.left.left.parent = root.left;
+		root.left.right = new BSTree(7);
+		root.left.right.parent = root.left;
+		
+		root.right.left = new BSTree(17);
+		root.right.left.parent = root.right;
+		root.right.right = new BSTree(20);
+		root.right.right.parent = root.right;
+		
+		root.left.left.left = new BSTree(2);
+		root.left.left.left.parent = root.left.left;
+		root.left.left.right = new BSTree(4);
+		root.left.left.right.parent = root.left.left;
+		
+		root.left.right.right = new BSTree(13);
+		root.left.right.right.parent = root.left.right;
+		
+		root.left.right.right.left = new BSTree(9);
+		root.left.right.right.left.parent = root.left.right.right; 
+		
+		root.inOrder();
+		root.inOrderNR();
+		///root.preOrderNR();
+		//root.postOrderNR();
+		/*
+		List<Integer> treelist = new LinkedList<Integer>();
+		root.inOrderNR(treelist);
+		TeasingUtil.printListInteger(treelist);
+		*/
+		
+		BSTree bst = root.search(4);
+		/*
+		if (bst != null)
+			bst.inOrder();
+		else
+			System.out.println("not found");
+			*/
+		
+		BSTree succ = root.succ_in(bst);
+		if (succ != null)
+			System.out.println(succ.val);
+		else
+			System.out.println("null");
+		
+		BSTree x = new BSTree(18);
+		root.insert(x);
+		root.inOrder();
+		/*
+		BSTree minnode = root.min();
+		BSTree maxnode = root.max();
+		
+		if (maxnode != null)
+			System.out.println("Max value is " + maxnode.val);
+		if (minnode != null)
+			System.out.println("Max value is " + minnode.val);
 		*/
 	}
 	
