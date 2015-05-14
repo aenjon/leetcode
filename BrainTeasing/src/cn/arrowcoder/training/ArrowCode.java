@@ -1222,19 +1222,20 @@ public class ArrowCode {
     	if (nums == null || nums.length < 1)
     		return -1;
     	int s = 0, e = nums.length-1, m = (s+e)/2;
-    	while (s >= e){
+    	while (s <= e){
     		if (nums[m] == target)
     			return m;
-    		if (nums[e] > nums[m])
+    		if (nums[e] >= nums[m])
     			if (target >= nums[m] && target <= nums[e])
-    				s = m;
+    				s = m+1;
     			else
-    				e = m;
-    		if (nums[m] > nums[s])
+    				e = m-1;
+    		else// (nums[m] >= nums[s])
     			if (target >= nums[s] && target <= nums[m])
-    				e = m;
+    				e = m-1;
     			else
-    				s = m;    				
+    				s = m+1;
+    		m = (s+e)/2;
     	}
     	return -1;
     }    
