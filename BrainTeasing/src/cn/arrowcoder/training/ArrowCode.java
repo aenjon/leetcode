@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import cn.arrow.brainteasing.ListNode;
+import cn.arrow.brainteasing.TeasingUtil;
 
 /*
 class ListNode{
@@ -1182,30 +1183,61 @@ public class ArrowCode {
      * Problem #32
      * Longest Valid Parentheses 
      */
+    
     public int longestValidParentheses(String s) {
     	if (s == null || s.isEmpty()) return 0;
-    	int max = 0, cur = 0;
-    	boolean open = false;
+    	int[] ret = new int[s.length()];
+    	for (int i=0; i<ret.length; ++i)
+    		ret[i] = 0;
+    	int open = 0;
     	for (int i=0; i<s.length(); ++i){
-    		if ( s.charAt(i) == '('){
-    			if(open){
-    				max = max > cur ? max : cur;
-    				cur = 0;
+    		if (s.charAt(i) == '('){
+    			++open;
+    			ret[i] = 0;
+    		}
+    		else if (s.charAt(i) == ')'){
+    			if (open == 0)
+    				ret[i] = 0;
+    			else{
+    				open = open > 0 ? open-1 : 0;
+    				ret[i] = ret[i-1] + 2;
+    				if (i - ret[i] >= 0)
+    					ret[i] = ret[i] + ret[i - ret[i]];
     			}
-    			open = true;
-    		} else if (s.charAt(i) == ')'){
-    			if (open){
-    				cur += 2;
-    			}else{
-    				max = max > cur ? max : cur;
-    				cur = 0;
-    			}
-    			open = false;
     		}
     	}
-    	return max > cur ? max : cur;
+    	TeasingUtil.printList(ret);
+    	int max = ret[0];
+    	for (int i=1; i<ret.length; ++i)
+    		max = max > ret[i] ? max : ret[i];
+    	return max;
     }
     
+    
+    /**
+     * Problem #33
+     * Search in Rotated Sorted Array 
+     */
+    public int search(int[] nums, int target) {
+    	if (nums == null || nums.length < 1)
+    		return -1;
+    	int s = 0, e = nums.length-1, m = (s+e)/2;
+    	while (s >= e){
+    		if (nums[m] == target)
+    			return m;
+    		if (nums[e] > nums[m])
+    			if (target >= nums[m] && target <= nums[e])
+    				s = m;
+    			else
+    				e = m;
+    		if (nums[m] > nums[s])
+    			if (target >= nums[s] && target <= nums[m])
+    				e = m;
+    			else
+    				s = m;    				
+    	}
+    	return -1;
+    }    
     /**
      * Problem No. 189
      * Rotate Array

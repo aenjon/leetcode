@@ -14,13 +14,13 @@ public class ArrowCodeTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//ArrowCodeTest.test();
+		ArrowCodeTest.test();
 		/*
 		String[] argss = {"a", "b"};
 		System.out.println("main...");
 		main(argss);
 		*/
-		ArrowCodeTest.classictest();
+		//ArrowCodeTest.classictest();
 		
 	}
 	
@@ -403,9 +403,16 @@ public class ArrowCodeTest {
 	     * Problem #32
 	     * Longest Valid Parentheses 
 	     */
-		
-		String pstr = "()()()()(";
+		/*
+		String pstr = ")))()((()()()(())()))";
 		System.out.println(arrowcode.longestValidParentheses(pstr));
+		*/
+	    /**
+	     * Problem #33
+	     * Search in Rotated Sorted Array 
+	     */
+		int[] nums = {4,5,6,7,0,1,2};
+		System.out.println(arrowcode.search(nums, 5));
 		/**
 		 * Problem No.189
 		 * Rotate Array
