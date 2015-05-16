@@ -411,9 +411,25 @@ public class ArrowCodeTest {
 	     * Problem #33
 	     * Search in Rotated Sorted Array 
 	     */
-		int[] nums = {1,1,1,2,3,1,1,1};
+		//int[] nums = {1,1,1,2,3,1,1,1};
 		//int[] nums = {10, 45,0,1,3, 5, 5, 7, 8,10};
-		System.out.println(arrowcode.search(nums, 3));
+		//System.out.println(arrowcode.search(nums, 3));
+		
+	    /**
+	     * Problem #34
+	     * Search for a Range 
+	     */
+		/*
+		int[] nums = {1,4,4,5,5,5,7, 8, 9, 10,12};
+		int[] nums2 = {4,4};
+		TeasingUtil.printList(arrowcode.searchRange(nums2, 4));
+		*/
+	    /**
+	     * Problem #35
+	     * Search Insert Position 
+	     */
+		int[] nums = {4};
+		System.out.println(arrowcode.searchInsert(nums, 4));
 		/**
 		 * Problem No.189
 		 * Rotate Array

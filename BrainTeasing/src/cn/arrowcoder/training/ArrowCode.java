@@ -1238,7 +1238,67 @@ public class ArrowCode {
     		m = (s+e)/2;
     	}
     	return -1;
-    }    
+    }  
+    
+    /**
+     * Problem #34
+     * Search for a Range 
+     */
+    public int[] searchRange(int[] nums, int target) {
+    	int[] ret = new int[2];
+    	ret[0] = -1; ret[1] = -1;
+    	if (nums == null || nums.length == 0) return ret;
+    	int s = 0, e = nums.length-1, mid;
+    	while (s + 1 < e){
+    		mid = (s+e)/2;
+    		if (target <= nums[mid])
+    			e = mid;
+    		else
+    			s = mid + 1;
+    	}
+    	if (nums[s] == target)
+    		ret[0] = s;
+    	else if (nums[e] == target)
+    		ret[0] = e;
+    	
+    	s = 0; e = nums.length - 1;
+    	while (s + 1 < e){
+    		mid = (s+e)/2;
+    		if (target >= nums[mid])
+    			s = mid;
+    		else
+    			e = mid - 1;
+    	}
+    	if (nums[e] == target)
+    		ret[1] = e;
+    	else if (nums[s] == target)
+    		ret[1] = s;
+    	return ret;
+    }
+    
+    /**
+     * Problem #35
+     * Search Insert Position 
+     */
+    public int searchInsert(int[] nums, int target) {
+    	int ret = 0;
+    	if (nums == null || nums.length == 0) return ret;
+    	int s = 0, e = nums.length-1, mid;
+    	while (s < e){
+    		mid = (s+e)/2;
+    		if (target <= nums[mid])
+    			e = mid;
+    		else
+    			s = mid +1;
+    	}
+    	if (target <= nums[s])
+    		ret = s;
+    	else
+    		ret = s + 1;
+    	System.out.println(s);
+    	return ret;
+    }
+    
     /**
      * Problem No. 189
      * Rotate Array
