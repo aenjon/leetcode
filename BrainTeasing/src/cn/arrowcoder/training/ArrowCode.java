@@ -1300,6 +1300,79 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #36
+     * Valid Sudoku
+     */
+    
+	public boolean isValidSudoku(char[][] board) {
+        if (board == null || board.length != 9 ||
+        		board[0] == null || board[0].length != 9)
+        	return false;
+        ArrayList<HashSet<Character>> rows = new ArrayList<HashSet<Character>>();
+        ArrayList<HashSet<Character>> cols = new ArrayList<HashSet<Character>>();
+        ArrayList<HashSet<Character>> boxes = new ArrayList<HashSet<Character>>();
+        for (int i = 0; i<9; ++i){
+        	rows.add(new HashSet<Character>());
+        	cols.add(new HashSet<Character>());
+        	boxes.add(new HashSet<Character>());
+        }
+        for (int i = 0; i<board.length; ++i)
+        	for (int j = 0; j<board[0].length; ++j){
+        		char cur = board[i][j];
+        		if (cur == '.') continue;
+        		// Check row and col
+        		if (!rows.get(i).add(cur) && !cols.get(j).add(cur))
+        			return false;
+        		// Check sub-box
+        		int x = i / 3, y = j / 3;
+        		if (!boxes.get(x*3+y).add(cur))
+        			return false;
+        	}
+        return true;
+    }
+	
+    public boolean isValidSudoku2(char[][] board) {
+    	if (board == null) return false;
+    	if (board.length != 9 || board[0].length != 9) return false;
+
+    	HashSet<Character> hs = new HashSet<Character>();
+    	
+    	// Check rows
+    	for(int i=0; i<board.length; ++i){
+    		for (int j=0; j<board[0].length; ++j)
+    			if (board[i][j] != '.' && !hs.add(board[i][j]))
+    				return false;
+    		hs.clear();
+    	}
+    	
+    	// Check cols
+    	for (int j=0;j<board[0].length; ++j){
+    		for (int i=0; i<board.length; ++i)
+    			if (board[i][j] != '.' && !hs.add(board[i][j]))
+    				return false;
+    		hs.clear();
+    	}
+    	
+    	// Check subbox
+    	for (int i=0;i<3;++i)
+    		for (int j=0;j<3;++j){
+    			for (int m=0;m<3;++m)
+    				for(int n=0;n<3;++n){
+    					char c = board[i*3+m][j*3+n];
+    					if (c !='.' && !hs.add(c))
+    						return false;
+    				}
+    			hs.clear();
+    		}
+    	return true;        
+    }
+
+	
+	/**
+	 * Problem #37
+	 * Sudoku Solver
+	 */
+    /**
      * Problem No. 189
      * Rotate Array
      */
