@@ -1478,6 +1478,33 @@ public class ArrowCode {
     	return !rows.get(cell.x).contains(cell.val) && !cols.get(cell.y).contains(cell.val) 
     			&& !boxes.get(cell.x/3*3 + cell.y/3).contains(cell.val);
     }
+    /**
+     * Problem #38
+     * Count and Say
+     */
+    public String countAndSay(int n) {
+    	if (n <= 0) return null;
+    	String s = "1";
+    	for (int i = 2; i <=n ; ++i){
+    		String temp = "";
+    		char prechar = s.charAt(0);
+			int counter = 1;
+    		for (int j=1; j<s.length(); j++){
+    			if (prechar == s.charAt(j))
+    				counter++;
+    			else{
+    				temp += String.valueOf(counter);
+    				temp += prechar;
+    				prechar = s.charAt(j);
+    				counter = 1;
+    			}
+    		}
+    		s = temp;
+			s += String.valueOf(counter);
+			s += prechar;
+    	}
+    	return s;
+    }
     
     /**
      * Problem No. 189

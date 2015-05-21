@@ -454,8 +454,15 @@ public class ArrowCodeTest {
 		 * Problem #37
 		 * Sudoku Solver
 		 */
-		arrowcode.solveSudoku(board);
-		TeasingUtil.printSudoku(board);
+		//arrowcode.solveSudoku(board);
+		//TeasingUtil.printSudoku(board);
+		
+	    /**
+	     * Problem #38
+	     * Count and Say
+	     */
+		System.out.println(arrowcode.countAndSay(7));
+		
 		/**
 		 * Problem No.189
 		 * Rotate Array
