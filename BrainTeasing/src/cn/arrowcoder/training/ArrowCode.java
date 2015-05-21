@@ -1321,8 +1321,8 @@ public class ArrowCode {
         		char cur = board[i][j];
         		if (cur == '.') continue;
         		// Check row and col
-        		if (!rows.get(i).add(cur) && !cols.get(j).add(cur))
-        			return false;
+        		if (!rows.get(i).add(cur)) return false;
+        		if (!cols.get(j).add(cur)) return false;
         		// Check sub-box
         		int x = i / 3, y = j / 3;
         		if (!boxes.get(x*3+y).add(cur))
@@ -1372,6 +1372,113 @@ public class ArrowCode {
 	 * Problem #37
 	 * Sudoku Solver
 	 */
+
+	ArrayList<HashSet<Character>> rows = new ArrayList<HashSet<Character>>();
+	ArrayList<HashSet<Character>> cols = new ArrayList<HashSet<Character>>();
+	ArrayList<HashSet<Character>> boxes = new ArrayList<HashSet<Character>>();
+
+    public class SCell {
+    	int x;
+    	int y;
+    	char val;
+    	
+    	public SCell(int i, int j, char key){
+    		x = i; y = j; val = key;
+    	}
+    	
+    }
+    public void solveSudoku(char[][] board) {
+    	if (board == null || board.length == 0 
+    			|| board[0] == null || board[0].length == 0)
+    		return;
+    	/*
+        for (int i = 0; i<9; ++i){
+        	rows.add(new HashSet<Character>());
+        	cols.add(new HashSet<Character>());
+        	boxes.add(new HashSet<Character>());
+        }*/
+
+        Stack<SCell> stunfill = new Stack<SCell>();
+        Stack<SCell> stfilled = new Stack<SCell>();
+        
+        for (int i=0; i<board.length; ++i)
+        	for (int j=0; j<board[i].length; ++j){
+        		//char cur = board[i][j];
+        		//int xbox = i/3, ybox = j/3;
+        		if (board[i][j] == '.' )
+        			stunfill.push(new SCell(i,j,'1'));
+        		/*
+        		{
+        			rows.get(i).add(cur);
+        			cols.get(j).add(cur);
+        			boxes.get(xbox * 3 + ybox).add(cur);
+        		}else{
+        			stunfill.push(new SCell(i,j,'1'));
+        		}*/
+        	}
+        
+        while (!stunfill.isEmpty()){
+        	SCell curcell = stunfill.pop();
+        	while (curcell.val <= '9'){
+        		/*
+        		if (checkvalidcell(curcell)){
+        			board[curcell.x][curcell.y] = curcell.val;
+        			rows.get(curcell.x).add(curcell.val);
+        			cols.get(curcell.y).add(curcell.val);
+        			boxes.get(curcell.x/3*3 + curcell.y/3).add(curcell.val);
+        			stfilled.push(curcell);
+        			break;
+        		}*/
+        		if (checkCell(curcell.x, curcell.y, curcell.val, board)){
+        			board[curcell.x][curcell.y] = curcell.val;
+        			stfilled.push(curcell);
+        			break;
+        		}
+            	curcell.val++;
+        	}
+        	if (curcell.val > '9')
+        		if(!stfilled.isEmpty()){
+        			curcell.val = '1';
+        			stunfill.push(curcell);
+        			curcell = stfilled.pop();
+        			board[curcell.x][curcell.y] = '.';        			
+        			//rows.get(curcell.x).remove(curcell.val);
+        			//cols.get(curcell.y).remove(curcell.val);
+        			//boxes.get(curcell.x/3*3 + curcell.y/3).remove(curcell.val);
+        			curcell.val++;
+        			stunfill.push(curcell);
+        		}
+        		else return;
+        }
+        
+    }
+
+    public boolean checkCell(int i, int j, char checker, char[][] board){
+    	boolean result = true;
+    	for (int k=0; k< board.length; ++k){
+    		if (checker == board[k][j])
+    			return false;
+    	}
+    	
+    	for (int k=0; k<board[i].length; ++k)
+    		if (checker == board[i][k])
+    			return false;
+    	
+    	int top = (i / 3) * 3;
+    	int left = (j / 3) * 3;
+    	for (int m = top ; m < top+3; ++m)
+    		for (int n = left; n < left + 3; ++n)
+    			if (checker == board[m][n])
+    				return false;
+    	
+    	return result;
+    }
+    
+    public boolean checkvalidcell(SCell cell){
+    	return !rows.get(cell.x).contains(cell.val) && !cols.get(cell.y).contains(cell.val) 
+    			&& !boxes.get(cell.x/3*3 + cell.y/3).contains(cell.val);
+    }
+    
     /**
      * Problem No. 189
      * Rotate Array

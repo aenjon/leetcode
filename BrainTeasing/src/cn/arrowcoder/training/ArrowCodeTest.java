@@ -448,8 +448,14 @@ public class ArrowCodeTest {
 							{'8','2','.','9','7','5','3','1','4'},
 							{'1','4','7','2','3','6','8','9','5'},
 							{'3','9','.','.','1','4','2','.','7'}};
-		System.out.println(arrowcode.isValidSudoku(board1));
-		
+		//System.out.println(arrowcode.isValidSudoku(board1));
+
+		/**
+		 * Problem #37
+		 * Sudoku Solver
+		 */
+		arrowcode.solveSudoku(board);
+		TeasingUtil.printSudoku(board);
 		/**
 		 * Problem No.189
 		 * Rotate Array
