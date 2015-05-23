@@ -1507,6 +1507,45 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #39
+     * Combination Sum
+     */
+    
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    	List<List<Integer>> ret = new LinkedList<List<Integer>>();
+    	if (candidates == null || candidates.length == 0) return ret;
+    	Arrays.sort(candidates);
+    	for (int i=0; i<candidates.length; i++){
+    		if (candidates[i] > target)
+    			break;
+    		else{
+    			List<Integer> subret = new LinkedList<Integer>();
+    			subret.add(candidates[i]);
+    			cSum_helper(candidates, i, target-candidates[i], subret, ret);
+    		}
+    	}
+    	return ret;
+    }
+    
+    public void cSum_helper(int[] nums, int index, int target, List<Integer> subret, List<List<Integer>> ret){
+    	if (target == 0){
+    		List<Integer> newitem = new LinkedList<Integer>(subret);
+    		ret.add(newitem);
+    		return;
+    	}
+    	if (target - nums[index] >= 0){
+    		subret.add(nums[index]);
+    		cSum_helper(nums,index,target - nums[index], subret,ret);
+    		subret.remove(subret.size()-1);
+    	}
+    	if (index + 1 < nums.length && target - nums[index+1] >= 0){
+    		subret.add(nums[index+1]);
+    		cSum_helper(nums,index+1,target - nums[index+1], subret,ret);
+    		subret.remove(subret.size()-1);
+    	}
+    }
+    
+    /**
      * Problem No. 189
      * Rotate Array
      */

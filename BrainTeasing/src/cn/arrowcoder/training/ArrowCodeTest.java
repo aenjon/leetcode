@@ -461,7 +461,14 @@ public class ArrowCodeTest {
 	     * Problem #38
 	     * Count and Say
 	     */
-		System.out.println(arrowcode.countAndSay(7));
+		//System.out.println(arrowcode.countAndSay(7));
+		
+	    /**
+	     * Problem #39
+	     * Combination Sum
+	     */
+		int[] candidates = {2,3,5};
+		TeasingUtil.printIntegerPowerSet(arrowcode.combinationSum(candidates, 7));
 		
 		/**
 		 * Problem No.189
