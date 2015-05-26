@@ -1515,34 +1515,74 @@ public class ArrowCode {
     	List<List<Integer>> ret = new LinkedList<List<Integer>>();
     	if (candidates == null || candidates.length == 0) return ret;
     	Arrays.sort(candidates);
-    	for (int i=0; i<candidates.length; i++){
-    		if (candidates[i] > target)
-    			break;
-    		else{
-    			List<Integer> subret = new LinkedList<Integer>();
-    			subret.add(candidates[i]);
-    			cSum_helper(candidates, i, target-candidates[i], subret, ret);
-    		}
-    	}
+    	int[] nodup = removeDuplicated(candidates);
+    	csum_helper(new LinkedList<Integer>(), nodup, 0, target, ret);
     	return ret;
     }
     
-    public void cSum_helper(int[] nums, int index, int target, List<Integer> subret, List<List<Integer>> ret){
+    public void csum_helper(List<Integer> subret, int[] nums, int index, int target, List<List<Integer>> ret){
     	if (target == 0){
-    		List<Integer> newitem = new LinkedList<Integer>(subret);
-    		ret.add(newitem);
+    		ret.add(subret);
     		return;
     	}
-    	if (target - nums[index] >= 0){
-    		subret.add(nums[index]);
-    		cSum_helper(nums,index,target - nums[index], subret,ret);
-    		subret.remove(subret.size()-1);
+    	for (int i=index; i<nums.length; ++i){
+    		int newtarget = target - nums[i];
+    		if (newtarget >=0){
+    			List<Integer> newsubret = new LinkedList<Integer>(subret);
+    			newsubret.add(nums[i]);
+    			csum_helper(newsubret, nums, i, newtarget, ret);
+    		}else{
+    			break;
+    		}    			
     	}
-    	if (index + 1 < nums.length && target - nums[index+1] >= 0){
-    		subret.add(nums[index+1]);
-    		cSum_helper(nums,index+1,target - nums[index+1], subret,ret);
-    		subret.remove(subret.size()-1);
+    }
+    public int[] removeDuplicated(int[] nums){
+    	int len = 1;
+    	for (int i=1;i<nums.length; ++i){
+    		if(nums[i] != nums[i-1]){
+    			nums[len++] = nums[i];
+    		}
     	}
+    	int[] ret = Arrays.copyOf(nums, len);
+    	return ret;
+    }
+    
+    /**
+     * Problem #40
+     * Combination Sum II 
+     */
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+    	List<List<Integer>> ret = new LinkedList<List<Integer>>();
+    	if (candidates == null || candidates.length == 0) return ret;
+    	Arrays.sort(candidates);
+    	csum2_helper(new LinkedList<Integer>(), candidates, 0, target, ret);
+    	return ret;
+    }
+    
+    public void csum2_helper(List<Integer> subret, int[] nums, int index, int target, List<List<Integer>> ret){
+    	if (target == 0){
+    		ret.add(subret);
+    		return;
+    	}
+    	for (int i=index; i<nums.length; ++i){
+    		int newtarget = target - nums[i];
+    		if (newtarget >= 0){
+    			List<Integer> newsubret = new LinkedList<Integer>(subret);
+    			newsubret.add(nums[i]);
+    			csum2_helper(newsubret, nums, i+1, newtarget, ret);
+    			while (i<nums.length-1 && nums[i] == nums[i+1])
+    				++i;
+    		}else
+    			break;
+    	}
+    } 
+    
+    /**
+     * Problem #41
+     * First Missing Positive
+     */
+    public int firstMissingPositive(int[] nums) {
+    	return 0;
     }
     
     /**

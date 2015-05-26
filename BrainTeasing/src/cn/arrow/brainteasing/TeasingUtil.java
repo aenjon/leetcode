@@ -80,7 +80,7 @@ public class TeasingUtil
 		}
 		System.out.println("]");
 	}
-	public static void printIntegerPowerSet(List<List<Integer>> pset){
+	public static void printListList(List<List<Integer>> pset){
 		if (pset == null) return;
 		System.out.println("[");
 		for (List<Integer> set : pset){

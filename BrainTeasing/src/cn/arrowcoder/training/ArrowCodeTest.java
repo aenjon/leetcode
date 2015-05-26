@@ -435,6 +435,7 @@ public class ArrowCodeTest {
 	     * Problem #36
 	     * Valid Sudoku
 	     */
+		/*
 		char[][] board ={{'5','3','.','.','7','.','.','.','.'}, {'6','.','.','1','9','5','.','.','.'},{'.','9','8','.','.','.','.','6','.'},
 				{'8','.','.','.','6','.','.','.','3'}, {'4','.','.','8','.','3','.','.','1'}, {'7','.','.','.','2','.','.','.','6'},
 				{'.','6','.','.','.','.','2','8','.'}, {'.','.','.','4','1','9','.','.','5'},{'.','.','.','.','8','.','.','7','9'}};
@@ -448,6 +449,7 @@ public class ArrowCodeTest {
 							{'8','2','.','9','7','5','3','1','4'},
 							{'1','4','7','2','3','6','8','9','5'},
 							{'3','9','.','.','1','4','2','.','7'}};
+		*/
 		//System.out.println(arrowcode.isValidSudoku(board1));
 
 		/**
@@ -467,8 +469,9 @@ public class ArrowCodeTest {
 	     * Problem #39
 	     * Combination Sum
 	     */
-		int[] candidates = {2,3,5};
-		TeasingUtil.printIntegerPowerSet(arrowcode.combinationSum(candidates, 7));
+		int[] candidates = {2,3,3,5,5,5,9};
+		//TeasingUtil.printList(arrowcode.removeDuplicated(candidates));
+		TeasingUtil.printListList(arrowcode.combinationSum2(candidates, 16));
 		
 		/**
 		 * Problem No.189
