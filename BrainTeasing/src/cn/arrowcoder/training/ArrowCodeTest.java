@@ -469,9 +469,16 @@ public class ArrowCodeTest {
 	     * Problem #39
 	     * Combination Sum
 	     */
-		int[] candidates = {2,3,3,5,5,5,9};
+		//int[] candidates = {2,3,3,5,5,5,9};
 		//TeasingUtil.printList(arrowcode.removeDuplicated(candidates));
-		TeasingUtil.printListList(arrowcode.combinationSum2(candidates, 16));
+		//TeasingUtil.printListList(arrowcode.combinationSum2(candidates, 16));
+		
+	    /**
+	     * Problem #41
+	     * First Missing Positive
+	     */
+		int nums[] = {3,4,-1,1};
+		System.out.println(arrowcode.firstMissingPositive(nums));
 		
 		/**
 		 * Problem No.189
