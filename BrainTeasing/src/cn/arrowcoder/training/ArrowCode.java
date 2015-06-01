@@ -1585,13 +1585,16 @@ public class ArrowCode {
     	int i = 0;
     	int n = nums.length;
     	while (i < n){
-    		System.out.println("i=" +i + ", nums[i]=" + nums[i] + ", nums[i]-1=" + (nums[i]-1) + ", nums[nums[i]-1]=" + nums[nums[i]-1]);
+    		//System.out.println("i=" +i + ", nums[i]=" + nums[i] + ", nums[i]-1=" + (nums[i]-1) + ", nums[nums[i]-1]=" + nums[nums[i]-1]);
     		if (nums[i] != (i+1) && nums[i] >= 1 && nums[i] <= n && nums[nums[i]-1] != nums[i]){
     			//System.out.println(nums[i]-1);
+    			/*
     			int temp = nums[i];
     			nums[i] = nums[nums[i]-1];
     			nums[nums[i]-1] = temp;
+    			*/
     			//System.out.println(nums[i]-1);
+    			swap(nums,i, nums[i]-1);
     		}
     		else
     			++i;
@@ -1602,6 +1605,11 @@ public class ArrowCode {
     	return n+1;
     }
     
+    public void swap(int[] A, int i, int j){
+    	int temp = A[i];
+    	A[i] = A[j];
+    	A[j] = temp;
+    }
     /**
      * Problem No. 189
      * Rotate Array
