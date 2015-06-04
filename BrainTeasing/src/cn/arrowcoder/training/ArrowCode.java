@@ -1580,11 +1580,23 @@ public class ArrowCode {
     /**
      * Problem #41
      * First Missing Positive
+     * To search the first missing positive in O(n) without extras space, we need sophisticated solution.
+     * The solution is "partially sort" the integer array using bucket sort.
+     * Suppose all positive integers are in the array A. If we sort them, the number 1 should be in index 0,
+     * 2 should be in index 2, and so on. That is, A[i] should be the number i+1.
+     * So, begin with the first element, we check if A[i] == i+1. If it is not, swap the number to the position it should sit.
+     * After that, go through the array again, if the number at index i does not equal to i+1, then i+1 is the missing positive.
      */
     public int firstMissingPositive(int[] nums) {
     	int i = 0;
     	int n = nums.length;
     	while (i < n){
+    		/*
+    		 * 1. check if nums[i] is at the right position i+1
+    		 * 2. check if it is a positive integer between 1 and n, which the range of the array can contain
+    		 * 		if it is non-positive integer, leave as it is.
+    		 * 3. check if the integer in the intended position is already num[i], i.e. skip the duplicated integer
+    		 */
     		if (nums[i] != (i+1) && nums[i] >= 1 && nums[i] <= n && nums[nums[i]-1] != nums[i]){
     			swap(nums,i, nums[i]-1);
     		}
@@ -1594,6 +1606,7 @@ public class ArrowCode {
     	for (i = 0; i < n; ++i)
     		if (nums[i] != (i+1))
     			return i+1;
+    	/* If the array contains all non-duplicated integers from 1, return the next positive integer*/
     	return n+1;
     }
     
@@ -1602,6 +1615,15 @@ public class ArrowCode {
     	A[i] = A[j];
     	A[j] = temp;
     }
+    
+    /**
+     * Problem #42
+     * Trapping Rain Water
+     */
+    public int trap(int[] height) {
+    	return 0;
+    }
+    
     /**
      * Problem No. 189
      * Rotate Array

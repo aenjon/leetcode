@@ -477,8 +477,10 @@ public class ArrowCodeTest {
 	     * Problem #41
 	     * First Missing Positive
 	     */
-		int nums[] = {0, 2, 3, 9,8};
+		int nums[] = {6, 1, 2, 3, 7, 9,8, 5, 4};
+		TeasingUtil.printList(nums);
 		System.out.println(arrowcode.firstMissingPositive(nums));
+		TeasingUtil.printList(nums);
 		
 		/**
 		 * Problem No.189
