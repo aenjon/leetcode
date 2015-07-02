@@ -80,6 +80,8 @@ public class ArrowCode {
     /**
      * Problem No. 3
      * Longest Substring Without Repeating Characters
+     * Go through the string once, calculate the distance between any two duplicated chars
+     * Update the max distance in the end
      */
     public int lengthOfLongestSubstring(String s) {
         if (s == null || s.isEmpty()) return 0;
@@ -88,6 +90,7 @@ public class ArrowCode {
         char curchar;
         for (int i=0; i<s.length(); i++){
             curchar = s.charAt(i);
+            /* The char never occurs or it occurs before the current calculated distance */
             if ( !hm.containsKey(curchar) || hm.get(curchar) < i - d)
                 d++;
             else
