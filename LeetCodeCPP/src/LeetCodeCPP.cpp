@@ -78,6 +78,33 @@ public:
     		return getkth(A,m,B,n,l);
     }
 
+
+    double findMedianSortedArraysR(int* nums1, int nums1Size, int* nums2, int nums2Size) {
+        int l = (nums1Size + nums2Size + 1)/2;
+        int r = (nums1Size + nums2Size + 2)/2;
+        if (l!=r)
+            return (getkthR(nums1, nums1Size, nums2,nums2Size, l) + getkthR(nums1, nums1Size, nums2, nums2Size, r))/2.0;
+        else
+            return getkthR(nums1, nums1Size, nums2, nums2Size, l);
+    }
+
+    double getkthR(int* s, int m, int* l, int n, int k){
+        if (m > n)
+            return getkthR(l, n, s, m, k);
+        if (m == 0)
+            return l[k-1];
+        if (k == 1)
+            return min(s[0], l[0]);
+        int i = min (m, k/2);
+        int j = min (n, k/2);
+
+        if (s[i-1] > l[j-1])
+            return getkthR(s, m, l+j, n-j, k-j);
+        else
+            return getkthR(s+i,m-i, l, n, k-i);
+        return 0;
+    }
+
     /**
      * Problem #5: Longest Palindromic Substring
      */
