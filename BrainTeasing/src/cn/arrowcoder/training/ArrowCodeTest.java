@@ -197,8 +197,8 @@ public class ArrowCodeTest {
 		/**
 		 * Problem No. 8
 		 */
-		//String str = "     -1";
-		//System.out.println(arrowcode.atoi(str));
+		String str = "     -1";
+		System.out.println(arrowcode.atoi(str));
 		
 		/**
 		 * Problem #9
