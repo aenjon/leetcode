@@ -365,7 +365,13 @@ public class ArrowCode {
     	return rev == x / 10 && dx == x % 10;        
     }
 
+    /**
+     * Calculate the half-reversed number, and compare the half-reversed number with 
+     * @param x
+     * @return
+     */
     public boolean isPalindrome2(int x) {
+    	// Negative integer and the integers ending with 0 but not equal to 0 do not match
     	if (x<0 || (x!=0 && x%10 == 0)) return false;
     	int rev = 0;
     	while (x > rev){
