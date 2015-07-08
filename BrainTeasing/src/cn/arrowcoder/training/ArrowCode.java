@@ -406,6 +406,7 @@ public class ArrowCode {
         // p[j] matches an empty (sub)string iff
         // p[j] is '*' and p[j-2] matches. In this case, p[j-1] could be any char
         // i.e. b[0][j-1] is true and p[j] is '*'
+        // Note: "*" is an invalid regular expression string. "*" must follow another character
         for (int j = 0; j < n; j++)
             b[0][j+1] = j > 0 && b[0][j-1] && p.charAt(j) == '*';
             
