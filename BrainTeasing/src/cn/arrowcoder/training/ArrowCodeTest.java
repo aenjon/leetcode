@@ -197,9 +197,10 @@ public class ArrowCodeTest {
 		/**
 		 * Problem No. 8
 		 */
+		/*
 		String str = "     -1";
 		System.out.println(arrowcode.atoi(str));
-		
+		*/
 		/**
 		 * Problem #9
 		 * Palindrome Number 
@@ -247,7 +248,8 @@ public class ArrowCodeTest {
 	     * Problem No. 14
 	     * Letter Combinations of a Phone Number 
 	     */
-		//String s = "23";
+		String s = "23";
+		TeasingUtil.printList(arrowcode.letterCombinations(s));
 		//TeasingUtil.printListString(arrowcode.letterCombinations(s));
 		//List<List<Integer>> ret = arrowcode.threeSum2(nums);
 		//TeasingUtil.printIntegerPowerSet(ret);

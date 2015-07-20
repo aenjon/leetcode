@@ -23,7 +23,7 @@ public class TeasingUtil
 		}
 		System.out.println("null");
 	}
-	
+	/*
 	public static void printListString(List<String> list){
 		if (list == null) return;
 		int i = 0;
@@ -31,7 +31,7 @@ public class TeasingUtil
 			System.out.print(i++ + "-" + s + ",");
 		}
 		System.out.println();		
-	}
+	}*/
 	
 	public static void printStringList(List<String> strlist){
 		if (strlist == null || strlist.size() == 0) return;
@@ -60,14 +60,14 @@ public class TeasingUtil
 			System.out.println();
 		}			
 	}
-	
+	/*
 	public static void printListInteger(List<Integer> list){
 		if (list == null) return;
 		for (Integer a : list){
 			System.out.print(a.intValue() + ",");
 		}
 		System.out.println();
-	}
+	}*/
 	
 	public static void printStringArrayList(List<String[]> slist){
 		if (slist == null) return;
@@ -188,6 +188,14 @@ public class TeasingUtil
 		}
 		for(int i = 0; i<len; ++i)
 			A[i] = tmp[i+len-v];
+	}
+	
+	public static <T> void printList(List<T> list){
+		if (list == null) return;
+		System.out.print("[ ");
+		for(T e : list)
+			System.out.print(e + ", ");
+		System.out.println("]");
 	}
 	
 	public static void printList(int[] list)
