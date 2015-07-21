@@ -634,7 +634,7 @@ public class ArrowCode {
             int low = i + 1;
             int high = num.length-1;
             while (low < high){
-                int cursum = num[i]+num[low]+num[high];
+                int cursum = num[i]+num[low]+num[high]; 
                 if ( cursum == target)
                     return target;
                 if (Math.abs(target-cursum) < Math.abs(closest)){
