@@ -16,12 +16,13 @@ public class TeasingUtil
 	}
 	
 	public static void printListNode(ListNode head){
-		
-		while(head != null){
-			System.out.print(head.val + ",");
-			head = head.next;
-		}
-		System.out.println("null");
+
+        System.out.print("[");
+        while(head != null){
+            System.out.print(head.val + ",");
+            head = head.next;
+        }
+        System.out.println("]");
 	}
 	/*
 	public static void printListString(List<String> list){
@@ -197,6 +198,7 @@ public class TeasingUtil
 			System.out.print(e + ", ");
 		System.out.println("]");
 	}
+	
 	
 	public static void printList(int[] list)
 	{

@@ -844,7 +844,6 @@ public class ArrowCode {
     public List<String> generateParenthesis(int n) {
     	pc = 0;
     	List<String> ret = new ArrayList<String>();
-    	if (n <= 0 ) return ret;
     	getPar_aux("(", 1, 0, n, ret);
     	System.out.println("pc:" + pc);
     	return ret;
@@ -862,6 +861,7 @@ public class ArrowCode {
     		getPar_aux(temp+")", l, r+1, n, ret);
     	if (l == r)
     		getPar_aux(temp+"(", l+1, r, n, ret);
+    	return;
     }
     
     /**
