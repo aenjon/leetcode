@@ -890,6 +890,20 @@ public class ArrowCode {
     	}
     	return lists[0];
     }
+
+    public ListNode mergeKLists2(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
+        int step = 2, mstep = 1;
+        while (mstep < lists.length){
+            for (int i = 0; i < lists.length; i += step){
+                lists[i] = mergeTwoLists(lists[i], i+mstep < lists.length ? lists[i+mstep] : null);
+            }
+            step <<= 1;
+            mstep <<= 1;
+        }
+        return lists[0];
+    }
+    
     
     /**
      * Problem #24
