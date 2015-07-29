@@ -248,8 +248,8 @@ public class ArrowCodeTest {
 	     * Problem No. 14
 	     * Letter Combinations of a Phone Number 
 	     */
-		String s = "23";
-		TeasingUtil.printList(arrowcode.letterCombinations(s));
+		//String s = "23";
+		//TeasingUtil.printList(arrowcode.letterCombinations(s));
 		//TeasingUtil.printListString(arrowcode.letterCombinations(s));
 		//List<List<Integer>> ret = arrowcode.threeSum2(nums);
 		//TeasingUtil.printIntegerPowerSet(ret);
@@ -380,18 +380,18 @@ public class ArrowCodeTest {
 	     * Problem #30
 	     * Substring with Concatenation of All Words
 	     */
-		/*
-		String s = "wefoobarbarfoobar";
-		String[] words = {"foo", "bar"};
-		String s1 = "baaabababab";
+		
+		String s0 = "wefoobarbarfoobar";
+		String[] words = {"foo", "bar", "bar"};
+		String s1 = "baaababababa";
 		String[] words1 = {"a","b","a"};
 		String s2 = "cbaccbcbbc";
 		String[] words2 = {"cb","bc"}; 
 		//TeasingUtil.printListInteger(arrowcode.findSubstring2(s2, words2));
-		TeasingUtil.printListInteger(arrowcode.findSubstring3(s, words));
-		TeasingUtil.printListInteger(arrowcode.findSubstring3(s1, words1));
-		TeasingUtil.printListInteger(arrowcode.findSubstring3(s2, words2));
-		*/
+		TeasingUtil.printList(arrowcode.findSubstring3(s0, words));
+		TeasingUtil.printList(arrowcode.findSubstring3(s1, words1));
+		TeasingUtil.printList(arrowcode.findSubstring3(s2, words2));
+		
 	    /**
 	     * Problem #31
 	     * Next Permutation
@@ -405,10 +405,10 @@ public class ArrowCodeTest {
 	     * Problem #32
 	     * Longest Valid Parentheses 
 	     */
-		/*
-		String pstr = ")))()((()()()(())()))";
+		String pstr = "(()())";
+		//String pstr = ")))()((()()()(())()))";
 		System.out.println(arrowcode.longestValidParentheses(pstr));
-		*/
+		
 	    /**
 	     * Problem #33
 	     * Search in Rotated Sorted Array 
@@ -479,11 +479,12 @@ public class ArrowCodeTest {
 	     * Problem #41
 	     * First Missing Positive
 	     */
+		/*
 		int nums[] = {6, 1, 2, 3, 7, 9,8, 5, 4};
 		TeasingUtil.printList(nums);
 		System.out.println(arrowcode.firstMissingPositive(nums));
 		TeasingUtil.printList(nums);
-		
+		*/
 		/**
 		 * Problem No.189
 		 * Rotate Array
@@ -505,7 +506,16 @@ public class ArrowCodeTest {
 	     * Problem No. 191
 	     * Number of 1 Bits
 	     */
-
+		
+		/**
+		 * Problem No. 203
+		 */
+		ListNode head = new ListNode (1);
+		head.next = new ListNode(2);
+		head.next.next = new ListNode (3);
+		head.next.next.next = new ListNode(2);
+		TeasingUtil.printList(arrowcode.removeElements(head, 2));
+		
 		//System.out.println("n = " + 7 + " with " + arrowcode.hammingWeight(7) + " 1s");
 		
 	}

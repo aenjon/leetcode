@@ -973,16 +973,18 @@ public class ArrowCode {
      * Problem #27
      * Remove Element
      */
-    public int removeElement(int[] A, int elem) {
-    	if (A == null || A.length == 0) return 0;
-    	//int ret = 0;
-    	int len = A.length-1;
-    	for(int i=0; i <= len ;)
-    		if (A[i] == elem)
-    			A[i] = A[len--];
-    		else
-    			++i;
-    	return len+1;
+    public int removeElement(int[] nums, int val) {
+        if (nums == null || nums.length == 0)
+            return 0;
+        int i = 0, j = nums.length - 1;
+        while (i <= j){
+            if (nums[i] != val)
+                i++;
+            else{
+                nums[i] = nums[j--];
+            }
+        }
+        return j+1;
     }
     
     /**
@@ -1104,15 +1106,25 @@ public class ArrowCode {
     			wordsmap.put(words[i], 1);
     }
 	*/
+    /**
+     * The words may contain duplicated words, i.e., the word could appear more than once in the 
+     * searched string
+     * @param s
+     * @param words
+     * @return
+     */
     public List<Integer> findSubstring3(String s, String[] words) {
     	List<Integer> ret = new LinkedList<Integer>();
     	HashMap<String, Integer> dict = new HashMap<String, Integer>();
     	// Fill a dictionary, record the occurrence times of each word.
     	for (int i = 0; i < words.length; ++i){
+    		setDictCount(dict,words[i],1);
+    		/*
     		if (dict.containsKey(words[i]))
     			dict.put(words[i], dict.get(words[i]).intValue() + 1);
     		else
     			dict.put(words[i], 1);
+    		*/
     	}
     	int wlen = words[0].length();
     	int slen = s.length();
@@ -1132,11 +1144,12 @@ public class ArrowCode {
     				setDictCount(tdict,curword,1);
     				if (tdict.get(curword).intValue() <= dict.get(curword).intValue()){
     					/* The (duplicated) words appears only once */
+    					/* Because count starts with "0", we need "<="*/
     					++count;
     				}else{
     					/**
-    					 * When the (duplicated) word appears more than once,
-    					 * Discard the first word in the current checking sequence
+    					 * When the (duplicated) word appears in the string more times than it appears in the words
+    					 * Discard the first word in the current checking sequence, and shift one word.
     					 */
     					while (tdict.get(curword).intValue() > dict.get(curword).intValue()){
     						String head = s.substring(left, left + wlen);
@@ -1196,6 +1209,8 @@ public class ArrowCode {
     }
     
     private void reverseList(int[] num, int start, int end){
+    	if (num == null || start < 0 || end >= num.length)
+    		return;
         int len = end-start+1;
         for(int i=0;i<len/2; i++){
         	int temp = num[start+i];
@@ -1266,38 +1281,49 @@ public class ArrowCode {
     
     /**
      * Problem #34
-     * Search for a Range 
+     * Search for a Range
+     * Do binery search twice. Once for the left (small) edge, once for the right (large) edge
      */
     public int[] searchRange(int[] nums, int target) {
-    	int[] ret = new int[2];
-    	ret[0] = -1; ret[1] = -1;
-    	if (nums == null || nums.length == 0) return ret;
-    	int s = 0, e = nums.length-1, mid;
-    	while (s + 1 < e){
-    		mid = (s+e)/2;
-    		if (target <= nums[mid])
-    			e = mid;
-    		else
-    			s = mid + 1;
-    	}
-    	if (nums[s] == target)
-    		ret[0] = s;
-    	else if (nums[e] == target)
-    		ret[0] = e;
-    	
-    	s = 0; e = nums.length - 1;
-    	while (s + 1 < e){
-    		mid = (s+e)/2;
-    		if (target >= nums[mid])
-    			s = mid;
-    		else
-    			e = mid - 1;
-    	}
-    	if (nums[e] == target)
-    		ret[1] = e;
-    	else if (nums[s] == target)
-    		ret[1] = s;
-    	return ret;
+        if (nums == null) return null;
+        int[] ret = new int[2];
+        ret[0] = -1; ret[1] = -1;
+        int s = 0, e = nums.length - 1, mid;
+        // Looking for left (small) edge
+        while (e - s > 1){
+            mid = (e+s)/2;
+            if (nums[mid] > target)
+                e = mid - 1;
+            else if (nums[mid] == target)
+            	// Move the end index towards left edge
+                e = mid;
+            else
+                s = mid + 1;
+        }
+        // If nums[s] == nums[e], always take the small one.
+        if (target == nums[s])
+            ret[0] = s;
+        else if (target == nums[e])
+            ret[0] = e;
+        
+        // Looking for right (large) edge
+        s = 0; e = nums.length - 1;
+        while (e - s > 1){
+            mid = (e + s)/2;
+            if (nums[mid] < target)
+                s = mid + 1;
+            else if (nums[mid] == target)
+            	// Move the start index towards rigth edge
+                s = mid;
+            else
+                e = mid - 1;
+        }
+        // If nums[s] == nums[e], always take the large one.
+        if (target == nums[e])
+            ret[1] = e;
+        else if (target == nums[s])
+            ret[1] = s;
+        return ret;
     }
     
     /**
@@ -1734,6 +1760,25 @@ public class ArrowCode {
     		n = n >> 1;
     	}
     	return len;
+    }
+    
+    /**
+     * Problem No. 203
+     * Remove Linked List Elements
+     */
+    public ListNode removeElements(ListNode head, int val) {
+    	ListNode dummy = new ListNode(0);
+    	dummy.next = head;
+    	ListNode pre = dummy;
+    	ListNode cur = head;
+    	while (cur != null){
+    		if (cur.val == val){
+    			pre.next = cur.next;
+    		} else 
+    			pre = pre.next;
+    		cur = cur.next;
+    	}
+    	return dummy.next;
     }
     
     /**

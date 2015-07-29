@@ -210,6 +210,10 @@ public class TeasingUtil
 				System.out.println(list[i]);
 	}
 
+	public static void printList(ListNode head){
+		TeasingUtil.printListNode(head);
+	}
+	
 	public static void printList(float[] list)
 	{
 		int size = list.length;
