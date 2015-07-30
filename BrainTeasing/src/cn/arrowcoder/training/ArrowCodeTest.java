@@ -1,6 +1,7 @@
 package cn.arrowcoder.training;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +15,18 @@ public class ArrowCodeTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+	      HashSet<List<Integer>> test = new HashSet<List<Integer>>();
+	      List<Integer> e1 = new LinkedList<Integer>();
+	      e1.add(1); e1.add(2); e1.add(3);
+	      List<Integer> e2 = new LinkedList<Integer>();
+	      e2.add(1); e2.add(2); e2.add(3);
+	      System.out.println(test.add(e1));
+	      System.out.println(test.add(e2));
+		
 		ArrowCodeTest.test();
+		
+		//HashSet<Character> row[] = new HashSet<Character>[9];
 		/*
 		String[] argss = {"a", "b"};
 		System.out.println("main...");

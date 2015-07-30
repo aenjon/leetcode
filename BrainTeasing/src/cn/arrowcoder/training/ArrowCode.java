@@ -1423,10 +1423,11 @@ public class ArrowCode {
 	 * Sudoku Solver
 	 */
 
-	ArrayList<HashSet<Character>> rows = new ArrayList<HashSet<Character>>();
-	ArrayList<HashSet<Character>> cols = new ArrayList<HashSet<Character>>();
-	ArrayList<HashSet<Character>> boxes = new ArrayList<HashSet<Character>>();
-
+	ArrayList<HashSet<Character>> row; //= new ArrayList<HashSet<Character>>();
+	ArrayList<HashSet<Character>> col; //= new ArrayList<HashSet<Character>>();
+	ArrayList<HashSet<Character>> subbox; //= new ArrayList<HashSet<Character>>();
+	List<Cell> unfilled;
+	
     public class SCell {
     	int x;
     	int y;
@@ -1437,10 +1438,82 @@ public class ArrowCode {
     	}
     	
     }
+    class Cell{
+        int x;
+        int y;
+        Cell (int row, int col) {x = row; y = col;}
+    }
+    
+    public void solveSudoku2(char[][] board) {
+        if (board == null || board.length != 9 || board[0] == null || board[0].length != 9)
+            return;
+        
+        row = new ArrayList<HashSet<Character>>();
+        col = new ArrayList<HashSet<Character>>();
+        subbox = new ArrayList<HashSet<Character>>();
+        for(int i=0; i<9; i++){
+            row.add(new HashSet<Character>());
+            col.add(new HashSet<Character>());
+            subbox.add(new HashSet<Character>());
+        }
+        unfilled = new ArrayList<Cell>();
+        // Initialization
+        for (int i = 0; i<board.length; i++)
+            for (int j = 0; j< board[0].length; j++){
+                char c = board[i][j];
+                if (c == '.')
+                    unfilled.add(new Cell(i, j));
+                else{
+                    row.get(i).add(c);
+                    col.get(j).add(c);
+                    subbox.get(i/3*3 + j/3).add(c);
+                }
+            }
+        solveSudokuHelper(board, 0);
+    }    
+ 
+    private boolean solveSudokuHelper(char[][] board, int ufindex){
+        if(ufindex == unfilled.size()) return true;
+        Cell curcell = unfilled.get(ufindex);
+        for (char checker = '1'; checker <= '9'; checker++){
+            int i = curcell.x, j = curcell.y;
+            if (checkCell(board, curcell, checker)){
+                board[i][j] = checker;
+                if (solveSudokuHelper(board, ufindex+1))
+                    return true;
+                else{
+                    board[i][j] = '.';
+                    row.get(i).remove(checker);
+                    col.get(j).remove(checker);
+                    subbox.get(i/3*3 + j/3).remove(checker);                
+                }
+                
+            }
+        }
+        return false;
+    }
+
+    private boolean checkCell(char[][] board, Cell cell, char c){
+        int i = cell.x, j = cell.y;
+        if (!row.get(i).add(c)) return false;
+        if (!col.get(j).add(c)) {
+            row.get(i).remove(c);
+            return false;
+        }
+        if (!subbox.get(i/3*3 + j/3).add(c)){
+            row.get(i).remove(c);
+            col.get(j).remove(c);
+            return false;
+        }
+        return true;
+    }
+    
+    
     public void solveSudoku(char[][] board) {
     	if (board == null || board.length == 0 
     			|| board[0] == null || board[0].length == 0)
     		return;
+    	
     	/*
         for (int i = 0; i<9; ++i){
         	rows.add(new HashSet<Character>());
@@ -1523,11 +1596,11 @@ public class ArrowCode {
     	
     	return result;
     }
-    
+    /*
     public boolean checkvalidcell(SCell cell){
     	return !rows.get(cell.x).contains(cell.val) && !cols.get(cell.y).contains(cell.val) 
     			&& !boxes.get(cell.x/3*3 + cell.y/3).contains(cell.val);
-    }
+    }*/
     /**
      * Problem #38
      * Count and Say
@@ -1555,6 +1628,27 @@ public class ArrowCode {
     	}
     	return s;
     }
+    
+    public String countAndSay2(int n) {
+        if (n <= 0) return "";
+        String ret = "1";
+        for(int i = 1 ; i < n; i++){
+            StringBuffer sb = new StringBuffer();
+            int j = 0, count = 1;
+            while (++j < ret.length()){
+                if (ret.charAt(j-1) == ret.charAt(j))
+                    count++;
+                else{
+                    sb.append(String.valueOf(count) + ret.charAt(j-1));
+                    count = 1;
+                }                    
+            }
+            sb.append(String.valueOf(count) + ret.charAt(j-1));
+            ret = sb.toString();
+        }
+        return ret;
+    }
+    
     
     /**
      * Problem #39
@@ -1586,15 +1680,22 @@ public class ArrowCode {
     		}    			
     	}
     }
+    /**
+     * Remove duplicated integers in an array
+     * A generic approach with HashSet.
+     * @param nums
+     * @return
+     */
     public int[] removeDuplicated(int[] nums){
-    	int len = 1;
-    	for (int i=1;i<nums.length; ++i){
-    		if(nums[i] != nums[i-1]){
-    			nums[len++] = nums[i];
-    		}
-    	}
-    	int[] ret = Arrays.copyOf(nums, len);
-    	return ret;
+        if (nums == null) return null;
+        HashSet<Integer> hs = new HashSet<Integer>();
+        int len = 0;
+        for (int i=0; i<nums.length; i++){
+            if (hs.add(nums[i]))
+                nums[len++] = nums[i];
+        }
+        int[] ret = Arrays.copyOf(nums,len);
+        return ret;    	
     }
     
     /**
