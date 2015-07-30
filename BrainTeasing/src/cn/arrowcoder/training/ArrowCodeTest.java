@@ -16,6 +16,7 @@ public class ArrowCodeTest {
 	 */
 	public static void main(String[] args) {
 		
+			/*
 	      HashSet<List<Integer>> test = new HashSet<List<Integer>>();
 	      List<Integer> e1 = new LinkedList<Integer>();
 	      e1.add(1); e1.add(2); e1.add(3);
@@ -23,7 +24,7 @@ public class ArrowCodeTest {
 	      e2.add(1); e2.add(2); e2.add(3);
 	      System.out.println(test.add(e1));
 	      System.out.println(test.add(e2));
-		
+		*/
 		ArrowCodeTest.test();
 		
 		//HashSet<Character> row[] = new HashSet<Character>[9];
