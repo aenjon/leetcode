@@ -393,7 +393,7 @@ public class ArrowCodeTest {
 	     * Problem #30
 	     * Substring with Concatenation of All Words
 	     */
-		
+		/*
 		String s0 = "wefoobarbarfoobar";
 		String[] words = {"foo", "bar", "bar"};
 		String s1 = "baaababababa";
@@ -404,7 +404,7 @@ public class ArrowCodeTest {
 		TeasingUtil.printList(arrowcode.findSubstring3(s0, words));
 		TeasingUtil.printList(arrowcode.findSubstring3(s1, words1));
 		TeasingUtil.printList(arrowcode.findSubstring3(s2, words2));
-		
+		*/
 	    /**
 	     * Problem #31
 	     * Next Permutation
@@ -418,10 +418,11 @@ public class ArrowCodeTest {
 	     * Problem #32
 	     * Longest Valid Parentheses 
 	     */
+		/*
 		String pstr = "(()())";
 		//String pstr = ")))()((()()()(())()))";
 		System.out.println(arrowcode.longestValidParentheses(pstr));
-		
+		*/
 	    /**
 	     * Problem #33
 	     * Search in Rotated Sorted Array 
@@ -498,6 +499,14 @@ public class ArrowCodeTest {
 		System.out.println(arrowcode.firstMissingPositive(nums));
 		TeasingUtil.printList(nums);
 		*/
+	    /**
+	     * Problem #43
+	     * Multiply Strings
+	     */
+		String s1 = "189";
+		String s2 = "913";
+		System.out.println(arrowcode.add(s1, s2));
+		
 		/**
 		 * Problem No.189
 		 * Rotate Array
@@ -523,12 +532,13 @@ public class ArrowCodeTest {
 		/**
 		 * Problem No. 203
 		 */
+		/*
 		ListNode head = new ListNode (1);
 		head.next = new ListNode(2);
 		head.next.next = new ListNode (3);
 		head.next.next.next = new ListNode(2);
 		TeasingUtil.printList(arrowcode.removeElements(head, 2));
-		
+		*/
 		//System.out.println("n = " + 7 + " with " + arrowcode.hammingWeight(7) + " 1s");
 		
 	}

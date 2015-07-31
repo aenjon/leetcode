@@ -1734,7 +1734,7 @@ public class ArrowCode {
      * To search the first missing positive in O(n) without extras space, we need sophisticated solution.
      * The solution is "partially sort" the integer array using bucket sort.
      * Suppose all positive integers are in the array A. If we sort them, the number 1 should be in index 0,
-     * 2 should be in index 2, and so on. That is, A[i] should be the number i+1.
+     * 2 should be in index 1, and so on. That is, A[i] should be the number i+1.
      * So, begin with the first element, we check if A[i] == i+1. If it is not, swap the number to the position it should sit.
      * After that, go through the array again, if the number at index i does not equal to i+1, then i+1 is the missing positive.
      */
@@ -1773,6 +1773,39 @@ public class ArrowCode {
      */
     public int trap(int[] height) {
     	return 0;
+    }
+    
+    /**
+     * Problem #43
+     * Multiply Strings
+     */
+    /*
+    public String multiply(String num1, String num2) {
+        if (num1 == null || ) return null;
+        
+    }*/
+
+    public String add(String num1, String num2){
+        if (num1 == null || num1.isEmpty()) return num2;
+        if (num2 == null || num2.isEmpty()) return num1;
+        String ret = "";
+        int c = 0, sum = 0;
+        int i = num1.length() - 1, j = num2.length() - 1;
+        while (i >= 0 && j >= 0){
+            sum = num1.charAt(i) + num2.charAt(j) - 96 + c;
+            c = sum / 10;
+            ret = sum % 10 + ret;
+            i--; j--;
+        }
+        int k = i >= 0 ? i : j;
+        String rest = i >= 0 ? num1 : num2;
+        while ( k >= 0){
+            sum = rest.charAt(k) - 48 + c;
+            c = sum / 10;
+            ret = sum % 10 + ret;
+            k--;
+        }
+        return c > 0 ? "1"+ ret : ret;
     }
     
     /**
