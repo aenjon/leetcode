@@ -2053,6 +2053,41 @@ public class ArrowCode {
         return ret;
     }    
     
+    /**
+     * Problem #94
+     * Binary Tree Inorder Traversal
+     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> ret = new LinkedList<Integer>();
+        inTrav_helper(root, ret);
+        return ret;        
+    }
+
+    public void inTrav_helper(TreeNode root, List<Integer> ret){
+        if (root == null) return;
+        inTrav_helper(root.left, ret);
+        ret.add(root.val);
+        inTrav_helper(root.right, ret);
+        return;
+    }
+
+    public List<Integer> inorderTraversal2(TreeNode root) {
+        List<Integer> ret = new LinkedList<Integer>();
+        if (root == null) return ret;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        TreeNode cur = root;
+        do{
+            while (cur != null){
+                st.push(cur);
+                cur = cur.left;
+            }
+            cur = st.pop();
+            ret.add(cur.val);
+            cur = cur.right;            
+        } while (!st.isEmpty() || cur != null);
+        return ret;        
+    }
+
     
     /**
      * Problem No. 189
