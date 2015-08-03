@@ -2052,6 +2052,25 @@ public class ArrowCode {
         }
         return ret;
     }    
+    	
+    /**
+     * Problem #83
+     * Remove Duplicates from Sorted List
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null) return head;
+        ListNode pre = head;
+        ListNode cur = head.next;
+        while(cur != null){
+            if (pre.val != cur.val){
+                pre = pre.next;
+            }else {
+                pre.next = cur.next;
+            }
+            cur = cur.next;
+        }
+        return head;
+    }
     
     /**
      * Problem #94
@@ -2086,6 +2105,69 @@ public class ArrowCode {
             cur = cur.right;            
         } while (!st.isEmpty() || cur != null);
         return ret;        
+    }
+    
+    /**
+     * Problem #100
+     * Same Tree
+     */
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p != null && q != null)
+            return p.val == q.val && isSameTree(p.left, q.left) && 
+                    isSameTree(p.right, q.right);
+        else
+            return p == q;
+    }
+
+    /**
+     * Problem 101
+     * Symmetric Tree
+     */
+    public boolean isSymmetric(TreeNode root) {
+        if (root == null)
+            return true;
+        else
+            return isSymm_aux(root.left, root.right);
+    }
+
+    public boolean isSymm_aux(TreeNode a, TreeNode b){
+        if (a != null && b != null)
+            return a.val == b.val && isSymm_aux(a.left, b.right) && isSymm_aux(a.right, b.left);
+        else
+            return a == b;
+    }
+
+    public boolean isSymmetric2(TreeNode root) {
+        Stack<TreeNode> left = new Stack<TreeNode>();
+        Stack<TreeNode> right = new Stack<TreeNode>();
+        left.push(root); right.push(root);
+        while(!left.isEmpty()){
+            TreeNode l = left.peek();
+            TreeNode r = right.peek();
+            if ( (l==null ^ r==null) || l != null && r != null && l.val != r.val)
+                break;
+            left.pop(); right.pop();
+            if (l != null && r != null){
+                left.push(l.left); left.push(l.right);
+                right.push(r.right); right.push(r.left);
+            }
+        }
+        return left.isEmpty();
+    }
+    
+    /**
+     * Problem #104
+     * Maximum Depth of Binary Tree
+     */
+    public int maxDepth(TreeNode root) {
+        return maxdep_aux(root);        
+    }
+
+    public int maxdep_aux(TreeNode root){
+    	if (root == null) return 0;
+    	int left = maxdep_aux(root.left);
+    	int right = maxdep_aux(root.right);
+    	return left > right ? left + 1 : right + 1;
     }
 
     
