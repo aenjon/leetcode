@@ -737,32 +737,26 @@ public class LeetCode {
 	 */
 	
     public List<String> anagrams2(String[] strs) {
-        List<String> output = new ArrayList<String>();
+        List<String> ret = new ArrayList<String>();
         if (strs == null || strs.length == 0)
-            return output;
-        
+            return ret;
         HashMap<String, List<Integer>> counter = new HashMap<String, List<Integer>>();
-        // O(m*n)
-        for(int i=0; i<strs.length; i++){
-        	String sorted = sortString(strs[i]); // O(m)
-        	List<Integer> list;
-        	if  (counter.containsKey(sorted)){
-        		list = counter.get(sorted);
-        		list.add(i);
-        	}else{
-        		list = new ArrayList<Integer>();
-        		list.add(i);
-        		counter.put(sorted, list);
-        	}
+        for (int i =0 ; i<strs.length; i++){
+            String sorted = sortString(strs[i]);
+            List<Integer> list = counter.get(sorted);
+            if (list == null){
+                list = new ArrayList<Integer>();
+                counter.put(sorted, list);
+            }
+            list.add(i);
         }
-        
         for (String key : counter.keySet()){
-        	List<Integer> list = counter.get(key);
-        	if (list.size() > 1)
-        		for (Integer index: list)
-        			output.add(strs[index]);
-        }        
-        return output;
+            List<Integer> list = counter.get(key);
+            for (Integer index : list)
+                if (list.size() > 1)
+                    ret.add(strs[index.intValue()]);
+        }
+        return ret;
     }
 	
     /**

@@ -503,9 +503,21 @@ public class ArrowCodeTest {
 	     * Problem #43
 	     * Multiply Strings
 	     */
+		/*
 		String s1 = "189";
 		String s2 = "913";
 		System.out.println(arrowcode.add(s1, s2));
+		*/
+		
+	    /**
+	     * Problem #46, #47
+	     * Permutations | Unique Permutations
+	     */
+		
+		int[] nums = {1,2,3,4};
+		TeasingUtil.printListList(arrowcode.permute(nums));
+		System.out.println();
+		//TeasingUtil.printListList(arrowcode.permuteUnique(nums));
 		
 		/**
 		 * Problem No.189

@@ -1779,12 +1779,35 @@ public class ArrowCode {
      * Problem #43
      * Multiply Strings
      */
-    /*
+    
     public String multiply(String num1, String num2) {
-        if (num1 == null || ) return null;
-        
-    }*/
+        if (num1 == null || num1.isEmpty()) return num2;
+        if (num2 == null || num2.isEmpty()) return num1;
+        int m = num1.length(), n = num2.length();
+        int[] product = new int[m+n];
+        for (int i = m-1; i >= 0; i--)
+            for (int j = n-1; j >= 0; j--){
+                int d1 = num1.charAt(i) - '0';
+                int d2 = num2.charAt(j) - '0';
+                product[i+j+1] += d1 * d2;
+            }
+        int c = 0, sum = 0;
+        for (int i = product.length-1; i>=0; i--){
+            sum = product[i] + c;
+            product[i] = sum % 10;
+            c = sum / 10;
+        }
+        StringBuffer ret = new StringBuffer();
+        for (int i : product)
+            ret.append(i);
+        while (ret.length() != 0 && ret.charAt(0) == '0') ret.deleteCharAt(0);
+        return ret.length() == 0 ? "0" : ret.toString();        
+    }
 
+    /**
+     * Problem #43.1
+     * Add two strings 
+     */
     public String add(String num1, String num2){
         if (num1 == null || num1.isEmpty()) return num2;
         if (num2 == null || num2.isEmpty()) return num1;
@@ -1807,6 +1830,229 @@ public class ArrowCode {
         }
         return c > 0 ? "1"+ ret : ret;
     }
+    
+    /**
+     * Problem #46
+     * Permutations
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (nums == null || nums.length == 0) return ret;
+        boolean[] flags = new boolean[nums.length];
+        for (int i=0; i< flags.length; i++){
+        	flags[i] = false;
+        }
+        permutehelper(nums,flags, 0, new LinkedList<Integer>(), ret);
+        return ret;
+    }
+    
+    public void permutehelper(int[] nums, boolean[] flags, int counter, List<Integer> subret, List<List<Integer>> ret){
+        if (nums.length == counter){
+            ret.add(subret);
+            return;
+        }
+        for (int i = 0; i<nums.length; i++){
+            if (flags[i])
+                continue;
+            List<Integer> newsubret = new LinkedList<Integer>(subret);
+            newsubret.add(nums[i]);
+            flags[i] = true;
+            permutehelper(nums,flags, counter+1, newsubret,ret);
+            flags[i] = false;
+        }
+        return;
+    }
+
+    public List<List<Integer>> permute2(int[] nums) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (nums == null || nums.length == 0)
+            return ret;
+        List<Integer> first = new LinkedList<Integer>();
+        first.add(nums[0]);
+        ret.add(first);
+        for(int i=1; i<nums.length;i++){
+            List<List<Integer>> tmp = new LinkedList<List<Integer>>();
+            for (List<Integer> item : ret){
+                for (int j = 0; j<=item.size(); j++){
+                    List<Integer> newitem = new LinkedList<Integer>(item);
+                    newitem.add(j,nums[i]);
+                    tmp.add(newitem);
+                }
+            }
+            ret = tmp;
+        }
+        return ret;          
+    }    
+
+    /**
+     * Problem #47
+     * Permutations II
+     */
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        if (nums == null || nums.length == 0) return ret;
+        List<Integer> first = new LinkedList<Integer>();
+        first.add(nums[0]);
+        ret.add(first);
+        for(int i=1; i< nums.length; i++){
+            HashSet<List<Integer>> tmp = new HashSet<List<Integer>>();
+            for(List<Integer> item : ret){
+                for(int j=0; j<=item.size(); j++){
+                    List<Integer> newitem = new LinkedList<Integer>(item);
+                    newitem.add(j,nums[i]);
+                    tmp.add(newitem);
+                }
+            }
+            ret = new ArrayList<List<Integer>>();
+            ret.addAll(tmp);
+        }
+        return ret;
+    }    
+    
+    /**
+     * Problem #48
+     * Rotate Image
+     */
+
+    public void rotate(int[][] matrix) {
+    	if (matrix == null || matrix.length == 0 || matrix[0] == null ||
+    			matrix[0].length == 0 || matrix.length != matrix[0].length ) return;
+    	int n = matrix.length;
+    	for(int layer = 0; layer < n/2; layer++){
+    		int first = layer, last = n-1-layer;
+    		for (int i=first; i< last; i++){
+    			int offset = i - first;
+    			int top = matrix[first][i];
+    			matrix[first][i] = matrix[last-offset][first];
+    			matrix[last-offset][first] = matrix[last][last-offset];
+    			matrix[last][last-offset] = matrix[i][last];
+    			matrix[i][last] = top;
+    		}
+    	}
+    	return;
+    }
+    /**
+     * Problem #49
+     * Anagrams
+     * 
+	 * Step 1: Sort each string using counting sort (see the method below): O(n*m)
+	 * Step 2: Create a HashMap whose key is the sorted string and the value is a list of integer storing the indexes of the strings which have same sorted string values
+	 * Step 3: Traverse the sorted string array and fill the hash map: O(n)
+	 * Step 4: Iterate the hash map in terms of keys (sorted string values), retrive the indexes and add the original strings to the output list
+     */
+    public List<String> anagrams(String[] strs) {
+        List<String> ret = new ArrayList<String>();
+        if (strs == null || strs.length == 0)
+            return ret;
+        HashMap<String, List<Integer>> counter = new HashMap<String, List<Integer>>();
+        for (int i =0 ; i<strs.length; i++){
+            String sorted = sortString(strs[i]);
+            List<Integer> list = counter.get(sorted);
+            if (list == null){
+                list = new ArrayList<Integer>();
+                counter.put(sorted, list);
+            }
+            list.add(i);
+            
+        }
+        for (String key : counter.keySet()){
+            List<Integer> list = counter.get(key);
+            if (list.size() > 1)
+                for (Integer index : list)
+                    ret.add(strs[index.intValue()]);
+        }
+        return ret;
+    }
+
+    /**
+     * Sort a string using Counting Sort
+     * Assumption: all elements are letters in low case. i.e. there are totally 26 types of elements, which can be seen as 26 integers
+     * For each string, calculate the occurance of each letter, then assemble a new (sorted) string with the ascending order of elements by the number of occurance times.
+     * Time complexity: O(n)
+     */
+    public String sortString(String str){
+        if (str == null) return str;
+        int[] counter = new int[26];
+        for(int i=0; i<str.length(); i++)
+            counter[str.charAt(i)-'a']++;
+        StringBuffer sb = new StringBuffer();
+        for(int i=0; i<counter.length; i++)
+            while(counter[i]-- > 0)
+                sb.append((char)('a'+i));
+        return sb.toString();
+    }
+    
+    /**
+     * Anagrams2 
+     * Assign a prime number for a to z, and then multiply all prime numbers together to form a hash value.
+     */
+    public List<String> anagrams2(String[] strs) {
+        int[] PRIMES = new int[]{2, 3, 5, 7, 11 ,13, 17, 19, 23, 29, 31, 37, 41, 43,
+                                 47,53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 107};
+        List<String> ret = new LinkedList<String>();
+        if (strs == null || strs.length == 0) return ret;
+        HashMap<Long, List<Integer>> record = new HashMap<Long, List<Integer>>();
+        for (int i=0; i<strs.length; i++){
+            long mapping = 1;
+            for (int j=0; j<strs[i].length(); j++)
+                mapping *= PRIMES[strs[i].charAt(j) - 'a'];
+            List<Integer> list = record.get(mapping);
+            if (list == null){
+                list = new LinkedList<Integer>();
+                record.put(mapping, list);
+            }
+            list.add(i);
+        }
+        for (Long key : record.keySet()){
+            List<Integer> list = record.get(key);
+            if (list.size() > 1)
+                for (Integer index : list)
+                    ret.add(strs[index.intValue()]);
+        }
+        return ret;
+    }
+    
+    /**
+     * Problem #50
+     * Pow(x, n) 
+     */
+    public double myPow(double x, int n) {
+        if (x == 0.0)
+            return n >=0 ? 0.0 : Double.MAX_VALUE;
+        boolean sign = x >= 0 || n % 2 == 0;
+        double ret = calpow(Math.abs(x), Math.abs(n));
+        ret = sign ? ret : -ret;
+        return n >= 0 ? ret : 1/ret;
+    }
+    
+    public double calpow(double x, int n){
+    	if (n==0) return 1.0;
+    	double x_n_2 = calpow(x, n/2);
+    	if (n % 2 == 0)
+    		return x_n_2*x_n_2;
+    	else
+    		return x_n_2*x_n_2*x;
+    }
+    
+    public double myPow2(double x, int n) {
+        if (x == 0.0)
+            return n >=0 ? 0.0 : Double.MAX_VALUE;
+        double ret = 1.0;
+        long p;
+        if (n < 0){
+            p = -n;
+            x = 1/x;
+        }else
+            p = n;
+        while( p > 0){
+            if ((p & 1) == 1)
+                ret *= x;
+            x *= x;
+            p >>= 1;
+        }
+        return ret;
+    }    
+    
     
     /**
      * Problem No. 189
