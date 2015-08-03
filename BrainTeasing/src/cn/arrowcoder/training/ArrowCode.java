@@ -434,7 +434,7 @@ public class ArrowCode {
      * Set two points, the first and the last bar (height),
      * Calculate the area between the two points, then move the two points forward or backward.
      * We always move the shorter bar because if we move the taller bar, we must get a smaller area,
-     * Move the two bars and record the maxium value, until they come across. 
+     * Move the two bars and record the maximum value, until they come across. 
      */
     public int maxArea(int[] height) {
         if (height == null || height.length ==0) return 0;
@@ -605,10 +605,9 @@ public class ArrowCode {
     		while(low < high){
     			if (num[low] + num[high] == twosum){
     				ret.add(Arrays.asList(num[i],num[low],num[high]));
-    				while(low < high && num[low] == num[low+1]) ++low;
-    				while(low < high && num[high] == num[high-1]) --high;
-    				//++low;
-    				//--high;
+                    int lv = num[low], hv = num[high];
+                    while (low < high && lv == num[low]) ++low;
+                    while (low < high && hv == num[high]) --high;
     			}else if (num[low]+num[high] > twosum){
     				high--;
     			}else{
@@ -640,8 +639,9 @@ public class ArrowCode {
                 if (Math.abs(target-cursum) < Math.abs(closest)){
                     ret = num[i]+num[low]+num[high];
                     closest = target-cursum;
-                    while (low < high && num[low] == num[low+1]) ++low;
-                    while (low < high && num[high] == num[high-1]) --high;
+                    int lv = num[low], hv = num[high];
+                    while (low < high && lv == num[low]) ++low;
+                    while (low < high && hv == num[high]) --high;
                 }
                 else if (cursum > target)
                     --high;
@@ -707,10 +707,9 @@ public class ArrowCode {
     					item.add(num[low]);
     					item.add(num[high]);
     					ret.add(item);
-    					int lowvalue = num[low];
-    					int highvalue = num[high];
-    					while (low < high && lowvalue == num[low]) ++low;
-    					while (low < high && highvalue == num[high]) --high;
+    					int lv = num[low], hv = num[high];
+    					while (low < high && lv == num[low]) ++low;
+    					while (low < high && hv == num[high]) --high;
     				}
     			}
     		}
@@ -844,23 +843,23 @@ public class ArrowCode {
     public List<String> generateParenthesis(int n) {
     	pc = 0;
     	List<String> ret = new ArrayList<String>();
-    	getPar_aux("(", 1, 0, n, ret);
+    	genPar_aux("(", 1, 0, n, ret);
     	System.out.println("pc:" + pc);
     	return ret;
     }
     
-    private void getPar_aux(String temp, int l, int r, int n, List<String> ret){
+    private void genPar_aux(String temp, int l, int r, int n, List<String> ret){
     	pc++;
     	if ( l == r && l == n){
     		ret.add(temp);
     		return;
     	}
     	if (l < n && l != r)
-    		getPar_aux(temp+"(", l+1, r, n, ret);
+    		genPar_aux(temp+"(", l+1, r, n, ret);
     	if (l > r)
-    		getPar_aux(temp+")", l, r+1, n, ret);
+    		genPar_aux(temp+")", l, r+1, n, ret);
     	if (l == r)
-    		getPar_aux(temp+"(", l+1, r, n, ret);
+    		genPar_aux(temp+"(", l+1, r, n, ret);
     	return;
     }
     
@@ -1187,7 +1186,7 @@ public class ArrowCode {
     /**
      * Problem #31
      * Next Permutation
-     * The change should happen where a digit at position is smaller than the one at i+1
+     * The change should happen where a digit at position i is smaller than the one at i+1
      * The digit at i should be exchanged with the smallest digit after i, which is larger than i
      * Then reverse the the digits following digit i 
      */
@@ -1282,7 +1281,7 @@ public class ArrowCode {
     /**
      * Problem #34
      * Search for a Range
-     * Do binery search twice. Once for the left (small) edge, once for the right (large) edge
+     * Do binary search twice. Once for the left (small) edge, once for the right (large) edge
      */
     public int[] searchRange(int[] nums, int target) {
         if (nums == null) return null;
@@ -1513,45 +1512,19 @@ public class ArrowCode {
     	if (board == null || board.length == 0 
     			|| board[0] == null || board[0].length == 0)
     		return;
-    	
-    	/*
-        for (int i = 0; i<9; ++i){
-        	rows.add(new HashSet<Character>());
-        	cols.add(new HashSet<Character>());
-        	boxes.add(new HashSet<Character>());
-        }*/
 
         Stack<SCell> stunfill = new Stack<SCell>();
         Stack<SCell> stfilled = new Stack<SCell>();
         
         for (int i=0; i<board.length; ++i)
         	for (int j=0; j<board[i].length; ++j){
-        		//char cur = board[i][j];
-        		//int xbox = i/3, ybox = j/3;
         		if (board[i][j] == '.' )
         			stunfill.push(new SCell(i,j,'1'));
-        		/*
-        		{
-        			rows.get(i).add(cur);
-        			cols.get(j).add(cur);
-        			boxes.get(xbox * 3 + ybox).add(cur);
-        		}else{
-        			stunfill.push(new SCell(i,j,'1'));
-        		}*/
         	}
         
         while (!stunfill.isEmpty()){
         	SCell curcell = stunfill.pop();
         	while (curcell.val <= '9'){
-        		/*
-        		if (checkvalidcell(curcell)){
-        			board[curcell.x][curcell.y] = curcell.val;
-        			rows.get(curcell.x).add(curcell.val);
-        			cols.get(curcell.y).add(curcell.val);
-        			boxes.get(curcell.x/3*3 + curcell.y/3).add(curcell.val);
-        			stfilled.push(curcell);
-        			break;
-        		}*/
         		if (checkCell(curcell.x, curcell.y, curcell.val, board)){
         			board[curcell.x][curcell.y] = curcell.val;
         			stfilled.push(curcell);
@@ -1565,15 +1538,11 @@ public class ArrowCode {
         			stunfill.push(curcell);
         			curcell = stfilled.pop();
         			board[curcell.x][curcell.y] = '.';        			
-        			//rows.get(curcell.x).remove(curcell.val);
-        			//cols.get(curcell.y).remove(curcell.val);
-        			//boxes.get(curcell.x/3*3 + curcell.y/3).remove(curcell.val);
         			curcell.val++;
         			stunfill.push(curcell);
         		}
         		else return;
         }
-        
     }
 
     public boolean checkCell(int i, int j, char checker, char[][] board){
@@ -1596,11 +1565,7 @@ public class ArrowCode {
     	
     	return result;
     }
-    /*
-    public boolean checkvalidcell(SCell cell){
-    	return !rows.get(cell.x).contains(cell.val) && !cols.get(cell.y).contains(cell.val) 
-    			&& !boxes.get(cell.x/3*3 + cell.y/3).contains(cell.val);
-    }*/
+
     /**
      * Problem #38
      * Count and Say
@@ -1967,7 +1932,7 @@ public class ArrowCode {
     /**
      * Sort a string using Counting Sort
      * Assumption: all elements are letters in low case. i.e. there are totally 26 types of elements, which can be seen as 26 integers
-     * For each string, calculate the occurance of each letter, then assemble a new (sorted) string with the ascending order of elements by the number of occurance times.
+     * For each string, calculate the occurrence of each letter, then assemble a new (sorted) string with the ascending order of elements by the number of occurrence times.
      * Time complexity: O(n)
      */
     public String sortString(String str){

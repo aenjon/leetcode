@@ -252,11 +252,10 @@ public class ArrowCodeTest {
 	     * Problem #14 & #15
 	     * 3Sum  
 	     */
-		/*
+		
 		int[] nums = {-1, 0, 1, 2, -1, -4};
 		List<List<Integer>> ret = arrowcode.threeSum2(nums);
-		TeasingUtil.printIntegerPowerSet(ret);
-		*/
+		TeasingUtil.printListList(ret);
 	    /**
 	     * Problem No. 14
 	     * Letter Combinations of a Phone Number 
@@ -273,15 +272,15 @@ public class ArrowCodeTest {
 	     * Problem #18
 	     * 4Sum
 	     */
-		//int[] num = {1, 0, 7,0, -1, 0, -2, 2, 0, 3, -4, 5, 4, 6};
-		/*
-		int[] num = {0,0,0,0};
+		int[] num = {1, 0, 7,0, -1, 0, -2, 2, 0, 3, -4, 5, 4, 6};
+		
+		//int[] num = {0,0,0,0};
 		int[] num2 = Arrays.copyOf(num, num.length);
 		List<List<Integer>> sol = arrowcode.fourSum(num, 0);
 		List<List<Integer>> sol1 = arrowcode.fourSum2(num2, 0);
-		TeasingUtil.printIntegerPowerSet(sol);
-		TeasingUtil.printIntegerPowerSet(sol1);
-		*/
+		TeasingUtil.printListList(sol);
+		TeasingUtil.printListList(sol1);
+		
 	    /**
 	     * Problem #19
 	     * Remove Nth Node From End of List
@@ -513,10 +512,10 @@ public class ArrowCodeTest {
 	     * Problem #46, #47
 	     * Permutations | Unique Permutations
 	     */
-		
+		/*
 		int[] nums = {1,2,3,4};
 		TeasingUtil.printListList(arrowcode.permute(nums));
-		System.out.println();
+		System.out.println();*/
 		//TeasingUtil.printListList(arrowcode.permuteUnique(nums));
 		
 		/**
