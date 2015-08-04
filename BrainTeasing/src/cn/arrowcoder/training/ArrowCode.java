@@ -2290,6 +2290,18 @@ public class ArrowCode {
     	head.next = null;
     	return newhead;
     }    
+
+    /**
+     * Problem #226
+     * Invert Binary Tree
+     */
+    public TreeNode invertTree(TreeNode root) {
+        if (root == null) return root;
+        TreeNode tmp = invertTree(root.left);
+        root.left = invertTree(root.right);
+        root.right = tmp;
+        return root;        
+    }
     
     /**
      * Problem #242
