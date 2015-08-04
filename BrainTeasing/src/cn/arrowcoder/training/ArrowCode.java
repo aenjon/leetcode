@@ -2016,8 +2016,28 @@ public class ArrowCode {
             p >>= 1;
         }
         return ret;
-    }    
-    	
+    }
+    
+    /**
+     * Problem #67
+     * Add Binary
+     */
+    public String addBinary1(String a, String b) {
+        if (a == null || a.isEmpty()) return b;
+        if (b == null || b.isEmpty()) return a;
+        StringBuffer ret = new StringBuffer();
+        int i = a.length()-1, j = b.length()-1;
+        int c=0;
+        while (i >= 0 || j >= 0 || c > 0){
+            int sum = c + 
+                (i < 0 ? 0 : a.charAt(i--) - '0') + 
+                (j < 0 ? 0 : b.charAt(j--) - '0');
+            ret.insert(0, (char) (sum % 2 +'0'));
+            c = sum >> 1;
+        }
+        return ret.toString();
+    }
+     	
     /**
      * Problem #83
      * Remove Duplicates from Sorted List
