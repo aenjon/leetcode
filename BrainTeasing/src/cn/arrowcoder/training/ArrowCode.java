@@ -1780,7 +1780,7 @@ public class ArrowCode {
         int c = 0, sum = 0;
         int i = num1.length() - 1, j = num2.length() - 1;
         while (i >= 0 && j >= 0){
-            sum = num1.charAt(i) + num2.charAt(j) - 96 + c;
+            sum = num1.charAt(i) + num2.charAt(j) - 'a' - 'a' + c;
             c = sum / 10;
             ret = sum % 10 + ret;
             i--; j--;
@@ -2242,6 +2242,55 @@ public class ArrowCode {
     	}
     	return dummy.next;
     }
+    
+    /**
+     * Problem #206
+     * Reverse Linked List 
+     */
+    public ListNode reverseList(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        ListNode cur = head;
+        while (cur != null){
+            ListNode next = cur.next;
+            cur.next = dummy.next;
+            dummy.next = cur;
+            cur = next;
+        }
+        return dummy.next;
+    }
+    
+    public ListNode reverseList2(ListNode head) {
+    	if (head == null || head.next == null)
+    		return head;
+    	ListNode newhead = reverseList(head.next);
+    	ListNode cur = newhead;
+    	while (cur.next != null)
+    		cur = cur.next;
+    	cur.next = head;
+    	head.next = null;
+    	return newhead;
+    }    
+    
+    /**
+     * Problem #242
+     * Valid Anagram
+     */
+    public boolean isAnagram(String s, String t) {
+        if (s == null && t == null) return true;
+        if ((s != null) ^ (t!=null)) return false;
+        if (s.length() != t.length()) return false;
+        int[] log = new int[26];
+        for (int i : log)
+            i = 0;
+        for (int i = 0; i < s.length(); i++){
+            log[s.charAt(i) - 'a']++;
+            log[t.charAt(i) - 'a']--;
+        }
+        for (int i : log)
+            if ( i != 0) return false;
+        return true;
+    }
+    
     
     /**
      * Simple utilities
