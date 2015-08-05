@@ -2093,6 +2093,23 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #98
+     * Validate Binary Search Tree
+     */
+
+    public boolean isValidBST(TreeNode root) {
+        return isValidBST(root, null, null);
+    }
+
+    public boolean isValidBST(TreeNode root, TreeNode minnode, TreeNode maxnode) {
+        if (root == null) return true;
+        if (minnode != null && root.val <= minnode.val || maxnode != null && root.val >= maxnode.val)
+            return false;
+        return isValidBST(root.left, minnode, root) && isValidBST(root.right, root, maxnode);
+    }
+
+    
+    /**
      * Problem #100
      * Same Tree
      */
