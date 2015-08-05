@@ -2155,6 +2155,42 @@ public class ArrowCode {
     	return left > right ? left + 1 : right + 1;
     }
 
+    /**
+     * Problem #147
+     * Insertion Sort List
+     * If a node's value is smaller than the previous one, scan from the beginning and find the position the node should be inserted
+     * In case the node might be inserted at the beginning, we need a dummy node.
+     */
+    public ListNode insertionSortList(ListNode head) {
+        ListNode dummy = new ListNode(0);   
+        dummy.next = head;
+        ListNode check = dummy;
+        ListNode cur = head;
+        boolean inserted = false;
+        while ( cur != null && cur.next!=null){
+            if (cur.val > cur.next.val){
+                while (true){
+                    if (check.next.val > cur.next.val){
+                    	// Insert operations
+                        ListNode curtmp = cur.next;
+                        cur.next = cur.next.next;
+                        ListNode checktmp = check.next;
+                        check.next = curtmp;
+                        check.next.next = checktmp;
+                        inserted = true;
+                        break;
+                    }
+                check = check.next;
+                }
+            }
+            // If an insertion occurs, the "cur" point does not move.
+            if (!inserted)
+                cur = cur.next;
+            inserted = false;
+            check = dummy;            
+        }
+        return dummy.next;
+    }
     
     /**
      * Problem No. 189
