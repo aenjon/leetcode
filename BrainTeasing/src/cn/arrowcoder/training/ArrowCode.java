@@ -2040,6 +2040,27 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #66
+     * Plus One
+     */
+    public int[] plusOne(int[] digits) {
+        if (digits == null || digits.length == 0)
+            return null;
+        for(int i = digits.length-1; i>=0; i--){
+            if (++digits[i] < 10)
+                break;
+            digits[i] = 0;
+        }
+        if (digits[0] == 0){
+            int[] newdigits = new int[digits.length+1];
+            System.arraycopy(digits, 0, newdigits,1,digits.length);
+            newdigits[0] = 1;
+            return newdigits;
+        }
+        return digits;
+    }
+    
+    /**
      * Problem #67
      * Add Binary
      */
@@ -2058,7 +2079,7 @@ public class ArrowCode {
         }
         return ret.toString();
     }
-    
+
     /**
      * Problem #78
      * Subsets     

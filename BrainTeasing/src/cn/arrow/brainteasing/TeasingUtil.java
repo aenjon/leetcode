@@ -199,6 +199,13 @@ public class TeasingUtil
 		System.out.println("]");
 	}
 	
+	public static <T> void printList(T[] list){
+		if (list == null) return;
+		System.out.print("[ ");
+		for(T e : list)
+			System.out.print(e + ", ");
+		System.out.println("]");
+	}	
 	
 	public static void printList(int[] list)
 	{
