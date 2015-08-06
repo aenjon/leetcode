@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import cn.arrow.brainteasing.ListNode;
-import cn.arrow.brainteasing.TeasingUtil;
 
 /*
 class ListNode{
