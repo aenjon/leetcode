@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 import cn.arrow.brainteasing.ListNode;
+import cn.arrow.brainteasing.TeasingUtil;
 
 /*
 class ListNode{
@@ -2015,6 +2016,27 @@ public class ArrowCode {
             p >>= 1;
         }
         return ret;
+    }
+    
+    /**
+     * Problem #61
+     * Rotate List 
+     */
+    public ListNode rotateRight(ListNode head, int k) {
+    	if(head==null || head.next==null || k==0)
+    		return head;
+    //make it a circle, break from k position far from the head
+    ListNode index=head;
+    int len=1;// int len to record the length of list
+    	while(index.next!=null)
+        	{index=index.next; len++;}
+    	index.next = head;
+    	int mod = len - k % len;
+    	for(int i=0; i < mod; i++)
+    		index=index.next;
+    	ListNode newhead = index.next;
+    	index.next = null;
+    	return newhead;
     }
     
     /**
