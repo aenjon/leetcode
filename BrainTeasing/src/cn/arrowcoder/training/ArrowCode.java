@@ -2058,6 +2058,33 @@ public class ArrowCode {
         }
         return ret.toString();
     }
+    
+    /**
+     * Problem #78
+     * Subsets     
+     */
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (nums == null) return ret;
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length; i++){
+        	// Copy existing elements
+            List<List<Integer>> tmp = new LinkedList<List<Integer>>();
+            for (List<Integer> item : ret)
+                tmp.add(new LinkedList<Integer>(item));
+            // Add new number to the end of each element
+            for (List<Integer> item : tmp)
+                item.add(nums[i]);
+            // Add the single element 
+            List<Integer> single = new LinkedList<Integer>();
+            single.add(nums[i]);
+            tmp.add(single);
+            ret.addAll(tmp);
+        }
+        // Add the empty set
+        ret.add(new LinkedList<Integer>());
+        return ret;
+    }
      	
     /**
      * Problem #83
