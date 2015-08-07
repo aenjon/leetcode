@@ -2323,6 +2323,31 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #148
+     */
+
+    public ListNode partition(ListNode head, ListNode tail, int x){
+        ListNode h1 = new ListNode(0);
+        ListNode h2 = new ListNode(0);
+        ListNode t1 = h1, t2 = h2;
+        ListNode cur = head;
+        while (cur != tail){
+            if (cur.val < x){
+                t1.next = cur;
+                t1 = t1.next;
+            }else{
+                t2.next = cur;
+                t2 = t2.next;
+            }
+            cur = cur.next;
+        }
+        t1.next = h2.next;
+        t2.next = tail;
+        return h1.next;
+    }
+
+    
+    /**
      * Problem No. 189
      * Rotate Array
      */
