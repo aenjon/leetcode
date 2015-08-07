@@ -2127,6 +2127,33 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #86
+     * Partition List
+     * Create two dummy list nodes. The first one is used to link nodes with smaller values and the other one is used to
+     * link nodes with larger values. Connect the two lists in the end;
+     */
+
+    public ListNode partition(ListNode head, int x) {
+        ListNode h1 = new ListNode(0);
+        ListNode h2 = new ListNode(0);
+        ListNode t1 = h1, t2 = h2;
+        while (head != null){
+            if (head.val < x){
+                t1.next = head;
+                t1 = t1.next;
+            }else{
+                t2.next = head;
+                t2 = t2.next;
+            }
+            head = head.next;
+        }
+        // Connect the two lists and have the tail of the second one point to null.
+        t1.next = h2.next;
+        t2.next = null;
+        return h1.next;
+    }
+    
+    /**
      * Problem #88
      * Merge Sorted Array
      * Assume nums1 has sufficient space for two arrays.
