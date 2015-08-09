@@ -2324,28 +2324,44 @@ public class ArrowCode {
     
     /**
      * Problem #148
+     * Sort List
      */
 
-    public ListNode partition(ListNode head, ListNode tail, int x){
-        ListNode h1 = new ListNode(0);
-        ListNode h2 = new ListNode(0);
-        ListNode t1 = h1, t2 = h2;
-        ListNode cur = head;
-        while (cur != tail){
-            if (cur.val < x){
-                t1.next = cur;
-                t1 = t1.next;
-            }else{
-                t2.next = cur;
-                t2 = t2.next;
-            }
-            cur = cur.next;
-        }
-        t1.next = h2.next;
-        t2.next = tail;
-        return h1.next;
+    public ListNode sortList(ListNode head) {
+        return quicksortList(head, null);        
     }
-
+    
+    public ListNode quicksortList(ListNode head, ListNode tail){
+        if (head == tail) return head;
+        boolean equal = true;
+        ListNode left = head, right = head;
+        int x = head.val;
+        ListNode cur = head.next;
+        /* 
+         * Move the nodes with small values to the left of head
+         * Move the nodes with equal or large value to the right of head
+         * Recursively sort the list on the left and right until head meets tail
+         */
+       
+        while (cur != tail){
+            if (cur.val != x ) equal = false;
+            ListNode next = cur.next;
+            if (cur.val < x){
+                cur.next = left;
+                left = cur;
+            }else{
+                right.next = cur;
+                right = cur;
+            }
+            cur = next;
+        }
+        // If all nodes' values are same, no more recursion required.
+        if (equal)
+            return head;
+        right.next = tail;
+        head.next = quicksortList(head.next, tail);
+        return quicksortList(left,head);
+    }
     
     /**
      * Problem No. 189
