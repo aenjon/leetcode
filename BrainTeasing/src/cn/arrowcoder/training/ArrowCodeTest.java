@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 import cn.arrow.brainteasing.ListNode;
 import cn.arrow.brainteasing.TeasingUtil;
@@ -25,7 +26,15 @@ public class ArrowCodeTest {
 	      System.out.println(test.add(e1));
 	      System.out.println(test.add(e2));
 		*/
-		ArrowCodeTest.test();
+		//ArrowCodeTest.test();
+		
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        for(int t = 0; t < n; t++) {
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            System.out.println(a+b);
+        }
 		
 		//HashSet<Character> row[] = new HashSet<Character>[9];
 		/*

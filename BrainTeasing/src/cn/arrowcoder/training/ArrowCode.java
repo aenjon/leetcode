@@ -2079,6 +2079,33 @@ public class ArrowCode {
         }
         return ret.toString();
     }
+    
+    /**
+     * Problem #75
+     * Sort Colors
+     */
+    public void sortColors(int[] nums) {
+        if (nums == null) return ;
+        int i = 0, low = 0, high = nums.length-1;
+        while (i <= high){
+            if (nums[i] == 0){
+                int tmp = nums[low];
+                nums[low++] = nums[i];
+                nums[i] = tmp;
+                // Since "low" starts with 0, if it contains number bigger than 1, 
+                // It will be already moved to the end of the array, i.e. it only
+                // contains number 0 or 1. So, i++
+                i++;
+            } else if (nums[i] == 2){
+                int tmp = nums[high];
+                nums[high--] = nums[i];
+                nums[i] = tmp;
+                // The number located in the end of the array could be any number
+                // So don't change i and check nums[i] again
+            }else
+                i++;
+        }
+    }
 
     /**
      * Problem #78
@@ -2284,7 +2311,81 @@ public class ArrowCode {
     	int right = maxdep_aux(root.right);
     	return left > right ? left + 1 : right + 1;
     }
+    /**
+     * Problem #144
+     * Binary Tree Preorder Traversal 
+     */
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> ret = new LinkedList<Integer>();
+        preTrav_aux(root, ret);
+        return ret;
+    }
+    
+    public void preTrav_aux(TreeNode root, List<Integer> ret){
+        if (root == null) return;
+        ret.add(root.val);
+        preTrav_aux(root.left, ret);
+        preTrav_aux(root.right, ret);
+        return;
+    }
+    
+    public List<Integer> preorderTraversal_NR(TreeNode root) {
+        List<Integer> ret = new LinkedList<Integer>();
+        if (root == null) return ret;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        st.push(root);
+        while (!st.isEmpty()){
+            TreeNode cur = st.pop();
+            ret.add(cur.val);
+            if (cur.right != null)
+                st.push(cur.right);
+            if (cur.left != null)
+                st.push(cur.left);
+        }
+        return ret;
+    }
 
+    /**
+     * Problem #145
+     * Binary Tree Postorder Traversal
+     */
+    
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> ret = new LinkedList<Integer>();
+        postTrav_aux(root, ret);
+        return ret;
+    }
+
+    public void postTrav_aux(TreeNode root, List<Integer> ret){
+        if (root == null) return;        
+        postTrav_aux(root.left, ret);
+        postTrav_aux(root.right, ret);
+        ret.add(root.val);
+        return;
+    }    
+
+    public List<Integer> postorderTraversal2(TreeNode root) {
+        List<Integer> ret = new LinkedList<Integer>();
+        if (root == null) return ret;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        HashSet<TreeNode> hs = new HashSet<TreeNode>();
+        st.push(root);
+        while (!st.isEmpty()){
+            TreeNode cur = st.peek();
+            if (hs.contains(cur)){
+                ret.add(cur.val);
+                st.pop();
+            } else {
+                hs.add(cur);
+                if (cur.right != null)
+                    st.push(cur.right);
+                if (cur.left != null)
+                    st.push(cur.left);
+            }
+        }
+        return ret;        
+    }
+    
     /**
      * Problem #147
      * Insertion Sort List
@@ -2355,7 +2456,7 @@ public class ArrowCode {
             }
             cur = next;
         }
-        // If all nodes' values are same, no more recursion required.
+        // If all nodes' values are same, no more recursion required.	
         if (equal)
             return head;
         right.next = tail;
