@@ -10,13 +10,25 @@ import cn.arrow.brainteasing.ListNode;
 import cn.arrow.brainteasing.TeasingUtil;
 
 public class ArrowCodeTest {
+	
+	public int foo(int x){
+		try {
+			return x;
+		}
+		finally {
+			x++;
+			System.out.println(x);
+		}
+	}
 
 	//public ArrowCode arrowcode;
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+		ArrowCodeTest test = new ArrowCodeTest();
+		int x = test.foo(5);
+		System.out.println(x);
 			/*
 	      HashSet<List<Integer>> test = new HashSet<List<Integer>>();
 	      List<Integer> e1 = new LinkedList<Integer>();
@@ -27,14 +39,14 @@ public class ArrowCodeTest {
 	      System.out.println(test.add(e2));
 		*/
 		//ArrowCodeTest.test();
-		
+		/*
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         for(int t = 0; t < n; t++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
             System.out.println(a+b);
-        }
+        }*/
 		
 		//HashSet<Character> row[] = new HashSet<Character>[9];
 		/*

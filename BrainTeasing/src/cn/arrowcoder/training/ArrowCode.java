@@ -2081,6 +2081,26 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #69
+     * Sqrt(x)
+     */
+    public int mySqrt(int x) {
+        if (x <= 1) return x;
+        int s = 0, b = x, m = (s+b)/2;
+        while (b-s > 1){
+            int mid = x/m;
+            if (m  == mid)
+                break;
+            else if ( m < mid)
+                s = m;
+            else
+                b = m;
+            m = (s+b)/2;
+        }
+        return m;
+    }
+    
+    /**
      * Problem #75
      * Sort Colors
      */
@@ -2311,6 +2331,48 @@ public class ArrowCode {
     	int right = maxdep_aux(root.right);
     	return left > right ? left + 1 : right + 1;
     }
+    
+    /**
+     * Problem #143
+     * Reorder List
+     * Use a fast and a slow pointer to find the middle of the list
+     * Reverse the second part of the list
+     * Mix the first part of the list with the reversed second part of the list 
+     */
+    public void reorderList(ListNode head) {
+        if (head == null || head.next == null) return;
+        ListNode fast = head, slow = head;
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        ListNode second = slow.next;
+        slow.next = null;
+        second = reverseList3(second);
+        
+        ListNode first = head, tmp;
+        while (second != null){
+            tmp = first.next;
+            first.next = second;
+            second = second.next;
+            first.next.next = tmp;
+            first = tmp;
+        }
+        return;
+    }
+    
+    public ListNode reverseList3(ListNode head){
+        if (head == null) return head;
+        ListNode newhead = null;
+        ListNode cur, next;
+        for (cur = head; cur !=null; cur = next){
+            next = cur.next;
+            cur.next = newhead;
+            newhead = cur;
+        }
+        return newhead;
+    }   
+    
     /**
      * Problem #144
      * Binary Tree Preorder Traversal 
