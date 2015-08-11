@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Stack;
 
 import cn.arrow.brainteasing.ListNode;
@@ -2101,6 +2102,29 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #70
+     * Climbing Stairs
+     * DP, current solution is the sum of the previous two
+     */
+    public int climbStairs(int n) {
+    	if (n <= 1) return n; 
+    	int[] ways = new int[n+1];
+    	ways[0] = 1; ways[1] = 1;
+        for (int i = 2; i <= n; i++)
+            ways[i] = ways[i-1] + ways[i-2];
+        return ways[n];
+    }
+    
+    /* A simplified version where b stores the sum of the previous one */
+    public int climbStairs2(int n) {
+    	int a = 1, b = 1;
+    	while (n-- > 0)
+    		a = (b += a) - a;
+    	return a;
+    }
+    
+    
+    /**
      * Problem #75
      * Sort Colors
      */
@@ -2318,6 +2342,60 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #102
+     * Binary Tree Level Order Traversal
+     */
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (root == null) return ret;
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        TreeNode dummy = new TreeNode(0);
+        q.add(root); 
+        q.add(dummy);
+        List<Integer> item = new LinkedList<Integer>();
+        TreeNode cur;
+        while ( !q.isEmpty()){
+            cur = q.poll();
+            if (cur == dummy){
+                ret.add(new LinkedList<Integer>(item));
+                item.clear();
+                if (q.peek() != null)
+                    q.add(cur);
+            }else{
+                item.add(cur.val);
+                if (cur.left != null)
+                    q.add(cur.left);
+                if (cur.right != null)
+                    q.add(cur.right);
+            }
+        }
+        return ret;
+    }
+
+    public List<List<Integer>> levelOrder2(TreeNode root) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (root == null) return ret;
+        List<TreeNode> level = new LinkedList<TreeNode>();
+        level.add(root);
+        while (true){
+            if (level.isEmpty())
+                break;
+            List<TreeNode> nextlevel = new LinkedList<TreeNode>();
+            List<Integer> item = new LinkedList<Integer>();
+            for (TreeNode t : level){
+                item.add(t.val);
+                if (t.left != null)
+                    nextlevel.add(t.left);
+                if (t.right != null)
+                    nextlevel.add(t.right);
+            }
+            ret.add(item);
+            level = nextlevel;
+        }
+        return ret;
+    }
+    
+    /**
      * Problem #104
      * Maximum Depth of Binary Tree
      */
@@ -2331,6 +2409,71 @@ public class ArrowCode {
     	int right = maxdep_aux(root.right);
     	return left > right ? left + 1 : right + 1;
     }
+    
+    /**
+     * Problem #111
+     * Minimum Depth of Binary Tree
+     * Note: 1. if a node's left or right child is null, it only counts the other one
+     * 2. count in the root.
+     */
+    public int minDepth(TreeNode root) {
+        if (root == null) return 0;
+        int l = root.left == null ? 0 : minDepth(root.left);
+        int r = root.right == null ? 0 : minDepth(root.right);
+        if (l != 0 && r != 0)
+            return l < r ? l + 1 : r + 1; 
+        else
+            return l==0 ? r+1 : l+1;
+    }
+    
+    /**
+     * Problem #141
+     * Linked List Cycle
+     * A fast pointer and a slow pointer.
+     * If there is a cycle, the fast pointer will catch the slow one.
+     */
+    public boolean hasCycle(ListNode head) {
+        ListNode fast = head, slow = head;
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow)
+                return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Problem #142
+     * Linked List Cycle II
+     * Test if the linked list has cycle first.
+     * If so, suppose the step from head, say H, to the beginning node of the cycle, say C, is d_HC = x,
+     * Suppose fast and slow meet at the node of R and d_CR = y and d_RC = z
+     * We know the fast pointer moves x + y + z + y steps and the slow pointer moves x + y steps,
+     * and x + y + z + y = 2 * (x + y)  ==> x = z
+     * Then we move the fast pointer back to the head, and move both the fast and the slow pointer at the same pace.
+     * They will meet at Node C.
+     */
+    public ListNode detectCycle(ListNode head) {
+        ListNode fast = head, slow = head;
+        boolean hascycle = false;
+        while (fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if (fast == slow){
+                hascycle = true;
+                break;
+            }
+        }
+        if (!hascycle) return null;
+        fast = head;
+        while (fast != slow){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return fast;
+    }
+    
     
     /**
      * Problem #143
@@ -2671,6 +2814,20 @@ public class ArrowCode {
         root.left = invertTree(root.right);
         root.right = tmp;
         return root;        
+    }
+    
+    /**
+     * Problem #237
+     * Delete Node in a Linked List
+     * A tricky problem. It does not require remove the tail,
+     * So just copy the value of the next node to the current one and skip the next one. 
+     */
+    public void deleteNode(ListNode node) {
+        if (node != null && node.next != null){
+            node.val = node.next.val;
+            node.next = node.next.next;
+        }
+        return;
     }
     
     /**
