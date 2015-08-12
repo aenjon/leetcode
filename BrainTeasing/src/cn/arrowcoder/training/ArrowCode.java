@@ -2670,6 +2670,40 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #160
+     * Intersection of Two Linked Lists
+     * Calculate d, the difference of the two lists' length
+     * Have the longer move d steps first, then move the both lists together
+     * until they hit or one of them comes to the end (no intersection)
+     */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        int lensub = getLen(headA) - getLen(headB);
+        ListNode curA = headA, curB = headB;
+        if (lensub > 0)
+            for (int i=0; i<lensub; i++)
+                curA = curA.next;
+        else
+            for(int i=0; i<-lensub; i++)
+                curB = curB.next;
+        while (curA != curB && curA != null && curB != null){
+            curA = curA.next;
+            curB = curB.next;
+        }
+        return curA == null ? curA : curB;
+    }
+
+    public int getLen(ListNode head){
+        int ret = 0;
+        ListNode cur = head;
+        while (cur != null){
+            cur = cur.next;
+            ret++;
+        }
+        return ret;
+    }
+    
+    
+    /**
      * Problem #179
      * Largest Number
      * Observation: for two numbers a and b, we want to compare which one is bigger, ab or ba.
