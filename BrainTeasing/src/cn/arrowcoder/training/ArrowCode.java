@@ -2670,6 +2670,43 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #179
+     * Largest Number
+     * Observation: for two numbers a and b, we want to compare which one is bigger, ab or ba.
+     * Actually it is determining which one lexicographically proceeds the other one.
+     * Design a new class named NumStr which implements Comparable<T>, and override compareTo function, 
+     * which will be called by Arrays.sort().
+     * When returning the final value, be careful the case where only 0s are listed in the original array.
+     */
+    class NumStr implements  Comparable<NumStr> {
+        String numstr;
+        public NumStr(int x) {
+            numstr = String.valueOf(x);
+        }
+        
+        @Override
+        public int compareTo(NumStr o) {
+            String s1 = this.numstr + o.numstr;
+            String s2 = o.numstr + this.numstr;
+            return s1.compareTo(s2);
+        }
+    }
+        
+    public String largestNumber(int[] nums) {
+    	if (nums == null || nums.length == 0) return "";
+    	NumStr[] numstrs = new NumStr[nums.length];
+        for (int i = 0; i<nums.length; i++){
+        	numstrs[i] = new NumStr(nums[i]);
+        }
+        Arrays.sort(numstrs);
+        StringBuffer sb = new StringBuffer();
+        for(int i=numstrs.length-1 ; i>=0; i--){
+        	sb.append(numstrs[i].numstr);
+        }
+        return numstrs[numstrs.length-1].numstr.equals("0")? "0" : sb.toString();
+    }
+    
+    /**
      * Problem No. 189
      * Rotate Array
      */
