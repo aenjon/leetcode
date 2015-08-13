@@ -2876,6 +2876,34 @@ public class ArrowCode {
     }    
 
     /**
+     * Problem #222
+     * Count Complete Tree Nodes
+     * Check the height of left and right child
+     * If they are same, calculate the height of the left child by complete tree's feature, and recursion on the right
+     * Otherwise, left child should be deeper than the right one, and the right one should already be full
+     * then calculate the ndoes of the right child and recursion on the left child
+     */
+
+    public int countNodes(TreeNode root) {
+        if (root == null) return 0;        
+        int leftheight = getHeight(root.left);
+        int rightheight = getHeight(root.right);
+        if (leftheight == rightheight)
+            return (1 << leftheight) + countNodes(root.right);
+        else
+            return countNodes(root.left) + (1 << rightheight);
+    }
+    
+    public int getHeight(TreeNode root){
+        int ret = 0;
+        while(root != null){
+            ret++;
+            root = root.left;
+        }
+        return ret;
+    }
+    
+    /**
      * Problem #226
      * Invert Binary Tree
      */
