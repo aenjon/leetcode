@@ -2020,6 +2020,45 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #54
+     * Spiral Matrix
+     */
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> ret = new LinkedList<Integer>();
+        if (matrix == null || matrix.length == 0 )
+            return ret;
+        for (int i=0; i < matrix.length; i++)
+            if (matrix[i] == null || matrix[i].length == 0)
+                return ret;
+        int m = matrix.length, n = matrix[0].length, total = m*n, cnt = 0;
+        int level = 0, i=0, j= 0;
+        while(cnt < total){
+            while (j < n-level && cnt < total) {
+                ret.add(matrix[i][j]);
+                cnt++; j++;
+            }
+            i++; j--;
+            while (i < m-level && cnt <total){
+                ret.add(matrix[i][j]);
+                cnt++; i++;
+            }
+            i--; j--;
+            while (j >= level && cnt < total){
+                ret.add(matrix[i][j]);
+                cnt++; j--;
+            }
+            i--; j++;
+            while( i > level && cnt < total){
+                ret.add(matrix[i][j]);
+                cnt++; i--;                
+            }
+            i++; j++;
+            level++;                
+        }
+        return ret;
+    }
+    
+    /**
      * Problem #61
      * Rotate List 
      */
@@ -2242,6 +2281,117 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #91
+     * Decode Ways
+     * DP. Start with the last character
+     */
+    public int numDecodings(String s) {
+        if (s == null || s.isEmpty()) return 0;
+        int n = s.length();
+        int b = 1;
+        int a = s.charAt(n-1) == '0' ? 0 : 1;
+        for(int i = n-2; i >= 0; i--){
+            if (s.charAt(i) == '0'){
+                b = a;
+                a = 0;
+                continue;
+            }
+            int new_a = Integer.valueOf(s.substring(i,i+2)).intValue() <= 26 ? a + b : a;
+            b = a; a = new_a;
+        }
+        return a;
+    }
+    
+    /*
+     * Search for all combinations 
+     */
+    public List<List<Integer>> numDecodingsA(String s) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (s == null || s.isEmpty() || s.charAt(0) == '0') return ret;
+        if (s.length() == 1 && !s.equals("0")){
+            List<Integer> item = new LinkedList<Integer>();
+            item.add(Integer.valueOf(s).intValue());
+            ret.add(item);
+            return ret;
+        }
+        List<List<Integer>> subret1 = numDecodingsA(s.substring(1));
+        for (List<Integer> item : subret1)
+            item.add(0, Integer.valueOf(s.charAt(0)-'0'));
+    
+        if (s.length() == 2 && Integer.valueOf(s) <= 26){
+            List<Integer> item = new LinkedList<Integer>();
+            item.add(Integer.valueOf(s));
+            subret1.add(item);
+            return subret1;
+        }
+        if (s.length() > 2 && Integer.valueOf(s.substring(0,2)).intValue() <= 26){
+            List<List<Integer>> subret2 = numDecodingsA(s.substring(2));
+            int a = Integer.valueOf(s.substring(0,2)).intValue();
+            for (List<Integer> item : subret2)
+                item.add(0, a);
+            for (List<Integer> item : subret2)
+               subret1.add(item); 
+        }
+        return subret1;
+    }
+    
+    
+    /**
+     * Problem #92
+     * Reverse Linked List II 
+     */
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        if (head == null) return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode pre = dummy, cur = head, newhead=null, next;
+        int i = 0;
+        while (i < m-1) {
+            pre = cur;
+            cur = cur.next;
+            i++;
+        }
+        ListNode tail = cur;
+        while (i < n ){
+            next = cur.next;
+            cur.next = newhead;
+            newhead = cur;
+            cur = next;
+            i++;
+        }
+        if (newhead != null){
+            pre.next = newhead;
+            tail.next = cur;                    
+        }
+        return dummy.next;
+    }
+
+    public ListNode reverseBetween2(ListNode head, int m, int n) {
+        ListNode dummy = new ListNode(0), subhead = new ListNode(0), subtail = new ListNode(0);
+        ListNode pre = dummy, cur = head;
+        dummy.next = head;
+        int i = 1;
+        while (i <= n){
+            ListNode next = cur.next;
+            if ( i < m){
+                pre = cur;
+            } else if (i == m){
+                subtail = cur;
+                subhead.next = cur;
+            } else{
+                cur.next = subhead.next;
+                subhead.next = cur;
+            }
+            cur = next;
+            i++;
+        }
+        pre.next = subhead.next;
+        subtail.next = cur;
+        return dummy.next;
+    }
+    
+    
+    /**
      * Problem #94
      * Binary Tree Inorder Traversal
      */
@@ -2408,6 +2558,22 @@ public class ArrowCode {
     	int left = maxdep_aux(root.left);
     	int right = maxdep_aux(root.right);
     	return left > right ? left + 1 : right + 1;
+    }
+    
+    /** Problem #110
+     * Balanced Binary Tree
+     * Check the height when computing tree height
+     */
+    public boolean isBalanced(TreeNode root) {
+        return isBal_aux(root) >= 0;         
+    }
+    
+    public int isBal_aux(TreeNode root){
+        if (root == null) return 0;
+        int ld = 0, rd = 0;
+        if ((ld = isBal_aux(root.left)) < 0) return ld;
+        if ((rd = isBal_aux(root.right)) < 0) return rd;
+        return Math.abs(ld-rd) < 2 ? ((ld > rd) ? ld + 1 : rd + 1) : -1; 
     }
     
     /**

@@ -27,8 +27,13 @@ public class ArrowCodeTest {
 	 */
 	public static void main(String[] args) {
 		ArrowCodeTest test = new ArrowCodeTest();
-		int x = test.foo(5);
-		System.out.println(x);
+		//int x = test.foo(5);
+		//System.out.println(x);
+		/*
+		String teststr = "12";
+		System.out.println(teststr.substring(1, 2));
+		if (teststr.substring(1, 1).equals(""))
+			System.out.println("empty");*/
 			/*
 	      HashSet<List<Integer>> test = new HashSet<List<Integer>>();
 	      List<Integer> e1 = new LinkedList<Integer>();
@@ -38,7 +43,7 @@ public class ArrowCodeTest {
 	      System.out.println(test.add(e1));
 	      System.out.println(test.add(e2));
 		*/
-		//ArrowCodeTest.test();
+		ArrowCodeTest.test();
 		/*
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -293,6 +298,7 @@ public class ArrowCodeTest {
 	     * Problem #18
 	     * 4Sum
 	     */
+		/*
 		int[] num = {1, 0, 7,0, -1, 0, -2, 2, 0, 3, -4, 5, 4, 6};
 		
 		//int[] num = {0,0,0,0};
@@ -301,7 +307,7 @@ public class ArrowCodeTest {
 		List<List<Integer>> sol1 = arrowcode.fourSum2(num2, 0);
 		TeasingUtil.printListList(sol);
 		TeasingUtil.printListList(sol1);
-		
+		*/
 	    /**
 	     * Problem #19
 	     * Remove Nth Node From End of List
@@ -573,5 +579,65 @@ public class ArrowCodeTest {
 		*/
 		//System.out.println("n = " + 7 + " with " + arrowcode.hammingWeight(7) + " 1s");
 		
+		/**
+		 * Problem #146
+		 * LRU Cache
+		 */
+		/*
+		LRUCache lrucache = new LRUCache(2);
+
+		System.out.println("get 2:" + lrucache.get(2));
+		lrucache.set(2, 6);
+		lrucache.print();
+		System.out.println("get 1:" + lrucache.get(1));
+		lrucache.set(1, 5);
+		lrucache.print();
+		lrucache.set(1, 2);
+		lrucache.print();		
+		System.out.println("get 1:" + lrucache.get(1));
+		System.out.println("get 2:" + lrucache.get(2));*/
+		/*
+		lrucache.set(2, 1);
+		lrucache.print();
+		System.out.println("get 2:" + lrucache.get(2));
+		lrucache.print();
+		lrucache.set(3,2);
+		lrucache.print();
+		System.out.println("get 2:" + lrucache.get(2));
+		System.out.println("get 3:" + lrucache.get(3));
+		*/
+		/*
+		lrucache.set(1, 101);
+		lrucache.print();
+		lrucache.set(2,102);
+		lrucache.print();
+		lrucache.set(3,103);
+		lrucache.print();
+		lrucache.set(4,104);
+		lrucache.print();
+		lrucache.set(5,105);
+		lrucache.print();
+		System.out.println("get 2:" + lrucache.get(2));
+		System.out.println("get 9:" + lrucache.get(9));
+		lrucache.print();
+		lrucache.set(6,106);
+		lrucache.print();*/
+		
+		/**
+		 * Problem #173
+		 */
+		
+		TreeNode root = new TreeNode(10);
+		root.left = new TreeNode(5);
+		root.left.left = new TreeNode(3);
+		root.left.right = new TreeNode(8);
+		root.right = new TreeNode(15);
+		root.right.left = new TreeNode(12);
+		root.right.right = new TreeNode(18);
+		
+		BSTIterator bsti = new BSTIterator(root);
+		while(bsti.hasNext())
+			System.out.print(bsti.next() + ",");
+		System.out.println();
 	}
 }
