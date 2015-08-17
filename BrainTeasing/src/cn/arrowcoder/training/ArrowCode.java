@@ -3325,6 +3325,37 @@ public class ArrowCode {
         return true;
     }
     
+    /**
+     * Problem #257
+     * Binary Tree Paths
+     */
+    private List<String> btp_ret;
+    public List<String> binaryTreePaths(TreeNode root) {
+        btp_ret = new LinkedList<String>();
+        if (root == null)
+            return btp_ret;
+        if (root.left != null)
+            btp_aux(root.left, String.valueOf(root.val));
+        if (root.right != null)
+            btp_aux(root.right, String.valueOf(root.val));
+        if (root.left == null && root.right == null)
+            btp_ret.add(String.valueOf(root.val));
+        return btp_ret;      
+    }
+
+    public void btp_aux(TreeNode root, String path){
+        if (root.left == null && root.right == null){
+            String finalpath = new String(path);
+            finalpath += "->" + root.val;
+            btp_ret.add(finalpath);
+            return;
+        }
+        if (root.left != null)
+            btp_aux(root.left, path + "->" + root.val);
+        if (root.right != null)
+            btp_aux(root.right, path + "->" + root.val);
+        return;
+    }
     
     /**
      * Simple utilities
