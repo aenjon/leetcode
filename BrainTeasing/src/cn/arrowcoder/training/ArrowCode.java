@@ -2096,6 +2096,23 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #58
+     * Length of Last Word
+     */
+    public int lengthOfLastWord(String s) {
+        if (s == null || s.length() == 0) return 0;
+        int i = s.length()-1, len=0;
+        while (i>=0 && s.charAt(i) == ' ')
+            i--;
+        if (i < 0) return 0;
+        while (i>=0 && s.charAt(i) != ' '){
+            i--; len++;
+        }
+        return len;
+    }
+
+    
+    /**
      * Problem #59
      * Spiral Matrix II 
      */
@@ -2127,6 +2144,29 @@ public class ArrowCode {
         }
         return ret;        
     }
+    
+    /**
+     * Problem #60
+     * Permutation Sequence
+     * Put 1..n into a list with index starting with 1
+     * (k-1)/(n-1)! presents the position of the first number
+     */
+    public String getPermutation(int n, int k) {
+        LinkedList<Integer> nums = new LinkedList<Integer>();
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
+            nums.add(i);
+            fact *= i;
+        }
+        StringBuffer ret = new StringBuffer();
+        for (k--; n > 0; n--) {
+            fact /= n;
+            ret.append(nums.remove(k / fact));
+            k %= fact;
+        }
+        return ret.toString();                
+    }
+
     
     /**
      * Problem #61
@@ -3227,6 +3267,29 @@ public class ArrowCode {
         root.right = tmp;
         return root;        
     }
+    
+    /**
+     * Problem #234
+     * Palindrome Linked List
+     */
+    private ListNode root;
+    public boolean isPalindrome(ListNode head) {
+        if (head == null) return true;
+        root = head;
+        return isPal_aux(head);
+    }
+   
+    public boolean isPal_aux(ListNode head){
+        boolean flag = true;
+        if (head.next != null)
+            flag = isPal_aux(head.next);
+        if (flag && head.val == root.val){
+            root = root.next;
+            return true;
+        }
+        return false;
+    }
+    
     
     /**
      * Problem #237
