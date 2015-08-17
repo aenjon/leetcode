@@ -1727,6 +1727,7 @@ public class ArrowCode {
     	return n+1;
     }
     
+    
     public void swap(int[] A, int i, int j){
     	int temp = A[i];
     	A[i] = A[j];
@@ -2020,6 +2021,42 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #53
+     * Maximum Sub-array 
+     */
+    public int maxSubArray(int[] A) {
+        if (A == null || A.length == 0) return -1;
+        int maxsum = Integer.MIN_VALUE;
+        int cursum = 0;
+        for(int i=0; i<A.length; i++){
+            cursum += A[i];
+            maxsum = maxsum > cursum ? maxsum : cursum;
+            cursum = cursum < 0 ? 0 : cursum;
+        }
+        return maxsum;
+    }
+
+    public int[] maxSubArrayRange(int[] A) {
+    	int[] ret = new int[3];
+        if (A == null || A.length == 0) return ret;
+        int maxsum = Integer.MIN_VALUE;
+        int cursum = 0;
+        int low = 0, high = 0;
+        for(int i=0; i<A.length; i++){
+        	if (cursum == 0){
+        		low = i; high = i;
+        	}
+            cursum += A[i];
+            maxsum = maxsum > cursum ? maxsum : cursum;
+            high = maxsum > cursum ? high : i;
+            cursum = cursum < 0 ? 0 : cursum;
+        }
+        ret[0] = low; ret[1] = high; ret[2] = maxsum;
+        return ret;
+    }
+    
+    
+    /**
      * Problem #54
      * Spiral Matrix
      */
@@ -2056,6 +2093,39 @@ public class ArrowCode {
             level++;                
         }
         return ret;
+    }
+    
+    /**
+     * Problem #59
+     * Spiral Matrix II 
+     */
+    public int[][] generateMatrix(int n) {
+        int[][] ret = new int[n][n];
+        int i = 0, j=0, layer = 0, count = 0, total = n*n;
+        while (count < total){
+            while ( j < n - layer && count < total){
+                ret[i][j] = ++count;
+                j++; 
+            }
+            i++; j--;
+            while (i < n - layer && count < total) {
+                ret[i][j] = ++count;                
+                i++; 
+            }
+            i--; j--;
+            while (j >= layer && count < total) {
+                ret[i][j] = ++count;                
+                j--; 
+            }
+            i--; j++;
+            while ( i > layer && count < total) {
+                ret[i][j] = ++count;
+                i--;
+            }
+            i++; j++;
+            layer++;
+        }
+        return ret;        
     }
     
     /**
@@ -2559,6 +2629,52 @@ public class ArrowCode {
     	int right = maxdep_aux(root.right);
     	return left > right ? left + 1 : right + 1;
     }
+
+    /**
+     * Problem #108
+     * Convert Sorted Array to Binary Search Tree 
+     */
+    public TreeNode sortedArrayToBST(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return null;
+        return satobst(nums, 0, nums.length-1);
+    }
+
+    public TreeNode satobst(int[] nums, int low, int high){
+        if (low == high)
+            return new TreeNode(nums[low]);
+        int mid = (low + high)/2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = mid - low < 1 ? null : satobst(nums, low, mid-1);
+        root.right = satobst(nums, mid+1, high);
+        return root;
+    }
+
+    /**
+     * Problem #109
+     * Convert Sorted List to Binary Search Tree
+     */
+    public TreeNode sortedListToBST(ListNode head) {
+        int len = 0;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        while (head != null){
+            len++;
+            head = head.next;
+        }
+        return sltobst(dummy, 0, len-1);
+    }
+    
+    public TreeNode sltobst (ListNode list, int low, int high){
+        if (low > high) return null;
+        int mid = (low + high) / 2;
+        TreeNode lc = sltobst(list, low, mid-1);
+        TreeNode p = new TreeNode(list.next.val);
+        list.next = list.next.next;
+        TreeNode rc = sltobst(list, mid+1, high);
+        p.left = lc; p.right = rc;
+        return p;
+    }
     
     /** Problem #110
      * Balanced Binary Tree
@@ -2590,6 +2706,37 @@ public class ArrowCode {
             return l < r ? l + 1 : r + 1; 
         else
             return l==0 ? r+1 : l+1;
+    }
+    
+    /**
+     * Problem #114
+     * Flatten Binary Tree to Linked List
+     */
+    public void flatten(TreeNode root) {
+        if (root == null) return;
+        faltten_aux(root);
+        return;
+    }
+
+    /**
+     * Recursively flat left and right child trees
+     * Return the last node (leaf) of the flatten left and right child trees
+     * Move the flatten left to the right, set the right child as the right child the last leaf of flatten left child
+     * Return the last child of flatten right child
+     */
+    
+    public TreeNode faltten_aux(TreeNode root){
+        if (root.left == null && root.right == null)
+            return root;
+        TreeNode ltail = root.left == null? null : faltten_aux(root.left);
+        TreeNode rtail = root.right == null? null : faltten_aux(root.right);
+        if (ltail != null) {
+            TreeNode tmp = root.right;
+            root.right = root.left;
+            root.left = null; // No left child any more
+            ltail.right = tmp;
+        }
+        return rtail == null ? ltail : rtail;
     }
     
     /**

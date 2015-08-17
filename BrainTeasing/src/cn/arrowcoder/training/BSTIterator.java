@@ -4,8 +4,7 @@ import java.util.Stack;
 
 public class BSTIterator {
 
-	private Stack<TreeNode> next;
-	
+	private Stack<TreeNode> next;	
 	public BSTIterator(TreeNode root) {
 		next = new Stack<TreeNode>();
 		TreeNode cur = root;
@@ -14,12 +13,10 @@ public class BSTIterator {
 			cur = cur.left;
 		}
     }
-
     /** @return whether we have a next smallest number */
     public boolean hasNext() {
         return (!next.isEmpty());
     }
-
     /** @return the next smallest number */
     public int next() {
         TreeNode cur = next.pop();
@@ -34,5 +31,4 @@ public class BSTIterator {
         }
         return ret;
     }
-
 }
