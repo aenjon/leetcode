@@ -77,6 +77,7 @@ public class ArrowCode {
     	}
     	return dummy.next;
     }
+
     
     /**
      * Problem No. 3
@@ -681,7 +682,7 @@ public class ArrowCode {
      * 4Sum
      */
     public List<List<Integer>> fourSum(int[] num, int target) {
-    	int counter = 0;
+//    	int counter = 0;
     	List<List<Integer>> ret = new ArrayList<List<Integer>>();
     	if (num == null || num.length < 4) return ret;
     	Arrays.sort(num);
@@ -695,7 +696,7 @@ public class ArrowCode {
     			int low = j + 1;
     			int high = num.length - 1;
     			while (low < high){
-    				counter++;
+//    				counter++;
     				int i_sum = num[low] + num[high];
     				if (i_sum < itarget)
     					++low;
@@ -715,7 +716,7 @@ public class ArrowCode {
     			}
     		}
     	}
-    	System.out.println("counter:" + counter);
+ //   	System.out.println("counter:" + counter);
     	return ret;
     }
     /**
@@ -840,17 +841,17 @@ public class ArrowCode {
      * Problem #22
      * Generate Parentheses 
      */
-    private static int pc;
+    //private static int pc;
     public List<String> generateParenthesis(int n) {
-    	pc = 0;
+    	//pc = 0;
     	List<String> ret = new ArrayList<String>();
     	genPar_aux("(", 1, 0, n, ret);
-    	System.out.println("pc:" + pc);
+    	//System.out.println("pc:" + pc);
     	return ret;
     }
     
     private void genPar_aux(String temp, int l, int r, int n, List<String> ret){
-    	pc++;
+    	//pc++;
     	if ( l == r && l == n){
     		ret.add(temp);
     		return;
@@ -1012,26 +1013,30 @@ public class ArrowCode {
      * Divide Two Integers 
      */
     public int divide(int dividend, int divisor) {
-    	if (divisor == 0) return Integer.MAX_VALUE;
-    	int sign =(dividend > 0 && divisor < 0 || dividend < 0 && divisor > 0) ? -1 : 1; 
-    	if (dividend == Integer.MIN_VALUE && divisor == -1) return Integer.MAX_VALUE;
-    	if (dividend == Integer.MIN_VALUE && divisor == 1) return Integer.MIN_VALUE;
-    	long premainder = Math.abs((long)dividend);
-    	long pdivisor = Math.abs((long)divisor);
-    	int ret = 0;
-    	while (premainder >= pdivisor){
-    		int moves = -1;
-    		long tmp = pdivisor;
-    		while ( premainder >= tmp){
-    			++moves;
-    			tmp <<= 1;    			
-    		}
-    		if (moves >= 0){
-    			ret += 1 << moves;
-    			premainder -= (tmp >> 1);
-    		}
-    	}
-    	return sign > 0 ? ret : -ret;
+        if (divisor == 0) return Integer.MAX_VALUE;
+        boolean sign = (dividend > 0 && divisor > 0 || dividend < 0 && divisor < 0);
+        if (dividend == Integer.MIN_VALUE){
+            if (divisor == 1)
+                return Integer.MIN_VALUE;
+            if (divisor == -1)
+                return Integer.MAX_VALUE;
+        }
+        long lremainder = Math.abs((long)dividend);
+        long ldivisor = Math.abs((long)divisor);
+        int ret = 0;
+        while (lremainder >= ldivisor){
+            int folds = -1;
+            long temp = ldivisor;
+            while (temp <= lremainder){
+                folds++;
+                temp <<= 1;
+            }
+            if (folds >= 0){
+                ret += (1 << folds);
+                lremainder -= (temp >> 1);
+            }
+        }
+        return sign ? ret : -ret;
     }
     
     /**
@@ -1245,7 +1250,7 @@ public class ArrowCode {
     			}
     		}
     	}
-    	TeasingUtil.printList(ret);
+//    	TeasingUtil.printList(ret);
     	int max = ret[0];
     	for (int i=1; i<ret.length; ++i)
     		max = max > ret[i] ? max : ret[i];
@@ -3055,6 +3060,25 @@ public class ArrowCode {
         return ret;
     }
     
+    /**
+     * Problem #169
+     * Majority Element
+     * Because the majority element is the element that appears more than n/2 times.
+     * Count a number and decount the number. The majority one will be left. 
+     */
+    public int majorityElement(int[] nums) {
+    	int max = 0, count = 0;
+        for(int i = 0; i<nums.length; i++){
+          if (count == 0){
+            max = nums[i];
+            count = 1;
+            continue;
+          }
+          count = max == nums[i] ? count+1 : count-1;
+        }
+        return max;
+    }
+    
     
     /**
      * Problem #179
@@ -3356,7 +3380,32 @@ public class ArrowCode {
             btp_aux(root.right, path + "->" + root.val);
         return;
     }
-    
+
+    /**
+     * Problem #999
+     * Consecutive sum: check if an integer array has a consecutive numbers whose sum equals to the target
+     * Set a sliding window, starting with a number leftmost,
+     * Accumlate numbers from left to right. If the sum is smaller than the target, move forward;
+     * Otherwise, move the sliding window towards right  
+     */
+    public boolean conSum(int[] nums, int target){
+    	if (nums == null || nums.length == 0)
+    		return false;
+    	int low = 0, i = 0, sum = 0;
+    	while(i < nums.length){
+    		if (sum == target)
+    			return true;
+    		else if ( sum < target){
+    			sum += nums[i];
+    			i++;
+    		} else {
+    			while (sum > target)
+    				sum -= nums[low++];
+    			i = low;
+    		}
+    	}
+    	return false;
+    }
     /**
      * Simple utilities
      */
