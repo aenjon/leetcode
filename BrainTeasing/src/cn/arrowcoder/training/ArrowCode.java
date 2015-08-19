@@ -3316,6 +3316,21 @@ public class ArrowCode {
     
     
     /**
+     * Problem #236
+     * Lowest Common Ancestor of a Binary Tree
+     */
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {        
+      	if (root == null || root == p || root == q)
+          return root;
+      	TreeNode retl = lowestCommonAncestor(root.left, p, q);
+      	TreeNode retr = lowestCommonAncestor(root.right, p, q);
+    	if (retl != null && retr != null)
+    		return root;
+      	else 
+      		return retl == null ? retr : retl;
+    }
+    
+    /**
      * Problem #237
      * Delete Node in a Linked List
      * A tricky problem. It does not require remove the tail,
