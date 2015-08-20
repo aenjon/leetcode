@@ -3319,14 +3319,18 @@ public class ArrowCode {
      * Problem #236
      * Lowest Common Ancestor of a Binary Tree
      */
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {        
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+    	
       	if (root == null || root == p || root == q)
           return root;
       	TreeNode retl = lowestCommonAncestor(root.left, p, q);
       	TreeNode retr = lowestCommonAncestor(root.right, p, q);
     	if (retl != null && retr != null)
+    		// If both children are not null, it means they are ancestor of p or q respectively
     		return root;
       	else 
+      		// Or one of them is the ancestor of p or q, and the other one has nothing
+      		// Return the non-null one
       		return retl == null ? retr : retl;
     }
     
