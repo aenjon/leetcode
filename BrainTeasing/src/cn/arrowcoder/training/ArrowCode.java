@@ -3051,6 +3051,50 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #153
+     * Find Minimum in Rotated Sorted Array
+     */
+
+    public int findMin(int[] num) {
+        if (num == null || num.length == 0)
+            return Integer.MIN_VALUE;
+        int s = 0, e = num.length-1, mid = (s+e)/2;
+        while (e-s > 1){
+            if (num[mid] < num[e])
+            // If you are looking for the largest value,
+            // compare num[mid] with num[s], and search in the other side
+                e = mid;
+            else
+                s = mid;
+            mid = (s+e)/2;
+        }
+        return num[s] < num[e] ? num[s] : num[e];
+    }
+
+    /**
+     * Problem #154
+     * Find Minimum in Rotated Sorted Array II
+     */
+    public int findMinII(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return Integer.MIN_VALUE;
+        int s = 0, e = nums.length - 1, mid = (s+e)/2;
+        while (e-s > 1){
+            if (nums[mid] < nums[e])
+                e = mid;
+            else if (nums[mid] == nums[e])
+                e--;
+            else if (nums[s] < nums[mid])
+                s = mid;
+            else if (nums[s] == nums[mid])
+                s++;
+            mid = (s+e)/2;
+        }
+        return nums[s] < nums[e] ? nums[s] : nums[e];
+    }
+    
+    
+    /**
      * Problem #160
      * Intersection of Two Linked Lists
      * Calculate d, the difference of the two lists' length
@@ -3300,6 +3344,12 @@ public class ArrowCode {
         }
         return ret;
     }
+    
+    /**
+     * Problem #225
+     * Implement Stack using Queues
+     * See LeetStack.java
+     */
     
     /**
      * Problem #226
