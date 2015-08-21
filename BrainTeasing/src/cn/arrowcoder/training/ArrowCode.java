@@ -2331,6 +2331,29 @@ public class ArrowCode {
         ret.add(new LinkedList<Integer>());
         return ret;
     }
+    
+    /**
+     * Problem #82
+     * Remove Duplicates from Sorted List II
+     */
+    public ListNode deleteDuplicatesII(ListNode head) {
+      	ListNode dummy = new ListNode(0);
+      	dummy.next = head;
+		ListNode pre = dummy, cur = head;
+        while (cur != null && cur.next != null){
+            int count = 0;
+            while (cur.next != null && cur.val == cur.next.val ){
+                cur.next = cur.next.next;
+                count++;
+            }
+            if (count > 0)
+                pre.next = cur.next;
+            else
+        	    pre = cur;
+            cur = cur.next;
+      }
+      return dummy.next;	
+    }
      	
     /**
      * Problem #83
@@ -3210,19 +3233,17 @@ public class ArrowCode {
      * Remove Linked List Elements
      */
     public ListNode removeElements(ListNode head, int val) {
-    	ListNode dummy = new ListNode(0);
-    	dummy.next = head;
-    	ListNode pre = dummy;
-    	ListNode cur = head;
-    	while (cur != null){
-    		if (cur.val == val){
-    			pre.next = cur.next;
-    		} else 
-    			pre = pre.next;
-    		cur = cur.next;
-    	}
-    	return dummy.next;
-    }
+        if (head == null) return head;
+        ListNode cur = head;
+        while (cur.next != null){
+            if (cur.next.val == val)
+                cur.next = cur.next.next;          
+            else
+	            cur = cur.next;        
+        }
+        return head.val == val ? head.next : head;
+    }    
+    
     
     /**
      * Problem #206
@@ -3314,6 +3335,21 @@ public class ArrowCode {
         return false;
     }
     
+    /**
+     * Problem #235
+     * Lowest Common Ancestor of a Binary Search Tree
+     */
+    public TreeNode lowestCommonAncestorBST(TreeNode root, TreeNode p, TreeNode q) {
+    	if (root == null || p == null || q == null) return null;
+    	if (root.val >= p.val && root.val <= q.val || root.val <= p.val && root.val >= q.val)
+    		return root;
+    	if (root.val <= p.val && root.val <= q.val)
+    		return lowestCommonAncestorBST(root.right, p, q);
+  
+    	if (root.val >= p.val && root.val >= q.val)
+    		return lowestCommonAncestorBST(root.left, p, q);       
+    	return null;  
+    }    
     
     /**
      * Problem #236
