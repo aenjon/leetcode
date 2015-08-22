@@ -22,6 +22,13 @@ class ListNode{
 	}
 }*/
 
+
+class RandomListNode {
+    int label;
+    RandomListNode next, random;
+    RandomListNode (int x) {label = x;}    
+}
+
 public class ArrowCode {
 	
     static int counter4sum = 0;
@@ -2777,6 +2784,110 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #112
+     *  Path Sum 
+     */
+    public boolean hasPathSum(TreeNode root, int sum) {
+        if (root == null) return false;
+        int newsum = sum - root.val;
+        if (newsum == 0 && root.left == null && root.right == null)
+            return true;
+        return hasPathSum(root.left, newsum) || hasPathSum(root.right, newsum);
+    }
+
+    public boolean hasPathSum2(TreeNode root, int sum) {
+        if (root == null) return false;
+        boolean ret = false;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        HashSet<TreeNode> hs = new HashSet<TreeNode>();
+        TreeNode cur;
+        st.push(root);
+        while(!st.isEmpty()){
+            cur = st.peek();
+            if(!hs.contains(cur)){
+                hs.add(cur);
+                sum -= cur.val;
+                if (cur.right != null)
+                    st.push(cur.right);
+                if (cur.left != null)
+                    st.push(cur.left);
+            } else {
+                st.pop();
+                if (cur.left == null && cur.right == null && sum == 0){
+                    ret = true;
+                    break;
+                }else
+                    sum += cur.val;
+            }
+        }
+        return ret;
+    }
+    
+    /**
+     * Problem #113
+     * Path Sum II 
+     */
+    private List<List<Integer>> ret_pathsum;    
+    public List<List<Integer>> pathSum(TreeNode root, int sum) {
+        ret_pathsum = new LinkedList<List<Integer>>();
+        if (root == null) return ret_pathsum;
+        psum_aux(root, sum, new LinkedList<Integer>());
+        return ret_pathsum;
+    }
+    
+    public void psum_aux(TreeNode root, int sum, List<Integer> subret){
+        int newsum = sum-root.val;
+        if (newsum ==0 && root.left == null && root.right == null){
+            List<Integer> item = new LinkedList<Integer>(subret);
+            item.add(root.val);
+            ret_pathsum.add(item);
+        }
+        if (root.left != null){
+            subret.add(root.val);
+            psum_aux(root.left, newsum, subret);
+            subret.remove(subret.size()-1);
+        }
+        if  (root.right != null){
+            subret.add(root.val);
+            psum_aux(root.right, newsum, subret);
+            subret.remove(subret.size()-1);
+        }        
+        return;
+    }
+    
+    public List<List<Integer>> pathSum2(TreeNode root, int sum) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (root == null) return ret;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        HashSet<TreeNode> hs = new HashSet<TreeNode>();
+        List<Integer> subret = new LinkedList<Integer>();
+        TreeNode cur;
+        st.push(root);
+        while (!st.isEmpty()){
+            cur = st.peek();
+            if (!hs.contains(cur)){
+                hs.add(cur);
+                sum -= cur.val;
+                subret.add(cur.val);
+                if (cur.right!=null)
+                    st.push(cur.right);
+                if (cur.left != null)
+                    st.push(cur.left);
+            } else {
+                st.pop();
+                if (cur.left == null && cur.right == null && sum == 0){
+                    List<Integer> item = new LinkedList<Integer>(subret);
+                    ret.add(item);
+                }
+                sum += cur.val;
+                subret.remove(subret.size()-1);
+            }
+        }
+        return ret;        
+    }    
+    
+    
+    /**
      * Problem #114
      * Flatten Binary Tree to Linked List
      */
@@ -2806,6 +2917,30 @@ public class ArrowCode {
         }
         return rtail == null ? ltail : rtail;
     }
+    
+    /**
+     * Problem #138
+     * Copy List with Random Pointer
+     */
+    public RandomListNode copyRandomList(RandomListNode head) {
+        if (head == null) return head;        
+        HashMap<RandomListNode, RandomListNode> map = new  HashMap<RandomListNode, RandomListNode>();
+        RandomListNode cur = head;
+        /* Loop 1: create the copied list*/
+        while(cur != null){
+            map.put(cur, new RandomListNode(cur.label));
+            cur = cur.next;
+        }
+        cur = head;
+        /* Loop 2: set up next and random connections */
+        while(cur != null){
+            map.get(cur).next = map.get(cur.next);
+            map.get(cur).random = map.get(cur.random);
+            cur = cur.next;
+        }
+        return map.get(head);
+    }
+
     
     /**
      * Problem #141
