@@ -2217,6 +2217,52 @@ public class ArrowCode {
                 paths[i][j] = paths[i-1][j] + paths[i][j-1];
         return paths[m-1][n-1];
     }
+
+    /**
+     * It is the permutation of right steps and down steps 
+     * i.e. (m+n)!/(m! * n!)
+     */
+    public int uniquePaths2(int m, int n) {
+        if (m == 1 || n == 1) return 1;
+        m--; n--;
+        if (m < n) { // Swap to make sure m >= n
+            m += n;
+            n = m - n;
+            m = m - n;
+        }
+        long ret = 1;
+        int  j = 1;
+        /*
+         *  (m+n)!/(m! * n!) = (m+n)(m+n-1)...(m+1)*m! / (m! * n!) =  (m+n)(m+n-1)...(m+1)/n!
+         */
+        for (int i = m+1; i <= m+n; i++, j++){
+            ret *= i;
+            ret /= j;
+        }
+        return (int)ret;
+    }
+    
+    /**
+     * Problem #63
+     * Unique Paths II
+     */
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        if (obstacleGrid == null || obstacleGrid.length == 0 ||
+            obstacleGrid[0] == null || obstacleGrid[0].length == 0)
+            return -1;
+        int m = obstacleGrid.length, n = obstacleGrid[0].length;
+        obstacleGrid[0][0] = obstacleGrid[0][0] == 1 ? 0 : 1;
+        for (int i = 1; i< m; i++)
+            obstacleGrid[i][0] = obstacleGrid[i][0] == 1 ? 0 : obstacleGrid[i-1][0];
+        for (int j = 1; j < n; j++)
+            obstacleGrid[0][j] = obstacleGrid[0][j] == 1 ? 0 : obstacleGrid[0][j-1];
+        for (int i = 1; i < m; i++)
+            for (int j = 1; j < n; j++)
+                obstacleGrid[i][j] = obstacleGrid[i][j] == 1 ? 0 : obstacleGrid[i-1][j] + obstacleGrid[i][j-1];
+        return obstacleGrid[m-1][n-1];
+    }
+    
+    
     /**
      * Problem #66
      * Plus One
@@ -2722,6 +2768,57 @@ public class ArrowCode {
     }
 
     /**
+     * Problem #107
+     * Binary Tree Level Order Traversal II
+     */
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (root == null) return ret;
+        Queue<TreeNode> q = new LinkedList<TreeNode>();
+        TreeNode magic = new TreeNode(0);
+        q.add(root); q.add(magic);
+        List<Integer> item = new LinkedList<Integer>();
+        while(!q.isEmpty()){
+            TreeNode cur = q.poll();
+            if (cur != magic){
+                item.add(cur.val);
+                if (cur.left != null)
+                    q.add(cur.left);
+                if (cur.right != null)
+                    q.add(cur.right);
+            } else {
+                ret.add(0,item);
+                item = new LinkedList<Integer>();
+                if (!q.isEmpty())
+                    q.add(magic);        
+            }
+        }
+        return ret;
+    }
+
+    
+    public List<List<Integer>> levelOrderBottom2(TreeNode root) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (root == null) return ret;
+        List<TreeNode> level = new LinkedList<TreeNode>();
+        level.add(root);
+        while (!level.isEmpty()){
+            List<Integer> item = new LinkedList<Integer>();
+            List<TreeNode> nextlevel = new LinkedList<TreeNode>();
+            for (TreeNode tn : level){
+                item.add(tn.val);
+                if (tn.left != null)
+                    nextlevel.add(tn.left);
+                if (tn.right != null)
+                    nextlevel.add(tn.right);
+            }
+            ret.add(0,item);
+            level = nextlevel;
+        }
+        return ret;
+    }
+    
+    /**
      * Problem #108
      * Convert Sorted Array to Binary Search Tree 
      */
@@ -2933,6 +3030,37 @@ public class ArrowCode {
         }
         return rtail == null ? ltail : rtail;
     }
+    
+    /**
+     * Problem #136
+     * Single Number
+     * All numbers appear twice except one, find it.
+     */
+    public int singleNumber(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return Integer.MIN_VALUE;
+        int ret = nums[0];
+        for(int i=1; i<nums.length; i++)
+            ret ^= nums[i];
+        return ret;
+    }
+
+    /**
+     * Problem #137
+     * Single Number II: All numbers appear three times except one, find it.
+     */
+    public int singleNumberII(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return Integer.MIN_VALUE;
+        int ones = 0, twos = 0, threes = 0;
+        for (int x : nums){
+            threes = twos & x;
+            twos = (ones & x | twos) & (~threes);
+            ones = (ones | x) & (~threes);
+        }
+        return ones;
+    }    
+
     
     /**
      * Problem #138
