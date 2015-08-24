@@ -2262,6 +2262,83 @@ public class ArrowCode {
         return obstacleGrid[m-1][n-1];
     }
     
+    /**
+     * Problem #64
+     * Minimum Path Sum
+     * Solution 1: the minimum sum of a path to a cell is the smaller value of the sums of the
+     * cell value and the path value to the cell above and the cell left.
+     * Create an m*n array to record all values.
+     * Time: O(m*n), Space O(m*n)
+     */
+    
+    public int minPathSum(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0) 
+            return Integer.MIN_VALUE;
+        int m = grid.length, n = grid[0].length;
+        int[][] path = new int[m][n];
+        for(int i=0; i<m; i++)
+            for(int j=0;j<n;j++){
+                if (i==0 && j ==0)
+                    path[i][j] = grid[i][j];
+                else if ( i != 0 && j == 0)
+                    path[i][j] = path[i-1][j] + grid[i][j];
+                else if ( i==0 && j!=0)
+                    path[i][j] = path[i][j-1] + grid[i][j];
+                else 
+                    path[i][j] = path[i-1][j] < path[i][j-1] ? path[i-1][j] + grid[i][j] : path[i][j-1] + grid[i][j];
+            }
+        return path[m-1][n-1];
+    }
+
+    /**
+     * Solution 2: Not path sums for all cells are required.
+     * Only record path sums to the cell above (last row) and to the cell left (last col)
+     *  Time: O(m*n), Space O(m+n)
+     */
+    public int minPathSum2(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0) 
+            return Integer.MIN_VALUE;
+        int m = grid.length, n = grid[0].length;
+        int[] row = new int[n];
+        int[] col = new int[m];
+        row[0] = grid[0][0]; col[0] = grid[0][0];
+        for (int i = 1; i < m; i++)
+            col[i] = col[i-1] + grid[i][0];
+        for (int j = 1; j < n; j++)
+            row[j] = row[j-1] + grid[0][j];
+        for (int i = 1; i<m; i++)
+            for (int j = 1; j < n; j++){
+                int newcell = row[j] < col[i] ? row[j] + grid[i][j] : col[i] + grid[i][j];
+                row[j] = newcell;
+                col[i] = newcell;
+            }
+        return row[n-1];        
+    }
+    
+    /**
+     * Solution 3: To calculate the path sum to the current cell, we only need to know
+     * the sum of the left col (same row) and above row (same col)
+     * Create a vector with same row number of the original matrix, path[i] stores the value of last column
+     * and path[i-1] stores last row. 
+     */
+    public int minPathSum3(int[][] grid) {
+        if (grid == null || grid.length == 0 || grid[0] == null || grid[0].length == 0) 
+            return Integer.MIN_VALUE;
+        int m = grid.length, n = grid[0].length;
+        int[] path = new int[m];
+        path[0] = grid[0][0];
+        for (int i = 1; i < m; i++)
+            path[i] = path[i-1] + grid[i][0];
+        for (int j = 1; j < n; j++)
+            for (int i = 0; i < m; i++){
+                if (i==0)
+                    path[i] = path[i] + grid[i][j];
+                else
+                    path[i] = path[i] < path[i-1] ? path[i] + grid[i][j] : path[i-1] + grid[i][j];
+            }
+        return path[m-1];        
+    }
+
     
     /**
      * Problem #66
@@ -2748,6 +2825,38 @@ public class ArrowCode {
             }
             ret.add(item);
             level = nextlevel;
+        }
+        return ret;
+    }
+    
+    /**
+     * Problem #103
+     * Binary Tree Zigzag Level Order Traversal
+     */
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (root == null) return ret;
+        Stack<TreeNode> level = new Stack<TreeNode>();
+        List<Integer> item = new LinkedList<Integer>();
+        boolean flag = false;
+        level.add(root);
+        while (!level.isEmpty()){
+            Stack<TreeNode> nextlevel = new Stack<TreeNode>();
+            while (!level.isEmpty()){
+                TreeNode tn = level.pop();
+                item.add(tn.val);
+                if (flag){
+                    if (tn.right != null) nextlevel.push(tn.right);
+                    if (tn.left != null) nextlevel.push(tn.left);
+                } else {
+                    if (tn.left != null) nextlevel.push(tn.left);                    
+                    if (tn.right != null) nextlevel.push(tn.right);
+                }
+            }
+            ret.add(item);
+            item = new LinkedList<Integer>();
+            level = nextlevel;
+            flag = !flag;
         }
         return ret;
     }
