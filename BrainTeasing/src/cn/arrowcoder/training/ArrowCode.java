@@ -2875,7 +2875,108 @@ public class ArrowCode {
     	int right = maxdep_aux(root.right);
     	return left > right ? left + 1 : right + 1;
     }
+    
+    /**
+     * Problem #105
+     * Construct Binary Tree from Preorder and Inorder Traversal
+     */
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+       if (preorder == null || inorder == null || preorder.length == 0 
+    		   || inorder.length == 0 || preorder.length != inorder.length)
+    	   return null;
+       return bt_pi(preorder, 0, preorder.length-1, inorder, 0, inorder.length-1);
+    }
+    
+    public TreeNode bt_pi(int[] pre, int pre_s, int pre_e, int[] in, int in_s, int in_e){
+    	if (pre_s > pre_e)
+    		return null;
+    	TreeNode cur = new TreeNode(pre[pre_s]);
+    	int in_index;
+    	for (in_index = in_s; in_index<=in_e; in_index++)
+    		if (pre[pre_s] == in[in_index])
+    			break;
+    	cur.left = bt_pi(pre, pre_s+1, pre_s + in_index - in_s, in, in_s, in_index-1);
+    	cur.right = bt_pi(pre, pre_s + in_index - in_s+1, pre_e, in, in_index+1, in_e);
+    	return cur;    	
+    }
 
+    public TreeNode buildTree2(int[] preorder, int[] inorder) {
+    	if (preorder == null || inorder == null || preorder.length ==0 
+    			|| inorder.length == 0 || preorder.length != inorder.length)
+    		return null;
+    	Stack<TreeNode> st = new Stack<TreeNode>();
+    	TreeNode root = new TreeNode(preorder[0]);
+    	st.push(root);
+    	TreeNode cur = null;
+    	int i = 1, j = 0;
+    	boolean flag = false;
+    	while (i < preorder.length){
+    		if (!st.isEmpty() && st.peek().val == inorder[j]){
+    			cur = st.pop();
+    			flag = true;
+    			j++;
+    		} else if (flag){
+    			TreeNode node = new TreeNode(preorder[i]);
+    			cur.right = node;
+    			st.push(node);
+    			flag = false;
+    			i++;
+    		} else {
+    			TreeNode node = new TreeNode(preorder[i]);
+    			st.peek().left = node;
+    			st.push(node);
+    			i++;
+    		}
+    	}
+    	return root;
+    }  
+    /**
+     * Problem #106
+     * Construct Binary Tree from Inorder and Postorder Traversal 
+     */
+    public TreeNode buildTreeII(int[] inorder, int[] postorder) {
+    	if (postorder == null || inorder == null || postorder.length ==0 
+    			|| inorder.length == 0 || postorder.length != inorder.length)
+    		return null;
+    	return bt_ip(inorder, 0, inorder.length -1 , postorder, 0, postorder.length-1);
+    }
+    
+    private TreeNode bt_ip(int[] inorder, int is, int ie, int[] postorder, int ps, int pe){
+    	if (is > ie || ps > pe) return null;
+    	TreeNode root = new TreeNode(postorder[pe]);
+    	int i = 0;
+    	for (i = is; i <= ie; i++)
+    		if (inorder[i] == postorder[pe])
+    			break;
+    	root.left = bt_ip(inorder, is, i-1, postorder, ps, ps + i - is -1);
+    	root.right = bt_ip(inorder, i+1, ie, postorder, ps + i - is, pe-1);
+    	return root;
+    }
+
+    public TreeNode buildTreeII2(int[] inorder, int[] postorder) {
+    	if (postorder == null || inorder == null || postorder.length ==0 
+    			|| inorder.length == 0 || postorder.length != inorder.length)
+    		return null;
+    	int ip = inorder.length-1, pp = postorder.length-1;
+    	Stack<TreeNode> st = new Stack<TreeNode>();
+    	TreeNode root = new TreeNode(postorder[pp--]);
+    	st.push(root);
+    	TreeNode prev = null;
+    	while (pp >= 0){
+    		while ( !st.isEmpty() && st.peek().val == inorder[ip]){
+    			prev = st.pop();
+    			ip--;
+    		}
+    		TreeNode newnode = new TreeNode(postorder[pp--]);
+    		if (prev != null)
+    			prev.left = newnode;
+    		else if (!st.isEmpty())
+    			st.peek().right = newnode;
+    		st.push(newnode);
+    		prev = null;
+    	}
+    	return root;
+    }    
     /**
      * Problem #107
      * Binary Tree Level Order Traversal II
@@ -3752,6 +3853,15 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #231
+     * Power of Two
+     */
+    public boolean isPowerOfTwo(int n) {
+    	return n > 0 && ((n-1) & n) == 0; 
+    }
+
+    
+    /**
      * Problem #234
      * Palindrome Linked List
      */
@@ -3869,9 +3979,30 @@ public class ArrowCode {
         }
         if (root.left != null)
             btp_aux(root.left, path + "->" + root.val);
-        if (root.right != null)
+        if (root.right != null) 
             btp_aux(root.right, path + "->" + root.val);
         return;
+    }
+    
+    /**
+     * Problem #268
+     * Missing Number 
+     */
+    public int missingNumber(int[] nums) {
+    	if (nums == null || nums.length == 0) return 0;
+    	int i = 0, n = nums.length;
+    	while ( i < n){
+    		if (nums[i] != i && 0 <= nums[i] && nums[i] < n ) {
+    			int tmp = nums[i];
+    			nums[i] = nums[nums[i]];
+    			nums[tmp] = tmp;
+    		} else
+    			i++;
+    	}
+    	for (i=0; i<n; i++)
+    		if (nums[i] != i)
+    			break;
+    	return i;
     }
 
     /**

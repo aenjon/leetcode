@@ -278,10 +278,11 @@ public class ArrowCodeTest {
 	     * Problem #14 & #15
 	     * 3Sum  
 	     */
-		
+		/*
 		int[] nums = {-1, 0, 1, 2, -1, -4};
 		List<List<Integer>> ret = arrowcode.threeSum2(nums);
 		TeasingUtil.printListList(ret);
+		*/
 	    /**
 	     * Problem No. 14
 	     * Letter Combinations of a Phone Number 
@@ -626,7 +627,7 @@ public class ArrowCodeTest {
 		/**
 		 * Problem #173
 		 */
-		
+		/*
 		TreeNode root = new TreeNode(10);
 		root.left = new TreeNode(5);
 		root.left.left = new TreeNode(3);
@@ -638,6 +639,19 @@ public class ArrowCodeTest {
 		BSTIterator bsti = new BSTIterator(root);
 		while(bsti.hasNext())
 			System.out.print(bsti.next() + ",");
-		System.out.println();
+		*/
+		/**
+		 * Problem #231
+		 */
+		//System.out.println(arrowcode.isPowerOfTwo(16));
+		
+		/**
+		 * Problem #268
+		 * Missing Number
+		 */
+		int[] nums = {1,4, 2, 0, 3, 5, 8};
+		System.out.println(arrowcode.missingNumber(nums));
+		TeasingUtil.printList(nums);
+		
 	}
 }
