@@ -3804,8 +3804,23 @@ public class ArrowCode {
     	cur.next = head;
     	head.next = null;
     	return newhead;
-    }    
+    }
+    
+    /**
+     * Problem #217
+     * Contains Duplicate 
+     */
+    public boolean containsDuplicate(int[] nums) {
+        if (nums == null || nums.length == 0) return false;
+        HashSet<Integer> hs = new HashSet<Integer>();
+        for (int i : nums)
+        	if (!hs.add(i))
+        		return true;
+        return false;
+    }
 
+    
+    
     /**
      * Problem #222
      * Count Complete Tree Nodes
@@ -3987,6 +4002,7 @@ public class ArrowCode {
     /**
      * Problem #268
      * Missing Number 
+     * Similar as the first missing positive number, but easier
      */
     public int missingNumber(int[] nums) {
     	if (nums == null || nums.length == 0) return 0;
