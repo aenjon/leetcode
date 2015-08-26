@@ -3,6 +3,7 @@ package cn.arrowcoder.training;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
@@ -3819,8 +3820,21 @@ public class ArrowCode {
         return false;
     }
 
-    
-    
+    /**
+     * Problem #219
+     * Contains Duplicate II 
+     */
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+    	if (nums == null || nums.length == 0) return false;
+    	Hashtable<Integer, Integer> hs = new Hashtable<Integer, Integer>();
+    	Integer dist = Integer.MAX_VALUE;
+    	Integer pre;
+    	for (int i = 0; i<nums.length; i++)
+    		if ((pre = hs.put(nums[i], i)) != null)
+    			dist = dist > i - pre.intValue() ? i - pre.intValue() : dist;
+    	return dist <= k;
+    }
+
     /**
      * Problem #222
      * Count Complete Tree Nodes

@@ -649,8 +649,8 @@ public class ArrowCodeTest {
 		 * Problem #268
 		 * Missing Number
 		 */
-		int[] nums = {1,4, 2, 0, 3, 5, 8};
-		System.out.println(arrowcode.missingNumber(nums));
+		int[] nums = {1, 0, 1, 1};
+		System.out.println(arrowcode.containsNearbyDuplicate(nums, 1));
 		TeasingUtil.printList(nums);
 		
 	}
