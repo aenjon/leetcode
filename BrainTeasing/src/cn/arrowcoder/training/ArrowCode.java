@@ -3831,6 +3831,65 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #216
+     * Combination Sum III
+     */
+    List<List<Integer>> ret216;
+    public List<List<Integer>> combinationSumIII(int k, int n) {
+    	ret216 = new LinkedList<List<Integer>>();
+    	if (k <= 0 || k > 9 || n < 0) return ret216;
+    	comsumIII(0, k, n, new LinkedList<Integer>());
+    	return ret216;
+    }
+    
+    public void comsumIII(int start, int k, int target, List<Integer> subret){
+    	if (k == 0 && target == 0){
+    		List<Integer> item = new LinkedList<Integer>(subret);
+    		ret216.add(item);
+    		return;
+    	} 
+    	//subret.add(start);
+    	for (int i = start+1; i <= 9; i++){
+    		if ( k-1 < 0 || target - i < 0)
+    			break;
+    		target -= i; k--; subret.add(i);
+    		//if (k >= 0 && target >=0)
+    		comsumIII(i, k, target, subret);
+    		target += i; k++; subret.remove(subret.size()-1);
+    	}
+    	//subret.remove(subret.size()-1);
+    	return;
+    }
+
+    public List<List<Integer>> combinationSumIII2(int k, int n) {
+    	List<List<Integer>> ret216a = new LinkedList<List<Integer>>();
+    	if (k <= 0 || k > 9 || n < 0) return ret216a;
+    	int[] path = new int[k];
+    	int i = 0, cursum = 0;
+    	while (i != -1){
+    		path[i]++;
+    		cursum++;
+    		if (path[i] > 9 || cursum > n || i != k-1 && cursum + path[i] >=n){
+    			cursum -= path[i];
+    			i--;
+    		} else if ( i == k-1) {
+    			if (cursum == n){
+    				List<Integer> item = new LinkedList<Integer>();
+    				for (int j : path)
+    					item.add(j);
+    				ret216a.add(item);    				
+    			}    			
+    		} else if (cursum + path[i] < n){
+    			path[i+1] = path[i];
+    			cursum += path[i];
+    			i++;
+    		}
+    	}    	
+    	return ret216a;
+    }
+    
+    
+    /**
      * Problem #217
      * Contains Duplicate 
      */

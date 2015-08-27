@@ -640,6 +640,16 @@ public class ArrowCodeTest {
 		while(bsti.hasNext())
 			System.out.print(bsti.next() + ",");
 		*/
+	    /**
+	     * Problem #216
+	     * Combination Sum III
+	     */
+		TeasingUtil.printListList(arrowcode.combinationSumIII(4, 27));
+		TeasingUtil.printListList(arrowcode.combinationSumIII2(4, 27));
+		int[] nums = {1, 2, 5, 1,13};
+		//List<Integer> test = Arrays.asList(new Integer[](nums));
+		
+		
 		/**
 		 * Problem #231
 		 */
@@ -649,9 +659,10 @@ public class ArrowCodeTest {
 		 * Problem #268
 		 * Missing Number
 		 */
+		/*
 		int[] nums = {1, 0, 1, 1};
 		System.out.println(arrowcode.containsNearbyDuplicate(nums, 1));
 		TeasingUtil.printList(nums);
-		
+		*/
 	}
 }
