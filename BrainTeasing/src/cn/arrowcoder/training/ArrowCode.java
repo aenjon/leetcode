@@ -2727,7 +2727,33 @@ public class ArrowCode {
         return isValidBST(root.left, minnode, root) && isValidBST(root.right, root, maxnode);
     }
 
+    /**
+     * Problem #99
+     * Recover Binary Search Tree
+     */
+    private TreeNode pre_node, s1, s2;
+    public void recoverTree(TreeNode root) {
+    	if (root == null) return;
+    	pre_node = new TreeNode(Integer.MIN_VALUE);
+        recover_aux(root);
+        if (s1 != null && s2 != null){
+        	s1.val = s1.val + s2.val;
+        	s2.val = s1.val - s2.val;
+        	s1.val = s1.val - s2.val;
+        }
+        return;
+    }
     
+    private void recover_aux(TreeNode root){
+    	if (root.left != null) recover_aux(root.left);
+    	if (root.val < pre_node.val){
+    		if (s1 == null)
+    			s1 = pre_node;
+    		s2 = root;
+    	}
+    	pre_node = root;
+    	if (root.right != null) recover_aux(root.right);
+    }
     /**
      * Problem #100
      * Same Tree

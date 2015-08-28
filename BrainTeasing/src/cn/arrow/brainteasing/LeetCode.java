@@ -31,9 +31,6 @@ public class LeetCode {
 
 	int prev = Integer.MIN_VALUE;
 	
-	TreeNode pre_node = new TreeNode(Integer.MIN_VALUE);
-	TreeNode s1=null, s2=null;
-
 	int maxpathsum = Integer.MIN_VALUE;
 	
 	/**
@@ -2936,6 +2933,9 @@ public class LeetCode {
         return newhead;
     }
 	
+	TreeNode pre_node = new TreeNode(Integer.MIN_VALUE);
+	TreeNode s1=null, s2=null;
+
     public void recoverTree(TreeNode root) {
     	recoverhelper (root);
     	if (s1!=null && s2!=null){
