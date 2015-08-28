@@ -11,7 +11,7 @@ import java.util.Queue;
 import java.util.Stack;
 
 import cn.arrow.brainteasing.ListNode;
-import cn.arrow.brainteasing.TeasingUtil;
+//import cn.arrow.brainteasing.TeasingUtil;
 
 /*
 class ListNode{
@@ -2754,6 +2754,38 @@ public class ArrowCode {
     	pre_node = root;
     	if (root.right != null) recover_aux(root.right);
     }
+    /* Using Morris InOrder */
+    public void recoverTree2(TreeNode root) {
+    	TreeNode tn1 = null, tn2 = null;
+    	TreeNode pre = new TreeNode(Integer.MIN_VALUE);
+    	while(root != null){
+    		if (root.left != null){
+    			TreeNode p = root.left;
+    			while (p.right != null && p.right != root)
+    				p = p.right;
+    			if (p.right == null){
+    				p.right = root;
+    				root = root.left;
+    				continue;
+    			} else
+    				p.right = null;
+    		}
+    		if (root.val < pre.val){
+    			if (tn1 == null)
+    				tn1 = pre;
+    			tn2 = root;
+    		}
+    		pre = root;
+    		root = root.right;
+    	}
+    	if (tn1 != null && tn2 != null){
+    		int tmp = tn1.val;
+    		tn1.val = tn2.val;
+    		tn2.val = tmp;
+    	}
+    	return;
+    }
+    
     /**
      * Problem #100
      * Same Tree

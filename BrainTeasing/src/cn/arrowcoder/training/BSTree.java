@@ -1,6 +1,7 @@
 package cn.arrowcoder.training;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -69,6 +70,31 @@ public class BSTree {
 			if (cur.left != null)
 				st.push(cur.left);
 		}
+	}
+	
+	/**
+	 * Morris InOrder
+	 * @param root
+	 * @return
+	 */
+	public List<Integer> inOrderMorris(BSTree root){
+		List<Integer> ret = new LinkedList<Integer>();
+		while (root != null){
+			if (root.left != null){
+				BSTree p = root.left;
+				while(p.right != null && p.right != root)
+					p = p.right;
+				if (p.right == null){
+					p.right = root;
+					root = root.left;
+					continue;
+				}else
+					p.right = null;
+			}
+			ret.add(root.val);
+			root = root.right;
+		}
+		return ret;
 	}
 	
 	public void preOrderNR(){

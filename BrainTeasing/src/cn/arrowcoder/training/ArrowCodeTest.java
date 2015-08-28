@@ -43,7 +43,7 @@ public class ArrowCodeTest {
 	      System.out.println(test.add(e1));
 	      System.out.println(test.add(e2));
 		*/
-		ArrowCodeTest.test();
+		//ArrowCodeTest.test();
 		/*
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -59,7 +59,7 @@ public class ArrowCodeTest {
 		System.out.println("main...");
 		main(argss);
 		*/
-		//ArrowCodeTest.classictest();
+		ArrowCodeTest.classictest();
 		
 	}
 	
@@ -168,6 +168,8 @@ public class ArrowCodeTest {
 		if (minnode != null)
 			System.out.println("Max value is " + minnode.val);
 		*/
+		
+		TeasingUtil.printList(root.inOrderMorris(root));
 	}
 	
 	static public void test(){
