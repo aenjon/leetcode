@@ -2480,6 +2480,116 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #79
+     * Word Search
+     */
+    public boolean exist(char[][] board, String word) {
+    	if (board == null || word == null) return false; 
+    	for (int i = 0; i<board.length; i++)
+    		for(int j = 0; j < board[0].length; j++)
+    			if (wordsearch_aux(board, i, j, word, 0))
+    				return true;
+    	return false;
+    }
+    
+    private boolean wordsearch_aux(char[][] board, int x, int y, String word, int index){
+    	if (word.charAt(index) != board[x][y])
+    		return false;
+    	else if (index == word.length() - 1)
+    		return true;
+    	char mask = 0x80;
+    	board[x][y] ^= mask;
+    	int m = board.length, n = board[0].length;
+    	if ( y < n-1 && board[x][y+1] < mask)
+    		if (wordsearch_aux(board, x, y+1, word, index+1))
+    			return true;
+    	if ( x < m-1 && board[x+1][y] < mask)
+    		if (wordsearch_aux(board, x+1, y, word, index+1))
+    			return true;
+    	if ( y > 0 && board[x][y-1] < mask)
+    		if (wordsearch_aux(board, x, y-1, word, index+1))
+    			return true;
+    	if ( x > 0 && board[x-1][y] < mask)
+    		if (wordsearch_aux(board, x-1, y, word, index+1))
+    			return true;
+    	board[x][y] ^= mask;
+    	return false;
+    }
+
+    /**
+     * Problem #80
+     * Remove Duplicates from Sorted Array II
+     */
+    public int removeDuplicatesII(int[] nums) {
+    	if (nums == null || nums.length == 0) return 0;
+    	int ret = 0, i = 1;
+    	boolean dup = false;;
+    	while (i < nums.length){
+    		if (nums[ret] != nums[i]){
+    			nums[++ret] = nums[i++];
+    			dup = false;
+    		} else if (!dup){
+    			nums[++ret] = nums[i++];
+    			dup = true;
+    		} else
+    			i++;
+    	}
+    	return ret+1;
+    }
+    
+    public int removeDuplicatesII2(int[] nums) {
+    	if (nums == null) return 0;
+    	if (nums.length <= 2) return nums.length;
+    	int index = 2, len = 2, alen = nums.length;
+    	while(index < alen){
+    		if (nums[index] != nums[len-2])
+    			nums[len++] = nums[index];
+    		index++;
+    	}
+    	return len;
+    }
+    
+    /**
+     * Problem #81
+     * Search in Rotated Sorted Array II
+     */
+    public boolean search81(int[] nums, int target) {
+    	boolean ret = false;
+        if (nums == null || nums.length == 0)
+        	return ret;
+        int s = 0, e = nums.length-1;
+        while (s <= e){
+        	int mid = (s+e)/2;
+        	if (target == nums[mid]){
+        		ret = true;
+        		break;
+        	}
+        	boolean dup = false;
+        	while ( s <= mid && nums[s] == nums[mid]){
+        		dup = true;
+        		s++;
+        	}
+        	while ( mid <= e && nums[mid] == nums[e]){
+        		dup = true;
+        		e--;
+        	}
+        	if (dup) continue;
+        	
+        	if (nums[s] < nums[mid])
+        		if (target >= nums[s] && target < nums[mid])
+        			e = mid - 1;
+        		else
+        			s = mid + 1;
+        	else
+        	    if (target > nums[mid] && target <= nums[e])
+        			s = mid + 1;
+        		else
+        			e = mid - 1;
+        }
+        return ret;
+    }
+
+    /**
      * Problem #82
      * Remove Duplicates from Sorted List II
      */
@@ -4151,6 +4261,25 @@ public class ArrowCode {
         if (root.right != null) 
             btp_aux(root.right, path + "->" + root.val);
         return;
+    }
+    
+    /**
+     * Problem #258
+     * Add Digits
+     */
+    public int addDigits(int num) {
+    	do {
+        	int sum = 0;
+    		while (num > 0){
+    			sum += num%10;
+    			num /= 10;
+    		}
+    		num = sum;    		
+    	}while (num >= 10);
+    	return num;
+    }
+    public int addDigits2(int num){
+    	return ( num - 1 ) % 9 + 1;
     }
     
     /**

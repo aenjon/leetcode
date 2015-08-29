@@ -43,7 +43,7 @@ public class ArrowCodeTest {
 	      System.out.println(test.add(e1));
 	      System.out.println(test.add(e2));
 		*/
-		//ArrowCodeTest.test();
+		ArrowCodeTest.test();
 		/*
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -59,7 +59,7 @@ public class ArrowCodeTest {
 		System.out.println("main...");
 		main(argss);
 		*/
-		ArrowCodeTest.classictest();
+		//ArrowCodeTest.classictest();
 		
 	}
 	
@@ -547,7 +547,16 @@ public class ArrowCodeTest {
 		TeasingUtil.printListList(arrowcode.permute(nums));
 		System.out.println();*/
 		//TeasingUtil.printListList(arrowcode.permuteUnique(nums));
-		
+	    /**
+	     * Problem #80
+	     * Remove Duplicates from Sorted Array II
+	     */
+		/*
+		int nums[] = {1,1,1,2,2,2,3,3,4,5,5,5,6,7,8, 8, 8, 9, 9, 10};
+		TeasingUtil.printList(nums);
+		System.out.println(arrowcode.removeDuplicatesII2(nums));
+		TeasingUtil.printList(nums);
+		*/
 		/**
 		 * Problem No.189
 		 * Rotate Array
@@ -646,9 +655,9 @@ public class ArrowCodeTest {
 	     * Problem #216
 	     * Combination Sum III
 	     */
-		TeasingUtil.printListList(arrowcode.combinationSumIII(4, 27));
-		TeasingUtil.printListList(arrowcode.combinationSumIII2(4, 27));
-		int[] nums = {1, 2, 5, 1,13};
+		//TeasingUtil.printListList(arrowcode.combinationSumIII(4, 27));
+		//TeasingUtil.printListList(arrowcode.combinationSumIII2(4, 27));
+		//int[] nums = {1, 2, 5, 1,13};
 		//List<Integer> test = Arrays.asList(new Integer[](nums));
 		
 		
@@ -657,6 +666,14 @@ public class ArrowCodeTest {
 		 */
 		//System.out.println(arrowcode.isPowerOfTwo(16));
 		
+		
+	    /**
+	     * Problem #258
+	     * Add Digits
+	     */
+		int x = 19023;
+		System.out.println(arrowcode.addDigits(x));
+		System.out.println((x % 9) == 0 ? 9 : x % 9);
 		/**
 		 * Problem #268
 		 * Missing Number
