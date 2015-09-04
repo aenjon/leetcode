@@ -3970,6 +3970,56 @@ public class ArrowCode {
     }    
     
     
+    
+    /**
+     * Problem #204
+     * Count Primes
+     */
+    public int countPrimes(int n) {
+    	if (n <= 1) return 0;
+    	int ret = 0;
+    	for(int i = 2; i < n; i++)
+    		if (isPrime(i)){
+    			ret++;
+    			System.out.print(i + ",");
+    		}
+    	return ret;
+    }
+
+    /**
+     * All multiples of a prime should be removed from the prime number table   
+     */
+    public int countPrimes2(int n) {
+    	if (n <= 1) return 0;
+    	int count = 0;
+    	boolean[] primes = new boolean[n];
+    	for (int i=0; i<n; i++)
+    		primes[i] = true;
+
+    	// Loop's ending condition is i * i < n instead of i < sqrt(n)
+    	// to avoid repeatedly calling an expensive function sqrt().    		
+    	for(int i = 2; i * i < n; i++){
+    		if (!primes[i]) continue;
+    		for (int j = i * i; j < n; j += i)
+    			primes[j] = false;
+    	}
+    	for (int i = 2; i < n; i++)
+    		if (primes[i]){
+    			System.out.print(i + ",");
+    			count++;
+    		}
+    	return count;
+    }
+    
+    
+    public boolean isPrime(int n){
+    	if (n <= 1) return false;;
+    	for (int i = 2; i * i <= n; i++)
+    		if ( n % i == 0 )
+    			return false;
+    	return true;
+    }
+    
     /**
      * Problem #206
      * Reverse Linked List 

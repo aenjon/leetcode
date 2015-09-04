@@ -651,6 +651,13 @@ public class ArrowCodeTest {
 		while(bsti.hasNext())
 			System.out.print(bsti.next() + ",");
 		*/
+		
+	    /**
+	     * Problem #204
+	     * Count Primes
+	     */
+		arrowcode.countPrimes(150);
+		
 	    /**
 	     * Problem #216
 	     * Combination Sum III
@@ -671,9 +678,11 @@ public class ArrowCodeTest {
 	     * Problem #258
 	     * Add Digits
 	     */
+		/*
 		int x = 19023;
 		System.out.println(arrowcode.addDigits(x));
 		System.out.println((x % 9) == 0 ? 9 : x % 9);
+		*/
 		/**
 		 * Problem #268
 		 * Missing Number
