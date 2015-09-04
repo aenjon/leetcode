@@ -557,6 +557,14 @@ public class ArrowCodeTest {
 		System.out.println(arrowcode.removeDuplicatesII2(nums));
 		TeasingUtil.printList(nums);
 		*/
+		
+		/**
+		 * Problem #90
+		 * Subsets II 
+		 */
+		int[] test = { 1, 2, 4, 3,3,3};
+		TeasingUtil.printListList(arrowcode.subsetsWithDup(test));
+		
 		/**
 		 * Problem No.189
 		 * Rotate Array
@@ -656,7 +664,7 @@ public class ArrowCodeTest {
 	     * Problem #204
 	     * Count Primes
 	     */
-		arrowcode.countPrimes(150);
+		//arrowcode.countPrimes(150);
 		
 	    /**
 	     * Problem #216

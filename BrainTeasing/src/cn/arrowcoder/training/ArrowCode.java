@@ -2676,6 +2676,33 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #90
+     * Subsets II 
+     */
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+    	List<List<Integer>> ret = new LinkedList<List<Integer>>();
+    	if (nums == null || nums.length == 0) return ret;
+    	Arrays.sort(nums);
+    	ret.add(new LinkedList<Integer>());
+    	int j = 0, lastlen = 0;
+    	for (int i = 0; i< nums.length; i++){
+    		// Duplicated numbers will be only added to the lists which are added
+    		// in last round
+    		j =  (i > 0 && nums[i] == nums[i-1]) ? lastlen : 0;
+    		List<List<Integer>> tmp = new LinkedList<List<Integer>>();
+    		lastlen = ret.size();
+    		// Copy the lists which will not introduce duplicates
+    		for (; j<lastlen; j++)
+    			tmp.add(new LinkedList<Integer>(ret.get(j)));
+    		for (List<Integer> item : tmp)
+    			item.add(nums[i]);
+    		ret.addAll(tmp);
+    	}
+    	return ret;
+    }
+    
+    
+    /**
      * Problem #91
      * Decode Ways
      * DP. Start with the last character
