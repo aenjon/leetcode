@@ -2427,6 +2427,7 @@ public class ArrowCode {
     /**
      * Problem #73
      * Set Matrix Zeroes
+     * Approach 1: two arrays recording the row and col # of 0s. Space O(m+n)
      */
     public void setZeroes(int[][] matrix) {
     	if (matrix == null || matrix.length == 0 || 
@@ -2450,8 +2451,42 @@ public class ArrowCode {
     	return;
     }
 
+    /*
+     *  Approach 2: Use row 0 and col 0 as the record
+     *  Check if row0 and col0 have 0s. If so, fill them with 0s later 
+     */    
     public void setZeroes2(int[][] matrix) {
-    	
+    	if (matrix == null || matrix.length == 0 || 
+    			matrix[0] == null || matrix[0].length == 0)
+    		return;
+    	int m = matrix.length;
+    	int n = matrix[0].length;
+    	boolean row0 = false, col0 = false;
+    	for(int i= 0; i<m; i++)
+    		if(matrix[i][0] == 0){
+    			col0 = true; break;
+    		}
+    	for (int j=0; j<n; j++)
+    		if (matrix[0][j] == 0){
+    			row0 = true; break;
+    		}
+    	for(int i=0; i<m; i++)
+    		for (int j=0; j < n; j++)
+    			if (matrix[i][j] == 0){
+    				matrix[i][0] = 0;
+    				matrix[0][j] = 0;
+    			}
+    	for (int i = 1; i < m; i++)
+    		for (int j = 1; j < n; j++)
+    			if (matrix[0][j] == 0 || matrix[i][0] == 0)
+    				matrix[i][j] = 0;
+    	if (row0)
+    		for (int j=0; j < n; j++)
+    			matrix[0][j] = 0;
+    	if (col0)
+    		for (int i = 0; i < m; i++)
+    			matrix[i][0] = 0;
+    	return;
     }
     
     /**
@@ -3807,6 +3842,12 @@ public class ArrowCode {
         return nums[s] < nums[e] ? nums[s] : nums[e];
     }
     
+    /**
+     * Problem #155
+     * Min Stack
+     * See MinStack.java
+     */
+    
     
     /**
      * Problem #160
@@ -3860,6 +3901,18 @@ public class ArrowCode {
         return max;
     }
     
+    /**
+     * Problem #172
+     * Factorial Trailing Zeroes
+     * one 2 and one 5 together contribute a 10 (trailing zero).
+     * Because 2's are much more than 5's, counting 5's is sufficient
+     */
+    public int trailingZeroes(int n) {
+    	int count = 0;
+    	for (long i = 5; n/i >=1; i*=5)
+    		count += n/i;
+    	return count;
+    }
     
     /**
      * Problem #179
