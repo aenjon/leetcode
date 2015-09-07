@@ -3502,6 +3502,74 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #118
+     * Pascal's Triangle 
+     */
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (numRows <= 0) return ret;
+        List<Integer> level = new LinkedList<Integer>();
+        level.add(1); ret.add(level);
+        for(int i=2; i<= numRows; i++){
+        	List<Integer> newlevel = new LinkedList<Integer>();
+        	newlevel.add(1);
+        	for (int j = 1; j < level.size(); j++)
+        		newlevel.add(level.get(j-1) + level.get(j));
+        	newlevel.add(1);
+        	ret.add(newlevel);
+        	level = newlevel;
+        }
+        return ret;
+    }
+
+    /**
+     * Problem #119
+     * Pascal's Triangle II 
+     */
+    public List<Integer> getRow(int rowIndex) {
+    	List<Integer> ret = new LinkedList<Integer>();
+    	if (rowIndex <= 0) return ret;
+    	ret.add(1);
+    	for (int i = 2; i <= rowIndex; i++){
+    		List<Integer> newlevel = new LinkedList<Integer>();
+    		newlevel.add(1);
+    		for(int j = 1; j < ret.size(); j++)
+    			newlevel.add(ret.get(j-1) + ret.get(j));
+    		newlevel.add(1);
+    		ret = newlevel;
+    	}
+    	return ret;
+    }
+    
+    /**
+     * Problem #120
+     * Triangle
+     */
+    public int minimumTotal(List<List<Integer>> triangle) {
+    	if (triangle == null) return 0;
+    	int n = triangle.size();
+    	int[] record = new int[n];
+    	List<Integer> curlevel = triangle.get(0);
+    	record[0] = curlevel.get(0).intValue();
+    	for(int i = 1; i<triangle.size(); i++){
+    		curlevel = triangle.get(i);
+    		int cur_val = curlevel.get(curlevel.size()-1).intValue();
+    		record[curlevel.size()-1] = record[i-1] + cur_val;
+    		for (int j = curlevel.size()-2; j >= 0; j--){
+    			cur_val = curlevel.get(j).intValue();
+    			if (j > 0)
+    				record[j] = record[j] < record[j-1] ? record[j] + cur_val : record[j-1] + cur_val;
+    			else
+    				record[j] = record[j] + cur_val;
+    		}
+    	}    	
+    	int ret = record[0];
+    	for(int i=1; i<record.length; i++)
+    		if (record[i] < ret) ret = record[i];
+    	return ret;
+    }
+
+    /**
      * Problem #136
      * Single Number
      * All numbers appear twice except one, find it.
@@ -3845,7 +3913,7 @@ public class ArrowCode {
     /**
      * Problem #155
      * Min Stack
-     * See MinStack.java
+     * See MinStack.java/MinStack2.java
      */
     
     
@@ -4062,6 +4130,26 @@ public class ArrowCode {
     	return ret;
     }
     
+    /**
+     * Problem #202
+     * Happy Number
+     */
+    public boolean isHappy(int n) {
+    	if (n <= 0) return false;
+    	HashSet<Integer> nums = new HashSet<Integer>();
+    	int newnum;
+    	do {
+        	nums.add(n); newnum = 0;
+    		while (n > 0){
+    			newnum += (n % 10) * (n % 10);
+    			n /= 10;
+    		}
+    		n = newnum;
+    		//System.out.println(newnum);
+    	}while (newnum != 1 && !nums.contains(newnum));
+    	return newnum == 1;
+    }
+
     /**
      * Problem #203
      * Remove Linked List Elements

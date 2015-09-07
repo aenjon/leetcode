@@ -562,8 +562,8 @@ public class ArrowCodeTest {
 		 * Problem #90
 		 * Subsets II 
 		 */
-		int[] test = { 1, 2, 4, 3,3,3};
-		TeasingUtil.printListList(arrowcode.subsetsWithDup(test));
+		//int[] test = { 1, 2, 4, 3,3,3};
+		//TeasingUtil.printListList(arrowcode.subsetsWithDup(test));
 		
 		/**
 		 * Problem No.189
@@ -659,6 +659,11 @@ public class ArrowCodeTest {
 		while(bsti.hasNext())
 			System.out.print(bsti.next() + ",");
 		*/
+	    /**
+	     * Problem #202
+	     * Happy Number
+	     */
+		System.out.println(arrowcode.isHappy(782));
 		
 	    /**
 	     * Problem #204
