@@ -3945,6 +3945,7 @@ public class ArrowCode {
     /**
      * Problem #150
      * Evaluate Reverse Polish Notation
+     * Note: Handling Exception 
      */
     public int evalRPN(String[] tokens) {
     	if (tokens == null || tokens.length == 0) return -1;
@@ -3972,27 +3973,61 @@ public class ArrowCode {
 
     public int evalRPN2(String[] tokens) {
     	if (tokens == null || tokens.length == 0) return -1;
-    	Stack<String> st = new Stack<String>();
-    	int op1, op2;
+    	Stack<Integer> st = new Stack<Integer>();
+    	int op;
     	for(int i=0; i< tokens.length; i++){
     		try{
-    			Integer.parseInt(tokens[i]);
-    			st.push(tokens[i]);
+    			st.push(Integer.parseInt(tokens[i]));
     		} catch (NumberFormatException e) {
-    			op2 = Integer.parseInt(st.pop());
-    			op1 = Integer.parseInt(st.pop());
+    			//op2 = Integer.parseInt(st.pop());
+    			//op1 = Integer.parseInt(st.pop());
         		if (tokens[i].equals("+"))
-        			st.push(String.valueOf(op1 + op2));
-        		else if (tokens[i].equals("-"))
-        			st.push(String.valueOf(op1 - op2));
+        			st.push(st.pop() + st.pop());
+        		else if (tokens[i].equals("-")){
+        			op = st.pop();
+        			st.push(st.pop() - op);
+        		}
         		else if (tokens[i].equals("*"))
-        			st.push(String.valueOf(op1 * op2));
-        		else if (tokens[i].equals("/"))
-        			st.push(String.valueOf(op1/op2));    			
+        			st.push(st.pop() * st.pop());
+        		else if (tokens[i].equals("/")){
+        			op = st.pop();
+        			st.push(st.pop()/op);
+        		}
     		}
     	}
-    	return Integer.parseInt(st.pop());
+    	return st.pop();
     }
+
+    public int evalRPN3(String[] tokens) {
+    	if (tokens == null || tokens.length == 0) return -1;
+    	Stack<Integer> st = new Stack<Integer>();
+    	int ret = -1;
+    	for(int i=0; i< tokens.length; i++){
+    		if (tokens[i].equals("+") || tokens[i].equals("-") || tokens[i].equals("*") || tokens[i].equals("/")){
+    			switch (tokens[i].charAt(0)){
+    				case '+' :
+    					ret = st.pop() +st.pop();
+    					break;
+    				case '-' :
+    					ret = st.pop();
+    					ret = st.pop() - ret;
+    					break;
+    				case '*':
+    					ret = st.pop() * st.pop();
+    					break;
+    				case '/' :
+    					ret = st.pop();
+    					ret = st.pop() / ret;
+    					break;
+    				default:
+    			}
+    			st.push(ret);
+    		} else
+    			st.push(Integer.parseInt(tokens[i]));    		
+    	}
+    	return st.pop();
+    }
+    
     
     /**
      * Problem #153

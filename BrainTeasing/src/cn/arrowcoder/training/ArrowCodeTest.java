@@ -658,7 +658,7 @@ public class ArrowCodeTest {
 		 * Problem #173
 		 */
 		String[] tokens = {"4", "13", "5", "/", "+"};
-		System.out.println(arrowcode.evalRPN(tokens));
+		System.out.println(arrowcode.evalRPN3(tokens));
 		/*
 		TreeNode root = new TreeNode(10);
 		root.left = new TreeNode(5);
