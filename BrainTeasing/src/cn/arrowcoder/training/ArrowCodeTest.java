@@ -649,9 +649,16 @@ public class ArrowCodeTest {
 		lrucache.set(6,106);
 		lrucache.print();*/
 		
+	    /**
+	     * Problem #150
+	     * Evaluate Reverse Polish Notation
+	     */
+		
 		/**
 		 * Problem #173
 		 */
+		String[] tokens = {"4", "13", "5", "/", "+"};
+		System.out.println(arrowcode.evalRPN(tokens));
 		/*
 		TreeNode root = new TreeNode(10);
 		root.left = new TreeNode(5);

@@ -3943,6 +3943,58 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #150
+     * Evaluate Reverse Polish Notation
+     */
+    public int evalRPN(String[] tokens) {
+    	if (tokens == null || tokens.length == 0) return -1;
+    	Stack<String> st = new Stack<String>();
+    	int op1, op2;
+    	for(int i=0; i< tokens.length; i++){
+    		try{
+    			Integer.parseInt(tokens[i]);
+    			st.push(tokens[i]);
+    		} catch (NumberFormatException e) {
+    			op2 = Integer.parseInt(st.pop());
+    			op1 = Integer.parseInt(st.pop());
+        		if (tokens[i].equals("+"))
+        			st.push(String.valueOf(op1 + op2));
+        		else if (tokens[i].equals("-"))
+        			st.push(String.valueOf(op1 - op2));
+        		else if (tokens[i].equals("*"))
+        			st.push(String.valueOf(op1 * op2));
+        		else if (tokens[i].equals("/"))
+        			st.push(String.valueOf(op1/op2));    			
+    		}
+    	}
+    	return Integer.parseInt(st.pop());
+    }
+
+    public int evalRPN2(String[] tokens) {
+    	if (tokens == null || tokens.length == 0) return -1;
+    	Stack<String> st = new Stack<String>();
+    	int op1, op2;
+    	for(int i=0; i< tokens.length; i++){
+    		try{
+    			Integer.parseInt(tokens[i]);
+    			st.push(tokens[i]);
+    		} catch (NumberFormatException e) {
+    			op2 = Integer.parseInt(st.pop());
+    			op1 = Integer.parseInt(st.pop());
+        		if (tokens[i].equals("+"))
+        			st.push(String.valueOf(op1 + op2));
+        		else if (tokens[i].equals("-"))
+        			st.push(String.valueOf(op1 - op2));
+        		else if (tokens[i].equals("*"))
+        			st.push(String.valueOf(op1 * op2));
+        		else if (tokens[i].equals("/"))
+        			st.push(String.valueOf(op1/op2));    			
+    		}
+    	}
+    	return Integer.parseInt(st.pop());
+    }
+    
+    /**
      * Problem #153
      * Find Minimum in Rotated Sorted Array
      */
