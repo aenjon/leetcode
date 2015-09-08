@@ -552,7 +552,7 @@ public class ArrowCodeTest {
 		 * Problem #77
 		 * Combinations
 		 */
-		TeasingUtil.printListList(arrowcode.combine(1, 2));
+		TeasingUtil.printListList(arrowcode.combine(5, 3));
 	    /**
 	     * Problem #80
 	     * Remove Duplicates from Sorted Array II
@@ -657,8 +657,8 @@ public class ArrowCodeTest {
 		/**
 		 * Problem #173
 		 */
-		String[] tokens = {"4", "13", "5", "/", "+"};
-		System.out.println(arrowcode.evalRPN3(tokens));
+		//String[] tokens = {"4", "13", "5", "/", "+"};
+		//System.out.println(arrowcode.evalRPN3(tokens));
 		/*
 		TreeNode root = new TreeNode(10);
 		root.left = new TreeNode(5);

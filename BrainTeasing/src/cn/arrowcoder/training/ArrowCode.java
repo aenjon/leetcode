@@ -2521,7 +2521,7 @@ public class ArrowCode {
      * Combinations 
      */
     List<List<Integer>> ret77;
-    public List<List<Integer>> combine(int n, int k) {
+    public List<List<Integer>> combine1(int n, int k) {
         ret77 = new LinkedList<List<Integer>>();
         if (n <=0 || k <=0 || n < k) return ret77;
         for (int i = 1 ; i <=n-k+1 ; i++){
@@ -2544,6 +2544,46 @@ public class ArrowCode {
     	}
     	return;
     }
+    
+    /*
+     * Basically, this solution follows the idea of the mathematical formula C(n,k)=C(n-1,k-1)+C(n-1,k).
+     * Here C(n,k) is divided into two situations: 
+     * Situation #1, number n is selected, so we only need to select k-1 from n-1 next.
+     * Situation #2, number n is not selected, and the rest job is selecting k from n-1
+     */
+    
+    public List<List<Integer>> combine3(int n, int k) {
+    	if (n == k || k == 0){
+    		List<Integer> subret = new LinkedList<Integer>();
+    		for (int i = 1; i <= k; ++i)
+    			subret.add(i);
+    		return new LinkedList<List<Integer>>(Arrays.asList(subret));
+    	}
+    	List<List<Integer>> ret = this.combine(n-1, k-1);
+    	for (List<Integer> item : ret)
+    		item.add(n);
+    	ret.addAll(this.combine(n-1, k));
+    	return ret;
+    }
+    
+    public List<List<Integer>> combine(int n, int k) {
+    	LinkedList<List<Integer>> ret = new LinkedList<List<Integer>>();
+    	ret.add(new LinkedList<Integer>());
+    	for (int i = k - 1; i >= 0; i--){
+    		int size = ret.size();
+    		for (int j = 0; j < size; j++){
+    			LinkedList<Integer> subret = (LinkedList<Integer>)ret.pollFirst();
+    			int start = subret.isEmpty() ? 0 : subret.getLast();
+    			for (int l = start + 1; l + i <= n; l++){
+    				LinkedList<Integer> item = new LinkedList<Integer>(subret);
+    				item.add(l);
+    				ret.add(item);
+    			}
+    		}
+    	}
+    	return ret;
+    }
+    
     /**
      * Problem #78
      * Subsets     
