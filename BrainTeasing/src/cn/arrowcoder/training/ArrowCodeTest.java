@@ -547,6 +547,12 @@ public class ArrowCodeTest {
 		TeasingUtil.printListList(arrowcode.permute(nums));
 		System.out.println();*/
 		//TeasingUtil.printListList(arrowcode.permuteUnique(nums));
+		
+		/**
+		 * Problem #77
+		 * Combinations
+		 */
+		TeasingUtil.printListList(arrowcode.combine(1, 2));
 	    /**
 	     * Problem #80
 	     * Remove Duplicates from Sorted Array II
@@ -663,7 +669,7 @@ public class ArrowCodeTest {
 	     * Problem #202
 	     * Happy Number
 	     */
-		System.out.println(arrowcode.isHappy(782));
+		//System.out.println(arrowcode.isHappy(782));
 		
 	    /**
 	     * Problem #204

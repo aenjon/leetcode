@@ -2515,7 +2515,35 @@ public class ArrowCode {
                 i++;
         }
     }
-
+    
+    /**
+     * Problem #77
+     * Combinations 
+     */
+    List<List<Integer>> ret77;
+    public List<List<Integer>> combine(int n, int k) {
+        ret77 = new LinkedList<List<Integer>>();
+        if (n <=0 || k <=0 || n < k) return ret77;
+        for (int i = 1 ; i <=n-k+1 ; i++){
+        	List<Integer> subret = new LinkedList<Integer>();
+        	subret.add(i);
+        	combine_aux(n, k-1, i, subret);
+        }
+        return ret77;
+    }
+    
+    private void combine_aux (int n, int k, int start, List<Integer> subret){
+    	if (k == 0){
+    		ret77.add(subret);
+    		return;
+    	}
+    	for (int i = start+1; i <= n - k + 1; i++){
+    		List<Integer> item = new LinkedList<Integer>(subret);
+    		item.add(i);
+    		combine_aux(n, k-1, i, item);
+    	}
+    	return;
+    }
     /**
      * Problem #78
      * Subsets     
@@ -3568,7 +3596,54 @@ public class ArrowCode {
     		if (record[i] < ret) ret = record[i];
     	return ret;
     }
+    
+    /**
+     * Problem #129
+     * Sum Root to Leaf Numbers
+     */
+    private int ret129;
+    public int sumNumbers(TreeNode root) {
+    	if (root == null) return 0;
+    	ret129 = 0;
+    	sumnum_aux(root, 0);
+    	return ret129;
+    }
 
+    private void sumnum_aux(TreeNode root, int pathsum){
+    	int cursum = pathsum * 10 + root.val;
+    	if (root.left == null && root.right == null){
+    		ret129 += cursum;
+    		return;
+    	}
+    	if (root.left != null)
+    		sumnum_aux(root.left, cursum);
+    	if (root.right != null)
+    		sumnum_aux(root.right, cursum);
+    	return;
+    }
+    
+    public int sumNumbers2(TreeNode root) {
+    	if (root == null) return 0;
+    	int pathsum = 0, ret = 0;
+    	Stack<TreeNode> st = new Stack<TreeNode>();
+    	HashSet<TreeNode> hs = new HashSet<TreeNode>();
+    	st.push(root);
+    	while (!st.isEmpty()){
+    		TreeNode cur = st.pop();
+    		if (cur.left == null && cur.right == null){
+    			ret += pathsum * 10 + cur.val;
+    		} else if (hs.contains(cur)){
+    			pathsum = (pathsum - cur.val)/10;
+    		} else {
+    			st.push(cur); hs.add(cur);
+    			pathsum = pathsum * 10 + cur.val;
+    			if (cur.left != null) st.push(cur.left);
+    			if (cur.right != null) st.push(cur.right);
+    		}
+    	}
+    	return ret;
+    }
+    
     /**
      * Problem #136
      * Single Number
