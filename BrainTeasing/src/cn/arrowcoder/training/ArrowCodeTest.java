@@ -552,7 +552,7 @@ public class ArrowCodeTest {
 		 * Problem #77
 		 * Combinations
 		 */
-		TeasingUtil.printListList(arrowcode.combine(5, 3));
+		//TeasingUtil.printListList(arrowcode.combine(5, 3));
 	    /**
 	     * Problem #80
 	     * Remove Duplicates from Sorted Array II
@@ -570,6 +570,12 @@ public class ArrowCodeTest {
 		 */
 		//int[] test = { 1, 2, 4, 3,3,3};
 		//TeasingUtil.printListList(arrowcode.subsetsWithDup(test));
+
+	    /**
+	     * Problem #96
+	     * Unique Binary Search Trees
+	     */
+		System.out.println(arrowcode.numTrees(5));
 		
 		/**
 		 * Problem No.189

@@ -2981,6 +2981,90 @@ public class ArrowCode {
     }
     
     /**
+     * Problem #95
+     * Unique Binary Search Trees II
+     */
+    public List<TreeNode> generateTrees(int n) {
+    	if (n <= 0){
+        	List<TreeNode> ret = new LinkedList<TreeNode>();
+        	ret.add(null);
+        	return ret;
+    	}
+    	return gentree_aux(1,n);
+    }
+    
+    private List<TreeNode> gentree_aux(int start, int end){
+    	List<TreeNode> ret = new LinkedList<TreeNode>();
+    	if (start > end){
+    		ret.add(null);
+    		return ret;
+    	}
+    	for (int i = start; i <= end; i++){
+    		List<TreeNode> leftchild = gentree_aux(start, i-1);
+    		List<TreeNode> rightchild = gentree_aux(i+1, end);
+    		for (TreeNode lc : leftchild)
+    			for (TreeNode rc : rightchild){
+    				TreeNode root = new TreeNode(i);
+    				root.left = lc; root.right = rc;
+    				ret.add(root);
+    			}
+    	}
+    	return ret;
+    }
+
+    private List<?>[][] inter_ret;
+    private int maxtree = 0;
+    public List<TreeNode> generateTrees2(int n) {
+    	if (n <= 0){
+        	List<TreeNode> ret = new LinkedList<TreeNode>();
+        	ret.add(null);
+        	return ret;
+    	}
+    	inter_ret = new List<?>[n][n];
+    	return gentree_aux(1,n);    	
+    }
+
+    private List<TreeNode> gentree_aux2(int start, int end){
+    	List<TreeNode> ret = new LinkedList<TreeNode>();
+    	if (start > end){
+    		ret.add(null);
+    		return ret;
+    	}
+    	for (int i = start; i <= end; i++){
+    		List<TreeNode> leftchild = inter_ret[start-1][i-1] != null ? (List<TreeNode>)inter_ret[start-1][i-1] : gentree_aux(start, i-1);
+    		List<TreeNode> rightchild = inter_ret[start-1][i-1] != null ? (List<TreeNode>)inter_ret[start-1][i-1] : gentree_aux(start, i-1);
+gentree_aux(i+1, end);
+    		for (TreeNode lc : leftchild)
+    			for (TreeNode rc : rightchild){
+    				TreeNode root = new TreeNode(i);
+    				root.left = lc; root.right = rc;
+    				ret.add(root);
+    			}
+    	}
+    	return ret;
+    }
+    
+    
+    /**
+     * Problem #96
+     * Unique Binary Search Trees
+     * Pick a number k between 1 and n and form a BST. The number of unique trees is the multiply of
+     * the number of the left children and the right children
+     * Define an array A[n], representing that the number of unique threes with n nodes.
+     * A[n] is the sum of number of A[k], where 1 <= k <= n and k is the value of the root
+     * A[k] = A[k-1] * A[n-k]
+     */
+    public int numTrees(int n) {
+    	if (n <= 0) return 0;
+    	int[] A = new int[n+1];
+    	A[0] = 1; A[1] = 1;
+    	for (int i = 2; i <= n; ++i)
+    		for(int k = 1; k <= i; ++k)
+    			A[i] += (A[k-1] * A[i-k]);
+    	return A[n];
+    }
+    
+    /**
      * Problem #98
      * Validate Binary Search Tree
      */
