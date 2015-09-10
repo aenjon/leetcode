@@ -575,7 +575,12 @@ public class ArrowCodeTest {
 	     * Problem #96
 	     * Unique Binary Search Trees
 	     */
-		System.out.println(arrowcode.numTrees(5));
+		//System.out.println(arrowcode.numTrees(5));
+		for(int i=1; i<=15; i++){
+			System.out.println("i:" + i);
+			arrowcode.generateTrees2(i);
+			//arrowcode.generateTrees(i);			
+		}
 		
 		/**
 		 * Problem No.189

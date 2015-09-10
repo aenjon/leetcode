@@ -2984,16 +2984,21 @@ public class ArrowCode {
      * Problem #95
      * Unique Binary Search Trees II
      */
+    private int counter95a;
     public List<TreeNode> generateTrees(int n) {
     	if (n <= 0){
         	List<TreeNode> ret = new LinkedList<TreeNode>();
         	ret.add(null);
         	return ret;
     	}
-    	return gentree_aux(1,n);
+    	counter95a = 0;
+    	List<TreeNode> ret = gentree_aux(1,n);
+    	System.out.println("counter95a:" + counter95a);
+    	return ret;
     }
     
     private List<TreeNode> gentree_aux(int start, int end){
+    	counter95a++;
     	List<TreeNode> ret = new LinkedList<TreeNode>();
     	if (start > end){
     		ret.add(null);
@@ -3013,7 +3018,7 @@ public class ArrowCode {
     }
 
     private List<?>[][] inter_ret;
-    private int maxtree = 0;
+    private int counter95b;
     public List<TreeNode> generateTrees2(int n) {
     	if (n <= 0){
         	List<TreeNode> ret = new LinkedList<TreeNode>();
@@ -3021,19 +3026,29 @@ public class ArrowCode {
         	return ret;
     	}
     	inter_ret = new List<?>[n][n];
-    	return gentree_aux(1,n);    	
+    	counter95b= 0;
+    	gentree_aux2(1,n);
+    	System.out.println("counter95b:" + counter95b);
+    	return (List<TreeNode>)inter_ret[0][n-1];
     }
 
     private List<TreeNode> gentree_aux2(int start, int end){
+    	counter95b++;
     	List<TreeNode> ret = new LinkedList<TreeNode>();
     	if (start > end){
     		ret.add(null);
     		return ret;
     	}
     	for (int i = start; i <= end; i++){
-    		List<TreeNode> leftchild = inter_ret[start-1][i-1] != null ? (List<TreeNode>)inter_ret[start-1][i-1] : gentree_aux(start, i-1);
-    		List<TreeNode> rightchild = inter_ret[start-1][i-1] != null ? (List<TreeNode>)inter_ret[start-1][i-1] : gentree_aux(start, i-1);
-gentree_aux(i+1, end);
+    		List<TreeNode> leftchild, rightchild;
+    		if ( start <= i-1 && inter_ret[start-1][i-2] != null)
+    			leftchild = (List<TreeNode>)inter_ret[start-1][i-2];
+    		else
+    			leftchild = gentree_aux2(start, i-1);
+    		if ( i <= end-1 && inter_ret[i][end-1] != null)
+    			rightchild = (List<TreeNode>)inter_ret[i][end-1];
+    		else
+    			rightchild = gentree_aux2(i+1, end);
     		for (TreeNode lc : leftchild)
     			for (TreeNode rc : rightchild){
     				TreeNode root = new TreeNode(i);
@@ -3041,6 +3056,7 @@ gentree_aux(i+1, end);
     				ret.add(root);
     			}
     	}
+		inter_ret[start-1][end-1] = ret;
     	return ret;
     }
     
