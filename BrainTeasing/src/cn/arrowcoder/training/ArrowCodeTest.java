@@ -576,11 +576,12 @@ public class ArrowCodeTest {
 	     * Unique Binary Search Trees
 	     */
 		//System.out.println(arrowcode.numTrees(5));
+		/*
 		for(int i=1; i<=15; i++){
 			System.out.println("i:" + i);
 			arrowcode.generateTrees2(i);
 			//arrowcode.generateTrees(i);			
-		}
+		}*/
 		
 		/**
 		 * Problem No.189
@@ -729,5 +730,21 @@ public class ArrowCodeTest {
 		System.out.println(arrowcode.containsNearbyDuplicate(nums, 1));
 		TeasingUtil.printList(nums);
 		*/
+		
+	    /**
+	     * Problem #998
+	     * Activity-selection problem
+	     */
+		int[] s = {1, 3, 0, 5, 3, 5, 6, 8, 8, 2, 12};
+		int[] f = {4, 5, 6, 7, 9, 9, 10, 11, 12, 14, 16};
+		List<Integer> ret998 = arrowcode.actSel(s, f);
+		for (int i : ret998)
+			System.out.print(s[i] + "-" + f[i] + " : ");
+		System.out.println();
+		ret998 = arrowcode.actSel(s, f);
+		for (int i : ret998)
+			System.out.print(s[i] + "-" + f[i] + " : ");
+		System.out.println();
+		
 	}
 }

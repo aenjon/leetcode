@@ -133,6 +133,7 @@ public class ArrowCode {
     		 *  
     		 *  The first "while" loop tests the case of the substring's length is an even number, like "abba".
     		 *  The second "while" loop tests the case of the substring's length is an odd number, like "abcba".
+    		 *  Time complexity O(n^2)
     		 */    		
     		low = i-1;
     		high = i;
@@ -4853,6 +4854,48 @@ public class ArrowCode {
     	return i;
     }
 
+    /**
+     * Problem #998
+     * Activity-selection problem
+     */
+    private List<Integer> ret998;
+    public List<Integer> actSel(int[] S, int[] F){
+    	ret998 = new LinkedList<Integer>();
+    	// Assume S and F are already sort in accending order of F
+    	if (S == null || F == null || S.length != F.length)
+    		return ret998;
+    	ret998.add(0);
+    	actsel_aux(S, F, 0);
+    	return ret998;
+    }
+    
+    private void actsel_aux(int[] S, int[] F, int k){
+    	int m = k + 1;
+    	while (m < S.length && S[m] < F[k])
+    		m++;
+    	if (m < S.length){
+    		ret998.add(m);
+    		actsel_aux(S, F, m);
+    	}
+    	else
+    		return;
+    }
+    
+    public List<Integer> actSetII(int[] S, int[] F){
+    	ret998 = new LinkedList<Integer>();
+    	if (S == null || F == null || S.length != F.length)
+    		return ret998;
+    	ret998.add(0);
+    	int k = 0;
+    	for(int i=1; i<S.length; i++){
+    		if (S[i] < F[k])
+    			continue;
+    		ret998.add(i);
+    		k = i;
+    	}
+    	return ret998;
+    }
+    
     /**
      * Problem #999
      * Consecutive sum: check if an integer array has a consecutive numbers whose sum equals to the target
