@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 import java.util.Stack;
-import java.util.List;
 
 class Duplicated {
 	boolean val;
@@ -1776,7 +1776,7 @@ public class LeetCode {
     		boolean done = false;
     		for (int j=0;j<nRows;++j){
     			if (i*seg+j < s.length()){
-    				char c = s.charAt(i*seg+j);
+    				//char c = s.charAt(i*seg+j);
     				buff[j].append(s.charAt(i*seg+j));
     				count++;
     			}
@@ -1787,7 +1787,7 @@ public class LeetCode {
     			if (j==0 || j== nRows -1)
     				continue;    			
     			if ((i+1)*seg-j < s.length()){
-    				char c = s.charAt((i+1)*seg-j);
+    				//char c = s.charAt((i+1)*seg-j);
     				buff[j].append(s.charAt((i+1)*seg-j));
     				count++;
     			}

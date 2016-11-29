@@ -1,12 +1,12 @@
 package cn.arrowcoder.training;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -3020,7 +3020,8 @@ public class ArrowCode {
 
     private List<?>[][] inter_ret;
     private int counter95b;
-    public List<TreeNode> generateTrees2(int n) {
+    @SuppressWarnings("unchecked")
+	public List<TreeNode> generateTrees2(int n) {
     	if (n <= 0){
         	List<TreeNode> ret = new LinkedList<TreeNode>();
         	ret.add(null);
@@ -3033,7 +3034,8 @@ public class ArrowCode {
     	return (List<TreeNode>)inter_ret[0][n-1];
     }
 
-    private List<TreeNode> gentree_aux2(int start, int end){
+    @SuppressWarnings("unchecked")
+	private List<TreeNode> gentree_aux2(int start, int end){
     	counter95b++;
     	List<TreeNode> ret = new LinkedList<TreeNode>();
     	if (start > end){
@@ -4770,8 +4772,6 @@ public class ArrowCode {
         if ((s != null) ^ (t!=null)) return false;
         if (s.length() != t.length()) return false;
         int[] log = new int[26];
-        for (int i : log)
-            i = 0;
         for (int i = 0; i < s.length(); i++){
             log[s.charAt(i) - 'a']++;
             log[t.charAt(i) - 'a']--;

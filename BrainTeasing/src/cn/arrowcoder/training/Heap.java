@@ -14,7 +14,7 @@ public class Heap {
 		heap_size = A.length;
 	}
 	
-	private int HeapParent(int i) { return i/2; }
+	//private int HeapParent(int i) { return i/2; }
 	private int HeapLeft(int i) { return 2*i; }
 	private int HeapRight(int i) { return 2*i + 1; }
 	

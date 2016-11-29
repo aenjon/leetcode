@@ -1,12 +1,7 @@
 package cn.arrowcoder.training;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
-import cn.arrow.brainteasing.ListNode;
 import cn.arrow.brainteasing.TeasingUtil;
 
 public class ArrowCodeTest {
@@ -25,8 +20,7 @@ public class ArrowCodeTest {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		ArrowCodeTest test = new ArrowCodeTest();
+	public static void main(String[] args) {		
 		//int x = test.foo(5);
 		//System.out.println(x);
 		/*
@@ -64,7 +58,6 @@ public class ArrowCodeTest {
 	}
 	
 	static public void classictest(){
-		ArrowClassic arrowclassic = new ArrowClassic();
 
 		/**
 		 * Classic #1: sorting

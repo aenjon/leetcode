@@ -1,10 +1,6 @@
 package cn.arrow.brainteasing;
 
-import java.math.BigInteger;
 import java.util.List;
-import java.util.Random;
-
-import cn.arrow.brainteasing.Sort.Order;
 
 public class StartTeasing {
 	
@@ -170,7 +166,7 @@ public class StartTeasing {
 		TeasingUtil.printList(fsortlist);
 		*/
 		
-		LeetCode leetcode = new LeetCode();
+		//LeetCode leetcode = new LeetCode();
 		//leetcode.printListNode(leetcode.sortList(null));
 		//int B[] = {134,63,17,147};
 		//ListNode listnode = leetcode.genList(sortlist);
@@ -182,7 +178,7 @@ public class StartTeasing {
 		 * For sorting
 		 */
 		//Sort.recInsertSort(sortlist);
-		Sort sort = new Sort();
+		//Sort sort = new Sort();
 		//sort.heapSort(sortlist, Sort.Order.ASCENT);
 		//Sort.selectedSort(sortlist);
 		//sort.mergeSort(sortlist, 0, sortlist.length-1);
