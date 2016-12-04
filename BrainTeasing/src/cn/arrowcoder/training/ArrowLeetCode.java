@@ -1,6 +1,10 @@
 package cn.arrowcoder.training;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
 
 import cn.arrow.brainteasing.ListNode;
 
@@ -8,6 +12,143 @@ import cn.arrow.brainteasing.ListNode;
  * Leetcode practice for Job 2017
  */
 public class ArrowLeetCode {
+
+    /**
+     * P # -2 Binary Tree - post-order
+     */
+    public List<Integer> TreePostorder(TreeNode tree) {
+        List<Integer> ret = new LinkedList<Integer>();
+        if (tree == null)
+            return ret;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        st.push(tree);
+        HashSet<TreeNode> hs = new HashSet<TreeNode>();
+        while (!st.isEmpty()) {
+            TreeNode cur = st.peek();
+            if (!hs.contains(cur)) {
+                if (cur.right != null)
+                    st.push(cur.right);
+                if (cur.left != null)
+                    st.push(cur.left);
+                hs.add(cur);
+            } else {
+                ret.add(cur.val);
+                st.pop();
+            }
+        }
+        return ret;
+    }
+
+    public List<Integer> TreePostorderRec(TreeNode tree) {
+        List<Integer> ret = new LinkedList<Integer>();
+        TreePostorderRec_aux(tree, ret);
+        return ret;
+    }
+
+    private void TreePostorderRec_aux(TreeNode tree, List<Integer> ret) {
+        if (tree == null)
+            return;
+        TreePostorderRec_aux(tree.left, ret);
+        TreePostorderRec_aux(tree.right, ret);
+        ret.add(tree.val);
+    }
+
+    /**
+     * P # -1 Binary Tree - pre-order
+     */
+
+    public List<Integer> TreePreorder(TreeNode tree) {
+        List<Integer> ret = new LinkedList<Integer>();
+        if (tree == null)
+            return ret;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        st.push(tree);
+        while (!st.isEmpty()) {
+            TreeNode cur = st.pop();
+            ret.add(cur.val);
+            if (cur.right != null)
+                st.push(cur.right);
+            if (cur.left != null)
+                st.push(cur.left);
+        }
+        return ret;
+    }
+
+    public List<Integer> TreePreorderRec(TreeNode tree) {
+        List<Integer> ret = new LinkedList<Integer>();
+        TreePreorderRec_aux(tree, ret);
+        return ret;
+    }
+
+    private void TreePreorderRec_aux(TreeNode tree, List<Integer> output) {
+        if (tree == null)
+            return;
+        output.add(tree.val);
+        TreePreorderRec_aux(tree.left, output);
+        TreePreorderRec_aux(tree.right, output);
+    }
+
+    /**
+     * P #0: Binary Tree - in-order
+     */
+    public List<Integer> TreeInorder(TreeNode tree) {
+        List<Integer> ret = new LinkedList<Integer>();
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        HashSet<TreeNode> hs = new HashSet<TreeNode>();
+        st.push(tree);
+        while (!st.isEmpty()) {
+            TreeNode tn = st.peek();
+            if (tn.left == null) {
+                st.pop();
+                ret.add(tn.val);
+                hs.add(tn);
+                if (tn.right != null)
+                    st.push(tn.right);
+            } else {
+                if (!hs.contains(tn.left)) {
+                    st.push(tn.left);
+                } else {
+                    st.pop();
+                    ret.add(tn.val);
+                    hs.add(tn);
+                    if (tn.right != null)
+                        st.push(tn.right);
+                }
+            }
+        }
+        return ret;
+    }
+
+    public List<Integer> TreeInorder1(TreeNode tree) {
+        List<Integer> ret = new LinkedList<Integer>();
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        TreeNode cur = tree;
+        do {
+            while (cur != null) {
+                st.push(cur);
+                cur = cur.left;
+            }
+            cur = st.pop();
+            ret.add(cur.val);
+            cur = cur.right;
+        } while (!st.isEmpty() || cur != null);
+        return ret;
+    }
+
+    public List<Integer> TreeInorderRec(TreeNode tree) {
+        List<Integer> ret = new LinkedList<Integer>();
+        TreeInorderRec_aux(tree, ret);
+        return ret;
+    }
+
+    private void TreeInorderRec_aux(TreeNode tree, List<Integer> ret) {
+        if (tree == null)
+            return;
+        TreeInorderRec_aux(tree.left, ret);
+        ret.add(tree.val);
+        TreeInorderRec_aux(tree.right, ret);
+
+    }
 
     /**
      * P1: two sum

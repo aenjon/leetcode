@@ -147,6 +147,26 @@ public class ArrowCodeTest {
         ArrowLeetCode arrowcode = new ArrowLeetCode();
 
         /**
+         * P #0: Binary Tree - preorder
+         */
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(5);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(8);
+        root.right = new TreeNode(15);
+        root.right.left = new TreeNode(12);
+        root.right.left.left = new TreeNode(30);
+
+        TeasingUtil.printList(arrowcode.TreeInorder1(root));
+        TeasingUtil.printList(arrowcode.TreeInorderRec(root));
+
+        TeasingUtil.printList(arrowcode.TreePreorder(root));
+        TeasingUtil.printList(arrowcode.TreePreorderRec(root));
+
+        TeasingUtil.printList(arrowcode.TreePostorder(root));
+        TeasingUtil.printList(arrowcode.TreePostorderRec(root));
+
+        /**
          * Problem No. 1 Two Sum
          */
         /*
