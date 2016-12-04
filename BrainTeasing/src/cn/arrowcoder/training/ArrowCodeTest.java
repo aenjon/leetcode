@@ -149,13 +149,14 @@ public class ArrowCodeTest {
         /**
          * P #0: Binary Tree - preorder
          */
-        TreeNode root = new TreeNode(10);
-        root.left = new TreeNode(5);
-        root.left.left = new TreeNode(3);
-        root.left.right = new TreeNode(8);
-        root.right = new TreeNode(15);
-        root.right.left = new TreeNode(12);
-        root.right.left.left = new TreeNode(30);
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(-2);
+        root.right = new TreeNode(-3);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(3);
+        root.left.left.left = new TreeNode(-1);
+        root.right.left = new TreeNode(-2);
+        // root.right.left.left = new TreeNode(30);
 
         TeasingUtil.printList(arrowcode.TreeInorder1(root));
         TeasingUtil.printList(arrowcode.TreeInorderRec(root));
@@ -165,6 +166,8 @@ public class ArrowCodeTest {
 
         TeasingUtil.printList(arrowcode.TreePostorder(root));
         TeasingUtil.printList(arrowcode.TreePostorderRec(root));
+
+        System.out.println(arrowcode.p112_hasPathSumNR(root, -2));
 
         /**
          * Problem No. 1 Two Sum
@@ -194,7 +197,7 @@ public class ArrowCodeTest {
         ListNode l2 = new ListNode(5);
         l2.next = new ListNode(6);
         TeasingUtil.printListNode(l2);
-        ListNode sumlist = arrowcode.addTwoNumbers(l1, l2);
+        ListNode sumlist = arrowcode.p2_addTwoNumbers(l1, l2);
         TeasingUtil.printListNode(sumlist);
 
         /**

@@ -157,7 +157,7 @@ public class ArrowLeetCode {
      * @param target
      * @return
      */
-    public int[] twoSum(int[] nums, int target) {
+    public int[] p1_twoSum(int[] nums, int target) {
         int[] ret = new int[2];
         HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
         hm.put(nums[0], 0);
@@ -176,7 +176,7 @@ public class ArrowLeetCode {
     /**
      * P2. Add Two Numbers
      */
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode p2_addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = new ListNode(0);
         ListNode cur = head;
         int c = 0;
@@ -205,12 +205,42 @@ public class ArrowLeetCode {
     /**
      * P #112. Path Sum
      */
-    public boolean hasPathSum(TreeNode root, int sum) {
+    public boolean p112_hasPathSum(TreeNode root, int sum) {
         if (root == null)
             return false;
         if (root.left == null && root.right == null)
             return sum == root.val;
-        return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
+        return p112_hasPathSum(root.left, sum - root.val) || p112_hasPathSum(root.right, sum - root.val);
+    }
+
+    public boolean p112_hasPathSumNR(TreeNode root, int sum) {
+        boolean ret = false;
+        if (root == null)
+            return ret;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        HashSet<TreeNode> hs = new HashSet<TreeNode>();
+        st.push(root);
+        while (!st.isEmpty()) {
+            TreeNode cur = st.peek();
+            if (cur.left == null && cur.right == null && sum == cur.val && !hs.contains(cur)) {
+                ret = true;
+                break;
+            }
+            if (!hs.contains(cur)) {
+                if (cur.right != null) {
+                    st.push(cur.right);
+                }
+                if (cur.left != null) {
+                    st.push(cur.left);
+                }
+                sum -= cur.val;
+                hs.add(cur);
+            } else {
+                st.pop();
+                sum += cur.val;
+            }
+        }
+        return ret;
     }
 
     /**
