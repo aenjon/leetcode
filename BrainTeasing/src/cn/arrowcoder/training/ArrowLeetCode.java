@@ -244,6 +244,39 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P #113. Path Sum II
+     */
+    public List<List<Integer>> p113_pathSum(TreeNode root, int sum) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        List<Integer> subret = new LinkedList<Integer>();
+        p113_pathSum_aux(root, sum, ret, subret);
+        return ret;
+    }
+
+    private void p113_pathSum_aux(TreeNode root, int target, List<List<Integer>> ret, List<Integer> subret) {
+        if (root == null)
+            return;
+        subret.add(root.val);
+        if (root.left == null && root.right == null && root.val == target) {
+            List<Integer> newItem = new LinkedList<Integer>(subret);
+            ret.add(newItem);
+            subret.remove(subret.size() - 1);
+            return;
+        }
+        p113_pathSum_aux(root.left, target - root.val, ret, subret);
+        p113_pathSum_aux(root.right, target - root.val, ret, subret);
+        subret.remove(subret.size() - 1);
+    }
+
+    public List<List<Integer>> p113_pathSumNR(TreeNode root, int sum) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        List<Integer> subret = new LinkedList<Integer>();
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        HashSet<TreeNode> hs = new HashSet<TreeNode>();
+        return ret;
+    }
+
+    /**
      * P #463: Island Perimeter
      *
      * @param grid
