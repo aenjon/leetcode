@@ -273,6 +273,33 @@ public class ArrowLeetCode {
         List<Integer> subret = new LinkedList<Integer>();
         Stack<TreeNode> st = new Stack<TreeNode>();
         HashSet<TreeNode> hs = new HashSet<TreeNode>();
+        st.add(root);
+        while (!st.isEmpty()) {
+            TreeNode cur = st.peek();
+            if (cur == null) {
+                st.pop();
+                continue;
+            }
+            if (cur.left == null && cur.right == null && sum == cur.val && !hs.contains(cur)) {
+                subret.add(cur.val);
+                List<Integer> newItem = new LinkedList<Integer>(subret);
+                ret.add(newItem);
+                subret.remove(subret.size() - 1);
+                st.pop();
+                continue;
+            }
+            if (!hs.contains(cur)) {
+                subret.add(cur.val);
+                sum -= cur.val;
+                st.add(cur.right);
+                st.add(cur.left);
+                hs.add(cur);
+            } else {
+                st.pop();
+                sum += cur.val;
+                subret.remove(subret.size() - 1);
+            }
+        }
         return ret;
     }
 
