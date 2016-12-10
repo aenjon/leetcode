@@ -203,6 +203,27 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P3. Longest Substring Without Repeating Characters
+     */
+    public int p3_lengthOfLongestSubstring(String s) {
+        if (s == null || s.isEmpty())
+            return 0;
+        int maxlen = 0, d = 0;
+        HashMap<Character, Integer> hm = new HashMap<Character, Integer>();
+        for (int i = 0; i < s.length(); i++) {
+            char cur = s.charAt(i);
+            if (!hm.containsKey(cur) || hm.get(cur) < i - d) {
+                d++;
+            } else {
+                d = i - hm.get(cur);
+            }
+            hm.put(cur, i);
+            maxlen = maxlen > d ? maxlen : d;
+        }
+        return maxlen;
+    }
+
+    /**
      * P #112. Path Sum
      */
     public boolean p112_hasPathSum(TreeNode root, int sum) {
