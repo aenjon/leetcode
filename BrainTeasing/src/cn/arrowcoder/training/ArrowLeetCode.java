@@ -224,6 +224,37 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P5. Longest Palindromic Substring
+     */
+
+    private int p5_start, p5_maxlen = 1;
+
+    public String p5_longestPalindrome(String s) {
+        if (s == null || s.isEmpty())
+            return s;
+        for (int i = 1; i < s.length(); i++) {
+            searchPalindromic(s, i - 1, i);
+            searchPalindromic(s, i - 1, i + 1);
+        }
+        return s.substring(p5_start, p5_start + p5_maxlen);
+    }
+
+    private void searchPalindromic(String s, int low, int high) {
+        while (low >= 0 && high < s.length() && s.charAt(low) == s.charAt(high)) {
+            if (high - low + 1 > p5_maxlen) {
+                p5_start = low;
+                p5_maxlen = high - low + 1;
+            }
+            low--;
+            high++;
+        }
+    }
+
+    /**
+     * P7. Reverse Integer
+     */
+
+    /**
      * P #112. Path Sum
      */
     public boolean p112_hasPathSum(TreeNode root, int sum) {
