@@ -157,7 +157,7 @@ public class ArrowLeetCode {
      * @param target
      * @return
      */
-    public int[] p1_twoSum(int[] nums, int target) {
+    public int[] p001_twoSum(int[] nums, int target) {
         int[] ret = new int[2];
         HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
         hm.put(nums[0], 0);
@@ -176,7 +176,7 @@ public class ArrowLeetCode {
     /**
      * P2. Add Two Numbers
      */
-    public ListNode p2_addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode p002_addTwoNumbers(ListNode l1, ListNode l2) {
         ListNode head = new ListNode(0);
         ListNode cur = head;
         int c = 0;
@@ -205,7 +205,7 @@ public class ArrowLeetCode {
     /**
      * P3. Longest Substring Without Repeating Characters
      */
-    public int p3_lengthOfLongestSubstring(String s) {
+    public int p003_lengthOfLongestSubstring(String s) {
         if (s == null || s.isEmpty())
             return 0;
         int maxlen = 0, d = 0;
@@ -229,7 +229,7 @@ public class ArrowLeetCode {
 
     private int p5_start, p5_maxlen = 1;
 
-    public String p5_longestPalindrome(String s) {
+    public String p005_longestPalindrome(String s) {
         if (s == null || s.isEmpty())
             return s;
         for (int i = 1; i < s.length(); i++) {
@@ -253,6 +253,86 @@ public class ArrowLeetCode {
     /**
      * P7. Reverse Integer
      */
+    public int p007_reverse(int x) {
+        long ret = 0;
+        do {
+            ret = ret * 10 + x % 10;
+            x /= 10;
+        } while (x != 0);
+        if (ret > Integer.MAX_VALUE || ret < Integer.MIN_VALUE) {
+            return 0;
+        } else {
+            return (int) ret;
+        }
+    }
+
+    /**
+     * P8. String to Integer (atoi)
+     */
+    public int p008_myAtoi(String str) {
+        if (str == null || str.isEmpty()) {
+            return 0;
+        }
+        int i = 0, len = str.length();
+        boolean sign = true;
+        long ret = 0;
+        while (i < len && str.charAt(i) == ' ')
+            i++;
+        if (i < len) {
+            if (str.charAt(i) == '+') {
+                i++;
+            } else if (str.charAt(i) == '-') {
+                sign = false;
+                i++;
+            }
+        }
+        while (i < len) {
+            int cur = str.charAt(i) - 48;
+            if (cur > 9 || cur < 0) {
+                break;
+            }
+            ret = ret * 10 + cur;
+            if (sign && ret > Integer.MAX_VALUE) {
+                return Integer.MAX_VALUE;
+            } else if (!sign && ret >= ((long) Integer.MAX_VALUE + 1)) {
+                return Integer.MIN_VALUE;
+            }
+            i++;
+        }
+        return sign ? (int) ret : -(int) ret;
+    }
+
+    /**
+     * P9. Palindrome Number
+     */
+    public boolean p009_isPalindrome(int x) {
+        if (x < 0 || x % 10 == 0 && x != 0)
+            return false;
+        int rev = 0;
+        while (x > rev) {
+            rev = rev * 10 + x % 10;
+            x /= 10;
+        }
+        return (x == rev / 10 || x == rev);
+    }
+
+    /**
+     * P11. Container With Most Water
+     */
+    public int p011_maxArea(int[] height) {
+        if (height == null || height.length < 2)
+            return 0;
+        int maxarea = 0, i = 0, j = height.length - 1;
+        while (i < j) {
+            maxarea = Math.max(maxarea, (j - i) * Math.min(height[i], height[j]));
+            if (height[i] > height[j]) {
+                j--;
+            } else {
+                i++;
+            }
+        }
+        return maxarea;
+    }
 
     /**
      * P #112. Path Sum

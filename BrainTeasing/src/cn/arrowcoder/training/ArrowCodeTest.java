@@ -1,6 +1,5 @@
 package cn.arrowcoder.training;
 
-import cn.arrow.brainteasing.ListNode;
 import cn.arrow.brainteasing.TeasingUtil;
 
 public class ArrowCodeTest {
@@ -188,18 +187,15 @@ public class ArrowCodeTest {
         /**
          * Problem No. 2 Add Two Numbers presented in LinkedList
          */
-
-        ListNode l1 = new ListNode(2);
-        l1.next = new ListNode(4);
-        l1.next.next = new ListNode(9);
-        TeasingUtil.printListNode(l1);
-
-        ListNode l2 = new ListNode(5);
-        l2.next = new ListNode(6);
-        TeasingUtil.printListNode(l2);
-        ListNode sumlist = arrowcode.p2_addTwoNumbers(l1, l2);
-        TeasingUtil.printListNode(sumlist);
-
+        /*
+         * ListNode l1 = new ListNode(2); l1.next = new ListNode(4);
+         * l1.next.next = new ListNode(9); TeasingUtil.printListNode(l1);
+         *
+         * ListNode l2 = new ListNode(5); l2.next = new ListNode(6);
+         * TeasingUtil.printListNode(l2); ListNode sumlist =
+         * arrowcode.p2_addTwoNumbers(l1, l2);
+         * TeasingUtil.printListNode(sumlist);
+         */
         /**
          * Problem No. 3 Longest Substring Without Repeating Characters
          */
@@ -233,13 +229,13 @@ public class ArrowCodeTest {
          * Problem No. 8
          */
         /*
-         * String str = "     -1"; System.out.println(arrowcode.atoi(str));
+         * String str = "     -1"; System.out.println(arrowcode.p8_myAtoi(str));
          */
         /**
          * Problem #9 Palindrome Number
          */
-        // int x = 1;
-        // System.out.println(arrowcode.isPalindrome2(x));
+        // int x = 210112;
+        // System.out.println(arrowcode.p9_isPalindrome(x));
 
         /**
          * Problem #10 Regular Expression Match
