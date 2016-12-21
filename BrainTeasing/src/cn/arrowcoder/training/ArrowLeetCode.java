@@ -436,12 +436,12 @@ public class ArrowLeetCode {
     }
 
     /**
-     * P #463: Island Perimeter
+     * P463: Island Perimeter
      *
      * @param grid
      * @return
      */
-    public int islandPerimeter(int[][] grid) {
+    public int p463_islandPerimeter(int[][] grid) {
         int ret = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
@@ -458,5 +458,30 @@ public class ArrowLeetCode {
         }
         return ret;
     }
-
+    
+    /**
+     * P999: Consecutive sum: check if an integer array has a consecutive numbers whose sum equals to the target
+     */
+    public boolean p999_conSum(int[] nums, int target){
+    	if (nums == null || nums.length == 0)
+    		return false;
+    	int low = 0, high = 0, sum = nums[0];
+    	boolean ret = false;
+    	while(high < nums.length){
+    		if (sum == target){
+    			ret = true;
+    			break;
+    		}else if (sum < target){
+    			sum += nums[high];
+    			high++;
+    		}else{
+    			while(sum < target && low <= high){
+    				sum -= nums[low];
+    				low++;
+    			}
+    		}
+    	};
+    	return ret;
+    }
 }
+
