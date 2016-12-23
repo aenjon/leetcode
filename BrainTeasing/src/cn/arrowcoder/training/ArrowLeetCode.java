@@ -458,30 +458,41 @@ public class ArrowLeetCode {
         }
         return ret;
     }
-    
+
     /**
-     * P999: Consecutive sum: check if an integer array has a consecutive numbers whose sum equals to the target
+     * P999: Consecutive sum: check if an integer array has a consecutive
+     * numbers whose sum equals to the target
      */
-    public boolean p999_conSum(int[] nums, int target){
-    	if (nums == null || nums.length == 0)
-    		return false;
-    	int low = 0, high = 0, sum = nums[0];
-    	boolean ret = false;
-    	while(high < nums.length){
-    		if (sum == target){
-    			ret = true;
-    			break;
-    		}else if (sum < target){
-    			sum += nums[high];
-    			high++;
-    		}else{
-    			while(sum < target && low <= high){
-    				sum -= nums[low];
-    				low++;
-    			}
-    		}
-    	};
-    	return ret;
+    public boolean p999_conSum(int[] nums, int target) {
+        if (nums == null || nums.length == 0)
+            return false;
+        int low = 0, high = 0, sum = 0;
+
+        do {
+            if (sum == target) {
+                break;
+            } else if (sum < target) {
+                if (high < nums.length) {
+                    sum += nums[high];
+                    high++;
+                } else {
+                    break;
+                }
+            } else {
+                while (sum > target) {
+                    sum -= nums[low];
+                    low++;
+                }
+            }
+        } while (true);
+
+        /*
+         * while (high < nums.length)
+         * 
+         * { if (sum == target) { break; } else if (sum < target) { sum +=
+         * nums[high]; high++; } else { while (sum > target) { sum -= nums[low];
+         * low++; } } }
+         */
+        return sum == target;
     }
 }
-

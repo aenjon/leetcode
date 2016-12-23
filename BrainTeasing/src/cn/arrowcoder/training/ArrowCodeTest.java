@@ -166,7 +166,7 @@ public class ArrowCodeTest {
         TeasingUtil.printList(arrowcode.TreePostorder(root));
         TeasingUtil.printList(arrowcode.TreePostorderRec(root));
 
-        System.out.println(arrowcode.p112_hasPathSumNR(root, -2));
+        // System.out.println(arrowcode.p112_hasPathSumNR(root, -2));
 
         /**
          * Problem No. 1 Two Sum
@@ -642,5 +642,23 @@ public class ArrowCodeTest {
          * arrowcode.actSel(s, f); for (int i : ret998) System.out.print(s[i] +
          * "-" + f[i] + " : "); System.out.println();
          */
+
+        /**
+         * Problem 999 conSum
+         */
+        int[] nums = { 3, 2, 8 };
+        System.out.println("P999:");
+        System.out.println("8: " + arrowcode.p999_conSum(nums, 8));
+        System.out.println("2: " + arrowcode.p999_conSum(nums, 2));
+        System.out.println("3: " + arrowcode.p999_conSum(nums, 3));
+        System.out.println("5: " + arrowcode.p999_conSum(nums, 5));
+        System.out.println("10: " + arrowcode.p999_conSum(nums, 10));
+        System.out.println("13: " + arrowcode.p999_conSum(nums, 13));
+        System.out.println("15: " + arrowcode.p999_conSum(nums, 15));
+        System.out.println("1: " + arrowcode.p999_conSum(nums, 1));
+        System.out.println("4: " + arrowcode.p999_conSum(nums, 4));
+        System.out.println("9: " + arrowcode.p999_conSum(nums, 9));
+        System.out.println("11: " + arrowcode.p999_conSum(nums, 11));
+
     }
 }
