@@ -335,6 +335,78 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P012. Integer to Roman
+     */
+    public String p012_intToRoman(int num) {
+        String[] romanTable = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "", "X", "XX", "XXX", "XL",
+                "L", "LX", "LXX", "LXXX", "XC", "", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM", "", "M",
+                "MM", "MMM" };
+        return romanTable[num / 1000 + 30] + romanTable[(num / 100) % 10 + 20] + romanTable[(num / 10) % 10 + 10]
+                + romanTable[num % 10];
+    }
+
+    /**
+     * P013. Roman to Integer
+     */
+    public int p013_romanToInt(String s) {
+        if (s == null || s.isEmpty())
+            return 0;
+        int ret = 0;
+        int[] nums = new int[s.length()];
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            switch (c) {
+                case 'I':
+                    nums[i] = 1;
+                    break;
+                case 'V':
+                    nums[i] = 5;
+                    break;
+                case 'X':
+                    nums[i] = 10;
+                    break;
+                case 'L':
+                    nums[i] = 50;
+                    break;
+                case 'C':
+                    nums[i] = 100;
+                    break;
+                case 'D':
+                    nums[i] = 500;
+                    break;
+                case 'M':
+                    nums[i] = 1000;
+                    break;
+                default:
+                    return 0;
+            }
+        }
+        for (int i = 0; i < nums.length - 1; i++) {
+            if (nums[i] < nums[i + 1]) {
+                ret -= nums[i];
+            } else {
+                ret += nums[i];
+            }
+        }
+        return ret + nums[nums.length - 1];
+    }
+    /*
+     * HashMap<Character, Integer> hs = new HashMap<Character, Integer>();
+     * hs.put('I', 1); hs.put('V', 5); hs.put('X', 10); hs.put('L', 50);
+     * hs.put('C', 100); hs.put('D', 500); hs.put('M', 1000); int ret = 0;
+     * Integer leftVal, rightVal = hs.get(s.charAt(s.length() - 1)); if
+     * (rightVal != null) { ret = rightVal.intValue(); } else { return 0; }
+     *
+     * for (int i = s.length() - 2; i >= 0; i--) { leftVal =
+     * hs.get(s.charAt(i)); rightVal = hs.get(s.charAt(i + 1)); if (leftVal ==
+     * null || rightVal == null) { ret = 0; break; } if (leftVal >= rightVal) {
+     * ret += leftVal.intValue(); } else { ret -= leftVal.intValue(); } }
+     */
+    // return ret;
+
+    }
+
+    /**
      * P #112. Path Sum
      */
     public boolean p112_hasPathSum(TreeNode root, int sum) {
@@ -488,7 +560,7 @@ public class ArrowLeetCode {
 
         /*
          * while (high < nums.length)
-         * 
+         *
          * { if (sum == target) { break; } else if (sum < target) { sum +=
          * nums[high]; high++; } else { while (sum > target) { sum -= nums[low];
          * low++; } } }
