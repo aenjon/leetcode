@@ -390,24 +390,26 @@ public class ArrowLeetCode {
         }
         return ret + nums[nums.length - 1];
     }
-    /*
-     * HashMap<Character, Integer> hs = new HashMap<Character, Integer>();
-     * hs.put('I', 1); hs.put('V', 5); hs.put('X', 10); hs.put('L', 50);
-     * hs.put('C', 100); hs.put('D', 500); hs.put('M', 1000); int ret = 0;
-     * Integer leftVal, rightVal = hs.get(s.charAt(s.length() - 1)); if
-     * (rightVal != null) { ret = rightVal.intValue(); } else { return 0; }
-     *
-     * for (int i = s.length() - 2; i >= 0; i--) { leftVal =
-     * hs.get(s.charAt(i)); rightVal = hs.get(s.charAt(i + 1)); if (leftVal ==
-     * null || rightVal == null) { ret = 0; break; } if (leftVal >= rightVal) {
-     * ret += leftVal.intValue(); } else { ret -= leftVal.intValue(); } }
-     */
-    // return ret;
 
+    /**
+     * P014. Longest Common Prefix
+     */
+    public String p014_longestCommonPrefix(String[] strs) {
+        if (strs == null || strs.length == 0 || strs[0] == null)
+            return "";
+        for (int prefixlen = 0; prefixlen < strs[0].length(); prefixlen++) {
+            for (int i = 1; i < strs.length; i++) {
+                String curStr = strs[i];
+                if (prefixlen >= curStr.length() || curStr.charAt(prefixlen) != strs[0].charAt(prefixlen)) {
+                    return strs[0].substring(0, 0 + prefixlen);
+                }
+            }
+        }
+        return strs[0];
     }
 
     /**
-     * P #112. Path Sum
+     * P112. Path Sum
      */
     public boolean p112_hasPathSum(TreeNode root, int sum) {
         if (root == null)
