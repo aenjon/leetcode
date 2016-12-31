@@ -1,5 +1,7 @@
 package cn.arrowcoder.training;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -406,6 +408,37 @@ public class ArrowLeetCode {
             }
         }
         return strs[0];
+    }
+
+    /**
+     * P015. 3Sum
+     */
+    public List<List<Integer>> p015_threeSum(int[] nums) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        if (nums == null || nums.length < 3)
+            return ret;
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+            int low = i + 1, high = nums.length - 1;
+            while (low < high) {
+                if (nums[i] + nums[low] + nums[high] == 0) {
+                    ret.add(Arrays.asList(nums[i], nums[low], nums[high]));
+                    int lv = nums[low], hv = nums[high];
+                    while (low < high && lv == nums[low])
+                        low++;
+                    while (low < high && hv == nums[high])
+                        high--;
+                } else if (nums[i] + nums[low] + nums[high] > 0) {
+                    high--;
+                } else {
+                    low++;
+                }
+            }
+        }
+        return ret;
     }
 
     /**
