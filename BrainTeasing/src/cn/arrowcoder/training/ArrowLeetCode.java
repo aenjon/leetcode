@@ -442,6 +442,32 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P016. 3Sum Closest
+     */
+    public int p016_threeSumClosest(int[] nums, int target) {
+        if (nums == null || nums.length < 3)
+            return 0;
+        Arrays.sort(nums);
+        int ret = nums[0] + nums[1] + nums[nums.length - 1];
+        for (int i = 0; i < nums.length - 2; i++) {
+            int low = i + 1, high = nums.length - 1;
+            while (low < high) {
+                int sum = nums[i] + nums[low] + nums[high];
+                if (Math.abs(target - sum) < Math.abs(target - ret)) {
+                    ret = sum;
+                }
+                if (sum == target)
+                    return target;
+                else if (target < sum)
+                    high--;
+                else
+                    low++;
+            }
+        }
+        return ret;
+    }
+
+    /**
      * P112. Path Sum
      */
     public boolean p112_hasPathSum(TreeNode root, int sum) {
