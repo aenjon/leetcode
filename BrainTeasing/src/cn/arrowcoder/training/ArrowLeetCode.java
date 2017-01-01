@@ -628,6 +628,35 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P454. 4Sum II
+     *
+     * Note: the problems is looking for the tuple indexes of four arrays, hence
+     * the duplicated elements do not matter.
+     */
+    public int p454_fourSumCount(int[] A, int[] B, int[] C, int[] D) {
+        int ret = 0;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < B.length; j++) {
+                int sum = A[i] + B[j];
+                if (map.containsKey(sum))
+                    map.put(sum, map.get(sum) + 1);
+                else
+                    map.put(sum, 1);
+            }
+        }
+        for (int i = 0; i < C.length; i++) {
+            for (int j = 0; j < D.length; j++) {
+                int sum = 0 - C[i] - D[j];
+                if (map.containsKey(sum)) {
+                    ret += map.get(sum);
+                }
+            }
+        }
+        return ret;
+    }
+
+    /**
      * P463: Island Perimeter
      *
      * @param grid
