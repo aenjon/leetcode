@@ -268,8 +268,8 @@ public class ArrowCodeTest {
         /**
          * Problem No. 14 Letter Combinations of a Phone Number
          */
-        // String s = "23";
-        // TeasingUtil.printList(arrowcode.letterCombinations(s));
+        String s = "901";
+        TeasingUtil.printList(arrowcode.p017_letterCombinations(s));
         // TeasingUtil.printListString(arrowcode.letterCombinations(s));
         // List<List<Integer>> ret = arrowcode.threeSum2(nums);
         // TeasingUtil.printIntegerPowerSet(ret);
@@ -646,19 +646,19 @@ public class ArrowCodeTest {
         /**
          * Problem 999 conSum
          */
-        int[] nums = { 3, 2, 8 };
-        System.out.println("P999:");
-        System.out.println("8: " + arrowcode.p999_conSum(nums, 8));
-        System.out.println("2: " + arrowcode.p999_conSum(nums, 2));
-        System.out.println("3: " + arrowcode.p999_conSum(nums, 3));
-        System.out.println("5: " + arrowcode.p999_conSum(nums, 5));
-        System.out.println("10: " + arrowcode.p999_conSum(nums, 10));
-        System.out.println("13: " + arrowcode.p999_conSum(nums, 13));
-        System.out.println("15: " + arrowcode.p999_conSum(nums, 15));
-        System.out.println("1: " + arrowcode.p999_conSum(nums, 1));
-        System.out.println("4: " + arrowcode.p999_conSum(nums, 4));
-        System.out.println("9: " + arrowcode.p999_conSum(nums, 9));
-        System.out.println("11: " + arrowcode.p999_conSum(nums, 11));
+        // int[] nums = { 3, 2, 8 };
+        // System.out.println("P999:");
+        // System.out.println("8: " + arrowcode.p999_conSum(nums, 8));
+        // System.out.println("2: " + arrowcode.p999_conSum(nums, 2));
+        // System.out.println("3: " + arrowcode.p999_conSum(nums, 3));
+        // System.out.println("5: " + arrowcode.p999_conSum(nums, 5));
+        // System.out.println("10: " + arrowcode.p999_conSum(nums, 10));
+        // System.out.println("13: " + arrowcode.p999_conSum(nums, 13));
+        // System.out.println("15: " + arrowcode.p999_conSum(nums, 15));
+        // System.out.println("1: " + arrowcode.p999_conSum(nums, 1));
+        // System.out.println("4: " + arrowcode.p999_conSum(nums, 4));
+        // System.out.println("9: " + arrowcode.p999_conSum(nums, 9));
+        // System.out.println("11: " + arrowcode.p999_conSum(nums, 11));
 
     }
 }

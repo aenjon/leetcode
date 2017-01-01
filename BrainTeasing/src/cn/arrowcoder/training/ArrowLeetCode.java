@@ -468,6 +468,65 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P017. Letter Combinations of a Phone Number
+     */
+    public List<String> p017_letterCombinations(String digits) {
+        List<String> ret = new ArrayList<>();
+        if (digits == null || digits.isEmpty())
+            return ret;
+        String[] dict = { " ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+        ret.add("");
+        for (int i = 0; i < digits.length(); i++) {
+            List<String> temp = new ArrayList<String>();
+            int index = digits.charAt(i) - 48;
+            if (index == 1)
+                continue;
+            for (String s : ret) {
+                for (int j = 0; j < dict[index].length(); j++) {
+                    temp.add(s + dict[index].charAt(j));
+                }
+            }
+            ret = temp;
+        }
+        return ret;
+    }
+
+    /**
+     * P018. 4Sum
+     */
+    public List<List<Integer>> p018_fourSum(int[] nums, int target) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        if (nums == null || nums.length < 4)
+            return ret;
+        Arrays.sort(nums);
+        for (int i = 0; i < nums.length - 3; i++) {
+            if (i > 0 && nums[i] == nums[i - 1])
+                continue;
+            for (int j = i + 1; j < nums.length - 2; j++) {
+                if (j > i + 1 && nums[j] == nums[j - 1])
+                    continue;
+                int subtarget = target - nums[i] - nums[j];
+                int low = j + 1, high = nums.length - 1;
+                while (low < high) {
+                    if (nums[low] + nums[high] == subtarget) {
+                        ret.add(Arrays.asList(nums[i], nums[j], nums[low], nums[high]));
+                        int lv = nums[low], hv = nums[high];
+                        while (low < high && lv == nums[low])
+                            low++;
+                        while (low < high && hv == nums[high])
+                            high--;
+                    } else if (nums[low] + nums[high] > subtarget) {
+                        high--;
+                    } else {
+                        low++;
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    /**
      * P112. Path Sum
      */
     public boolean p112_hasPathSum(TreeNode root, int sum) {
