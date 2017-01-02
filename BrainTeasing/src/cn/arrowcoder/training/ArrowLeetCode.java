@@ -645,6 +645,24 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P283. Move Zeroes
+     */
+    public void p283_moveZeroes(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return;
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                int temp = nums[index];
+                nums[index] = nums[i];
+                nums[i] = temp;
+                index++;
+            }
+        }
+        return;
+    }
+
+    /**
      * P454. 4Sum II
      *
      * Note: the problems is looking for the tuple indexes of four arrays, hence
