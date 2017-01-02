@@ -527,6 +527,23 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P019. Remove Nth Node From End of List
+     */
+    public ListNode p019_removeNthFromEnd(ListNode head, int n) {
+        ListNode prev = head, end = head;
+        while (n-- > 0)
+            end = end.next;
+        if (end == null)
+            return head.next;
+        while (end.next != null) {
+            prev = prev.next;
+            end = end.next;
+        }
+        prev.next = prev.next.next;
+        return head;
+    }
+
+    /**
      * P112. Path Sum
      */
     public boolean p112_hasPathSum(TreeNode root, int sum) {
