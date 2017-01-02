@@ -544,6 +544,23 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P027. Remove Element
+     */
+    public int p027_removeElement(int[] nums, int val) {
+        if (nums == null || nums.length == 0)
+            return 0;
+        int low = 0, high = nums.length - 1;
+        while (low < high) {
+            if (nums[low] == val) {
+                nums[low] = nums[high--];
+            } else {
+                low++;
+            }
+        }
+        return nums[low] == val ? low : low + 1;
+    }
+
+    /**
      * P112. Path Sum
      */
     public boolean p112_hasPathSum(TreeNode root, int sum) {
@@ -643,6 +660,10 @@ public class ArrowLeetCode {
         }
         return ret;
     }
+
+    /**
+     * P345. Reverse Vowels of a String
+     */
 
     /**
      * P283. Move Zeroes
