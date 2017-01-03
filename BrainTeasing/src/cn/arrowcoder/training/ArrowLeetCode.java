@@ -664,6 +664,31 @@ public class ArrowLeetCode {
     /**
      * P345. Reverse Vowels of a String
      */
+    public String p345_reverseVowels(String s) {
+        if (s == null || s.isEmpty())
+            return s;
+        char[] chars = s.toCharArray();
+        int low = 0, high = s.length() - 1;
+        while (low < high) {
+            while (low < high && !isVowel(chars[low]))
+                low++;
+            while (low < high && !isVowel(chars[high]))
+                high--;
+            if (low < high) {
+                char temp = chars[low];
+                chars[low] = chars[high];
+                chars[high] = temp;
+                low++;
+                high--;
+            }
+        }
+        return s;
+    }
+
+    private boolean isVowel(char c) {
+        return c == 'a' || c == 'A' || c == 'e' || c == 'E' || c == 'i' || c == 'I' || c == 'o' || c == 'O' || c == 'u'
+                || c == 'U';
+    }
 
     /**
      * P283. Move Zeroes
