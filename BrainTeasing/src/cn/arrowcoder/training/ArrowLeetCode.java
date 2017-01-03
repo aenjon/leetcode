@@ -662,6 +662,24 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P344. Reverse String
+     */
+    public String p344_reverseString(String s) {
+        if (s == null || s.isEmpty())
+            return s;
+        char[] chars = s.toCharArray();
+        int i = 0, j = s.length() - 1;
+        while (i < j) {
+            char temp = chars[i];
+            chars[i] = chars[j];
+            chars[j] = temp;
+            i++;
+            j--;
+        }
+        return String.valueOf(chars);
+    }
+
+    /**
      * P345. Reverse Vowels of a String
      */
     public String p345_reverseVowels(String s) {
@@ -678,11 +696,11 @@ public class ArrowLeetCode {
                 char temp = chars[low];
                 chars[low] = chars[high];
                 chars[high] = temp;
-                low++;
-                high--;
             }
+            low++;
+            high--;
         }
-        return s;
+        return String.valueOf(chars);
     }
 
     private boolean isVowel(char c) {
