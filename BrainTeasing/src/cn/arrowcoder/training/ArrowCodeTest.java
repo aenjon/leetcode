@@ -268,8 +268,8 @@ public class ArrowCodeTest {
         /**
          * Problem No. 14 Letter Combinations of a Phone Number
          */
-        String s = "901";
-        TeasingUtil.printList(arrowcode.p017_letterCombinations(s));
+        // String s = "901";
+        // TeasingUtil.printList(arrowcode.p017_letterCombinations(s));
         // TeasingUtil.printListString(arrowcode.letterCombinations(s));
         // List<List<Integer>> ret = arrowcode.threeSum2(nums);
         // TeasingUtil.printIntegerPowerSet(ret);
@@ -501,6 +501,10 @@ public class ArrowCodeTest {
          * TeasingUtil.printList(nums);
          */
 
+        int nums1[] = { 1, 0 };
+        int nums2[] = { 2 };
+        arrowcode.p088_merge(nums1, 1, nums2, 1);
+        TeasingUtil.printList(nums1);
         /**
          * Problem #90 Subsets II
          */
