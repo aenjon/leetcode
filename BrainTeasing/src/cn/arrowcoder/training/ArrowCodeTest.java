@@ -1,5 +1,6 @@
 package cn.arrowcoder.training;
 
+import cn.arrow.brainteasing.ListNode;
 import cn.arrow.brainteasing.TeasingUtil;
 
 public class ArrowCodeTest {
@@ -501,10 +502,26 @@ public class ArrowCodeTest {
          * TeasingUtil.printList(nums);
          */
 
-        int nums1[] = { 1, 0 };
-        int nums2[] = { 2 };
-        arrowcode.p088_merge(nums1, 1, nums2, 1);
-        TeasingUtil.printList(nums1);
+        /**
+         * P088. Merge Sorted Array
+         */
+        // int nums1[] = { 1, 0 };
+        // int nums2[] = { 2 };
+        // arrowcode.p088_merge(nums1, 1, nums2, 1);
+        // TeasingUtil.printList(nums1);
+
+        /**
+         * P148. Sort List
+         */
+        ListNode list = new ListNode(3);
+        list.next = new ListNode(1);
+        list.next.next = new ListNode(4);
+        list.next.next.next = new ListNode(3);
+        list.next.next.next.next = new ListNode(1);
+        TeasingUtil.printList(list);
+        TeasingUtil.printList(arrowcode.p148_sortList(list));
+        TeasingUtil.printList(arrowcode.p148_sortList(null));
+
         /**
          * Problem #90 Subsets II
          */

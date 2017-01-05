@@ -724,6 +724,41 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P148. Sort List
+     */
+    public ListNode p148_sortList(ListNode head) {
+        return qsortList(head, null);
+    }
+
+    private ListNode qsortList(ListNode head, ListNode tail) {
+        if (head == tail)
+            return head;
+        ListNode left = head, right = head, rhead = head, cur = head.next, next = null;
+        while (cur != tail) {
+            next = cur.next;
+            if (head.val > cur.val) {
+                cur.next = left;
+                left = cur;
+            } else if (head.val == cur.val) {
+                if (cur != rhead.next) {
+                    cur.next = rhead.next;
+                }
+                rhead.next = cur;
+                if (right == rhead)
+                    right = cur;
+                rhead = cur;
+            } else {
+                right.next = cur;
+                right = cur;
+            }
+            cur = next;
+        }
+        right.next = tail;
+        rhead.next = qsortList(rhead.next, tail);
+        return qsortList(left, head);
+    }
+
+    /**
      * P344. Reverse String
      */
     public String p344_reverseString(String s) {
