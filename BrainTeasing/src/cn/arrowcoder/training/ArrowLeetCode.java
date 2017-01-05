@@ -747,6 +747,53 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P147. Insertion Sort List
+     */
+    public ListNode p147_insertionSortList(ListNode head) {
+        if (head == null)
+            return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        head = head.next;
+        dummy.next.next = null;
+        ListNode insert = head;
+        while (insert != null) {
+            ListNode cur = dummy;
+            head = head.next;
+            insert.next = null;
+            while (cur.next != null) {
+                if (cur.next.val > insert.val) {
+                    insert.next = cur.next;
+                    cur.next = insert;
+                    break;
+                }
+                cur = cur.next;
+            }
+            if (insert.next == null)
+                cur.next = insert;
+            insert = head;
+        }
+        return dummy.next;
+    }
+
+    public ListNode p147_insertionSortList2(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        ListNode cur = head;
+        ListNode pre = dummy;
+        ListNode next = null;
+        while (cur != null) {
+            next = cur.next;
+            while (pre.next != null && pre.next.val < cur.val)
+                pre = pre.next;
+            cur.next = pre.next;
+            pre.next = cur;
+            cur = next;
+            pre = dummy;
+        }
+        return dummy.next;
+    }
+
+    /**
      * P148. Sort List
      */
     public ListNode p148_sortList(ListNode head) {

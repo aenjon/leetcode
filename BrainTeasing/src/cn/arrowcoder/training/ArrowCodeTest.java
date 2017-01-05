@@ -513,14 +513,13 @@ public class ArrowCodeTest {
         /**
          * P148. Sort List
          */
-        ListNode list = new ListNode(3);
+        ListNode list = new ListNode(2);
         list.next = new ListNode(1);
         list.next.next = new ListNode(4);
         list.next.next.next = new ListNode(3);
         list.next.next.next.next = new ListNode(1);
         TeasingUtil.printList(list);
-        TeasingUtil.printList(arrowcode.p148_sortList(list));
-        TeasingUtil.printList(arrowcode.p148_sortList(null));
+        TeasingUtil.printList(arrowcode.p147_insertionSortList2(list));
 
         /**
          * Problem #90 Subsets II
