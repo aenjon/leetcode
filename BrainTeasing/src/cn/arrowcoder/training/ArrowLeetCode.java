@@ -609,6 +609,29 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P075. Sort Colors
+     */
+    public void p075_sortColors(int[] nums) {
+        if (nums == null || nums.length <= 1)
+            return;
+        int i = 0, r = 0, b = nums.length - 1;
+        while (i <= b) {
+            if (nums[i] == 0) {
+                int tmp = nums[r];
+                nums[r++] = nums[i];
+                nums[i++] = tmp;
+            } else if (nums[i] == 2) {
+                int tmp = nums[b];
+                nums[b--] = nums[i];
+                nums[i] = tmp;
+            } else {
+                i++;
+            }
+        }
+        return;
+    }
+
+    /**
      * P088. Merge Sorted Array
      */
     public void p088_merge(int[] nums1, int m, int[] nums2, int n) {
