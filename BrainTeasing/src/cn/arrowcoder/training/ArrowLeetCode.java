@@ -619,6 +619,27 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P023. Merge k Sorted Lists
+     */
+    public ListNode p023_mergeKLists(ListNode[] lists) {
+        if (lists == null || lists.length == 0)
+            return null;
+        int k = lists.length;
+        double realheight = Math.log(k) / Math.log(2);
+        int height = (int) realheight;
+        height = height < realheight ? height + 1 : height;
+        int step = 1;
+        for (int i = 0; i < height; i++) {
+            step *= 2;
+            for (int j = 0; j < k; j += step) {
+                int offset = j / 2;
+                lists[j] = p021_mergeTwoLists(lists[j], j + offset < k ? lists[j + offset] : null);
+            }
+        }
+        return lists[0];
+    }
+
+    /**
      * P027. Remove Element
      */
     public int p027_removeElement(int[] nums, int val) {
