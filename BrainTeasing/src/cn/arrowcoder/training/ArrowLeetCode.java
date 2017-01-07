@@ -877,6 +877,46 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P204. Count Primes
+     */
+    public int countPrimes(int n) {
+        if (n <= 1)
+            return 0;
+        boolean[] primes = new boolean[n];
+        for (int i = 0; i < n; i++)
+            primes[i] = true;
+        int count = 0;
+        for (int i = 2; i * i < n; i++) {
+            if (primes[i]) {
+                for (int j = i * i; j < n; j += i)
+                    primes[j] = false;
+            }
+        }
+        for (int i = 2; i < n; i++)
+            if (primes[i])
+                count++;
+        return count;
+    }
+
+    /**
+     * P283. Move Zeroes
+     */
+    public void p283_moveZeroes(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return;
+        int index = 0;
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                int temp = nums[index];
+                nums[index] = nums[i];
+                nums[i] = temp;
+                index++;
+            }
+        }
+        return;
+    }
+
+    /**
      * P344. Reverse String
      */
     public String p344_reverseString(String s) {
@@ -921,24 +961,6 @@ public class ArrowLeetCode {
     private boolean isVowel(char c) {
         return c == 'a' || c == 'A' || c == 'e' || c == 'E' || c == 'i' || c == 'I' || c == 'o' || c == 'O' || c == 'u'
                 || c == 'U';
-    }
-
-    /**
-     * P283. Move Zeroes
-     */
-    public void p283_moveZeroes(int[] nums) {
-        if (nums == null || nums.length == 0)
-            return;
-        int index = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if (nums[i] != 0) {
-                int temp = nums[index];
-                nums[index] = nums[i];
-                nums[i] = temp;
-                index++;
-            }
-        }
-        return;
     }
 
     /**
