@@ -592,6 +592,33 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P022. Generate Parentheses
+     */
+    public List<String> p022_generateParenthesis(int n) {
+        List<String> ret = new LinkedList<>();
+        if (n <= 0)
+            return ret;
+        p022_aux(1, 0, n, "(", ret);
+        return ret;
+    }
+
+    private void p022_aux(int l, int r, int n, String temp, List<String> ret) {
+        if (l == n && l == r) {
+            ret.add(temp);
+            return;
+        }
+        if (l < n && l != r) {
+            p022_aux(l + 1, r, n, temp + "(", ret);
+        }
+        if (l > r) {
+            p022_aux(l, r + 1, n, temp + ")", ret);
+        }
+        if (l == r) {
+            p022_aux(l + 1, r, n, temp + "(", ret);
+        }
+    }
+
+    /**
      * P027. Remove Element
      */
     public int p027_removeElement(int[] nums, int val) {
