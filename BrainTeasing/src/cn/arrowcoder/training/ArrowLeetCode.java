@@ -899,7 +899,7 @@ public class ArrowLeetCode {
     }
 
     /**
-     * P263. Ugly Number
+     * P263. Ugly Number I
      */
     public boolean p263_isUgly(int num) {
         if (num <= 0)
