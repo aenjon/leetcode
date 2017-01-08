@@ -1,6 +1,5 @@
 package cn.arrowcoder.training;
 
-import cn.arrow.brainteasing.ListNode;
 import cn.arrow.brainteasing.TeasingUtil;
 
 public class ArrowCodeTest {
@@ -513,13 +512,13 @@ public class ArrowCodeTest {
         /**
          * P148. Sort List
          */
-        ListNode list = new ListNode(2);
-        list.next = new ListNode(1);
-        list.next.next = new ListNode(4);
-        list.next.next.next = new ListNode(3);
-        list.next.next.next.next = new ListNode(1);
-        TeasingUtil.printList(list);
-        TeasingUtil.printList(arrowcode.p147_insertionSortList2(list));
+        // ListNode list = new ListNode(2);
+        // list.next = new ListNode(1);
+        // list.next.next = new ListNode(4);
+        // list.next.next.next = new ListNode(3);
+        // list.next.next.next.next = new ListNode(1);
+        // TeasingUtil.printList(list);
+        // TeasingUtil.printList(arrowcode.p147_insertionSortList2(list));
 
         /**
          * Problem #90 Subsets II
@@ -642,6 +641,16 @@ public class ArrowCodeTest {
          * int x = 19023; System.out.println(arrowcode.addDigits(x));
          * System.out.println((x % 9) == 0 ? 9 : x % 9);
          */
+
+        /**
+         * P263
+         */
+        // System.out.println(arrowcode.p263_isUgly(7));
+
+        /**
+         * P264
+         */
+        System.out.println(arrowcode.p264_nthUglyNumber(7));
         /**
          * Problem #268 Missing Number
          */

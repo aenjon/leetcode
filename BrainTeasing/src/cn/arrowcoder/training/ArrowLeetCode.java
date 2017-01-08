@@ -879,7 +879,7 @@ public class ArrowLeetCode {
     /**
      * P204. Count Primes
      */
-    public int countPrimes(int n) {
+    public int p204_countPrimes(int n) {
         if (n <= 1)
             return 0;
         boolean[] primes = new boolean[n];
@@ -896,6 +896,40 @@ public class ArrowLeetCode {
             if (primes[i])
                 count++;
         return count;
+    }
+
+    /**
+     * P263. Ugly Number
+     */
+    public boolean p263_isUgly(int num) {
+        if (num <= 0)
+            return false;
+        int[] divisors = { 2, 3, 5 };
+        for (int d : divisors) {
+            while (num % d == 0)
+                num /= d;
+        }
+        return (num == 1);
+    }
+
+    /**
+     * P264. Ugly Number II
+     */
+    public int p264_nthUglyNumber(int n) {
+        int[] ugly = new int[n];
+        ugly[0] = 1;
+        int index2 = 0, index3 = 0, index5 = 0;
+        int f2 = 2, f3 = 3, f5 = 5;
+        for (int i = 1; i < n; i++) {
+            ugly[i] = Math.min(f2, Math.min(f3, f5));
+            if (f2 == ugly[i])
+                f2 = 2 * ugly[++index2];
+            if (f3 == ugly[i])
+                f3 = 3 * ugly[++index3];
+            if (f5 == ugly[i])
+                f5 = 5 * ugly[++index5];
+        }
+        return ugly[n - 1];
     }
 
     /**
