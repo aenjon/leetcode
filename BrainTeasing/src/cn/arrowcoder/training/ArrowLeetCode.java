@@ -917,6 +917,31 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P206. Reverse Linked List
+     */
+
+    public ListNode p206a_reverseList(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        ListNode tail = head.next;
+        ListNode rest = p206a_reverseList(head.next);
+        tail.next = head;
+        head.next = null;
+        return rest;
+    }
+
+    public ListNode p206b_reverseList(ListNode head) {
+        ListNode dummy = new ListNode(0);
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = dummy.next;
+            dummy.next = head;
+            head = next;
+        }
+        return dummy.next;
+    }
+
+    /**
      * P263. Ugly Number I
      */
     public boolean p263_isUgly(int num) {
