@@ -669,7 +669,7 @@ public class ArrowLeetCode {
         while (fast != null) {
             while (fast != null && i++ < k)
                 fast = fast.next;
-            if (fast == null)
+            if (i < k)
                 break;
             ListNode cur = prek.next;
             while (cur.next != fast) {
@@ -682,6 +682,21 @@ public class ArrowLeetCode {
             i = 0;
         }
         return dummy.next;
+    }
+
+    /**
+     * P026. Remove Duplicates from Sorted Array
+     */
+    public int p026_removeDuplicates(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return 0;
+        int low = 0, high = 1;
+        while (high < nums.length) {
+            if (nums[high] != nums[low])
+                nums[++low] = nums[high];
+            high++;
+        }
+        return low + 1;
     }
 
     /**
