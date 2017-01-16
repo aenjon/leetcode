@@ -658,6 +658,33 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P025. Reverse Nodes in k-Group
+     */
+    public ListNode p025_reverseKGroup(ListNode head, int k) {
+        int i = 0;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode prek = dummy;
+        ListNode fast = head;
+        while (fast != null) {
+            while (fast != null && i++ < k)
+                fast = fast.next;
+            if (fast == null)
+                break;
+            ListNode cur = prek.next;
+            while (cur.next != fast) {
+                ListNode ln = cur.next.next;
+                cur.next.next = prek.next;
+                prek.next = cur.next;
+                cur.next = ln;
+            }
+            prek = cur;
+            i = 0;
+        }
+        return dummy.next;
+    }
+
+    /**
      * P027. Remove Element
      */
     public int p027_removeElement(int[] nums, int val) {
