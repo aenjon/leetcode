@@ -717,6 +717,24 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P028. Implement strStr()
+     */
+    public int p028_strStr(String haystack, String needle) {
+        if (haystack == null || needle == null || haystack.length() < needle.length())
+            return -1;
+        int i = 0, j = 0;
+        for (i = 0; i <= haystack.length() - needle.length(); i++) {
+            for (j = 0; j < needle.length(); j++) {
+                if (needle.charAt(j) != haystack.charAt(i + j))
+                    break;
+            }
+            if (j == needle.length())
+                break;
+        }
+        return j == needle.length() ? i : -1;
+    }
+
+    /**
      * P075. Sort Colors
      */
     public void p075_sortColors(int[] nums) {
