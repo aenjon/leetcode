@@ -717,6 +717,50 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P028. Implement strStr()
+     */
+    public int p028_strStr(String haystack, String needle) {
+        if (haystack == null || needle == null || haystack.length() < needle.length())
+            return -1;
+        int i = 0, j = 0;
+        for (i = 0; i <= haystack.length() - needle.length(); i++) {
+            for (j = 0; j < needle.length(); j++) {
+                if (needle.charAt(j) != haystack.charAt(i + j))
+                    break;
+            }
+            if (j == needle.length())
+                break;
+        }
+        return j == needle.length() ? i : -1;
+    }
+
+    /**
+     * P029. Divide Two Integers
+     */
+    public int p029_divide(int dividend, int divisor) {
+        long ret = 0;
+        if (divisor == 0)
+            return Integer.MAX_VALUE;
+        long sign = (dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0) ? 1 : -1;
+        long remainder = Math.abs((long) dividend);
+        long pdiv = Math.abs((long) divisor);
+        while (remainder >= pdiv) {
+            long moves = -1;
+            long temp = pdiv;
+            while (temp <= remainder) {
+                moves++;
+                temp <<= 1;
+            }
+            if (moves >= 0) {
+                ret += 1L << moves;
+                remainder -= (temp >> 1);
+            }
+        }
+        ret *= sign;
+        return ret > Integer.MAX_VALUE || ret < Integer.MIN_VALUE ? Integer.MAX_VALUE : (int) ret;
+    }
+
+    /**
      * P075. Sort Colors
      */
     public void p075_sortColors(int[] nums) {

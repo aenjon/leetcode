@@ -369,9 +369,9 @@ public class ArrowCodeTest {
         /**
          * Problem #29 Divide Two Integers
          */
-        /*
-         * int a = 180; int b = 29; System.out.println(arrowcode.divide(a, b));
-         */
+
+        System.out.println(arrowcode.p029_divide(-2147483648, -1));
+
         /**
          * Problem #30 Substring with Concatenation of All Words
          */
@@ -650,7 +650,7 @@ public class ArrowCodeTest {
         /**
          * P264
          */
-        System.out.println(arrowcode.p264_nthUglyNumber(7));
+        // System.out.println(arrowcode.p264_nthUglyNumber(7));
         /**
          * Problem #268 Missing Number
          */
