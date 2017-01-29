@@ -857,6 +857,74 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P033. Search in Rotated Sorted Array
+     */
+    public int p033_search(int[] nums, int target) {
+        if (nums == null || nums.length == 0)
+            return -1;
+        int low = 0, high = nums.length - 1, mid = 0;
+        while (low <= high) {
+            mid = (low + high) / 2;
+            if (target == nums[mid])
+                return mid;
+            else if (nums[high] >= nums[mid])
+                if (target > nums[mid] && target <= nums[high])
+                    low = mid + 1;
+                else
+                    high = mid - 1;
+            else if (target >= nums[low] && target < nums[mid])
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+        return -1;
+    }
+
+    /**
+     * P034. Search for a Range
+     */
+    public int[] p034_searchRange(int[] nums, int target) {
+        int[] ret = new int[2];
+        ret[0] = -1;
+        ret[1] = -1;
+        if (nums == null || nums.length == 0)
+            return ret;
+        int low = 0, high = nums.length - 1, mid;
+        while (high - low > 1) {
+            mid = (low + high) / 2;
+            if (target < nums[mid])
+                high = mid - 1;
+            else if (target == nums[mid])
+                high = mid;
+            else
+                low = mid + 1;
+        }
+
+        if (target == nums[low])
+            ret[0] = low;
+        else if (target == nums[high])
+            ret[0] = high;
+
+        low = 0;
+        high = nums.length - 1;
+        mid = 0;
+        while (high - low > 1) {
+            mid = (low + high) / 2;
+            if (target < nums[mid])
+                high = mid - 1;
+            else if (target == nums[mid])
+                low = mid;
+            else
+                low = mid + 1;
+        }
+        if (target == nums[high])
+            ret[1] = high;
+        else if (target == nums[low])
+            ret[1] = low;
+        return ret;
+    }
+
+    /**
      * P075. Sort Colors
      */
     public void p075_sortColors(int[] nums) {

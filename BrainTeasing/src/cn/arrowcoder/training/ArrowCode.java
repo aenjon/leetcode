@@ -1299,8 +1299,8 @@ public class ArrowCode {
                     s = m + 1;
                 else
                     e = m - 1;
-            else// (nums[m] >= nums[s])
-            if (target >= nums[s] && target <= nums[m])
+            else if (target >= nums[s] && target <= nums[m])
+                // (nums[m] >= nums[s])
                 e = m - 1;
             else
                 s = m + 1;
