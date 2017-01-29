@@ -375,14 +375,22 @@ public class ArrowCodeTest {
         /**
          * Problem #30 Substring with Concatenation of All Words
          */
+
         /*
-         * String s0 = "wefoobarbarfoobar"; String[] words = {"foo", "bar",
-         * "bar"}; String s1 = "baaababababa"; String[] words1 = {"a","b","a"};
-         * String s2 = "cbaccbcbbc"; String[] words2 = {"cb","bc"};
+         * String s0 = "wefoobarbarfoobar"; String[] words = { "foo", "bar",
+         * "bar" }; String s1 = "baaababababa"; String[] words1 = { "a", "b",
+         * "a" };
+         */
+
+        String s2 = "barfoofoobarthefoobarman";
+        String[] words2 = { "foo", "bar", "the" };
+        TeasingUtil.printList(arrowcode.p030_findSubstring2(s2, words2));
+        // TeasingUtil.printList(arrowcode.p030_findSubstring2(s0, words));
+        // TeasingUtil.printList(arrowcode.p030_findSubstring(s1, words1));
+        // TeasingUtil.printList(arrowcode.p030_findSubstring(s2, words2));
+
+        /**
          * //TeasingUtil.printListInteger(arrowcode.findSubstring2(s2, words2));
-         * TeasingUtil.printList(arrowcode.findSubstring3(s0, words));
-         * TeasingUtil.printList(arrowcode.findSubstring3(s1, words1));
-         * TeasingUtil.printList(arrowcode.findSubstring3(s2, words2));
          */
         /**
          * Problem #31 Next Permutation

@@ -735,7 +735,6 @@ public class ArrowLeetCode {
     }
 
     /**
-<<<<<<< HEAD
      * P029. Divide Two Integers
      */
     public int p029_divide(int dividend, int divisor) {
@@ -762,8 +761,102 @@ public class ArrowLeetCode {
     }
 
     /**
-=======
->>>>>>> 7b8e04306a511eedf2312dc9340d9821b103b098
+     * P030. Substring with Concatenation of All Words
+     */
+    public List<Integer> p030_findSubstring(String s, String[] words) {
+        List<Integer> ret = new LinkedList<Integer>();
+        if (s == null || words == null || s.isEmpty() || words.length == 0)
+            return ret;
+        HashMap<String, Integer> wordmap = new HashMap<String, Integer>();
+        resetWordSet(words, wordmap);
+        int i = 0, wordlen = words[0].length();
+        for (i = 0; i <= s.length() - words.length * wordlen; i++) {
+            boolean changed = false;
+            int j = 0;
+            for (j = 0; j < words.length * wordlen; j += wordlen) {
+                String cur = s.substring(i + j, i + j + wordlen);
+                if (wordmap.containsKey(cur)) {
+                    changed = true;
+                    wordmap.put(cur, wordmap.get(cur).intValue() - 1);
+                    if (wordmap.get(cur).intValue() == 0)
+                        wordmap.remove(cur);
+                } else
+                    break;
+            }
+            if (wordmap.isEmpty())
+                ret.add(i);
+            if (changed)
+                resetWordSet(words, wordmap);
+        }
+        return ret;
+    }
+
+    private void resetWordSet(String[] words, HashMap<String, Integer> wordmap) {
+        wordmap.clear();
+        for (String s : words) {
+            if (!wordmap.containsKey(s)) {
+                wordmap.put(s, 1);
+            } else {
+                wordmap.put(s, wordmap.get(s).intValue() + 1);
+            }
+        }
+    }
+
+    public List<Integer> p030_findSubstring2(String s, String[] words) {
+        List<Integer> ret = new LinkedList<Integer>();
+        if (s == null || words == null || s.isEmpty() || words.length == 0)
+            return ret;
+        HashMap<String, Integer> dict = new HashMap<String, Integer>();
+        for (int i = 0; i < words.length; ++i) {
+            setDict(words[i], dict, 1);
+        }
+        int wlen = words[0].length();
+        int slen = s.length();
+        for (int i = 0; i < wlen; i++) {
+            int left = i, count = 0;
+            HashMap<String, Integer> tdict = new HashMap<String, Integer>();
+            for (int j = i; j <= slen - wlen; j += wlen) {
+                String cur = s.substring(j, j + wlen);
+                if (dict.containsKey(cur)) {
+                    setDict(cur, tdict, 1);
+                    if (tdict.get(cur).intValue() <= dict.get(cur).intValue()) {
+                        count++;
+                    } else {
+                        while (tdict.get(cur).intValue() > dict.get(cur).intValue()) {
+                            String head = s.substring(left, left + wlen);
+                            setDict(head, tdict, -1);
+                            if (tdict.get(head).intValue() < dict.get(head).intValue()) {
+                                count--;
+                            }
+                            left += wlen;
+                        }
+                    }
+                    if (count == words.length) {
+                        ret.add(left);
+                        setDict(s.substring(left, left + wlen), tdict, -1);
+                        count--;
+                        left += wlen;
+                    }
+
+                } else {
+                    tdict.clear();
+                    count = 0;
+                    left = j + wlen;
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    private void setDict(String word, HashMap<String, Integer> dict, int offset) {
+        if (!dict.containsKey(word))
+            dict.put(word, 1);
+        else
+            dict.put(word, dict.get(word).intValue() + offset);
+    }
+
+    /**
      * P075. Sort Colors
      */
     public void p075_sortColors(int[] nums) {
