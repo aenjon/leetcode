@@ -382,9 +382,9 @@ public class ArrowCodeTest {
          * "a" };
          */
 
-        String s2 = "barfoofoobarthefoobarman";
-        String[] words2 = { "foo", "bar", "the" };
-        TeasingUtil.printList(arrowcode.p030_findSubstring2(s2, words2));
+        // String s2 = "barfoofoobarthefoobarman";
+        // String[] words2 = { "foo", "bar", "the" };
+        // TeasingUtil.printList(arrowcode.p030_findSubstring2(s2, words2));
         // TeasingUtil.printList(arrowcode.p030_findSubstring2(s0, words));
         // TeasingUtil.printList(arrowcode.p030_findSubstring(s1, words1));
         // TeasingUtil.printList(arrowcode.p030_findSubstring(s2, words2));
@@ -495,6 +495,10 @@ public class ArrowCodeTest {
          */
         // TeasingUtil.printListList(arrowcode.permuteUnique(nums));
 
+        /**
+         * P050. Pow(x, n)
+         */
+        System.out.println(arrowcode.p050_myPow(2.0, -2147483648));
         /**
          * Problem #77 Combinations
          */

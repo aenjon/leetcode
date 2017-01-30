@@ -925,6 +925,50 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P035. Search Insert Position
+     */
+    public int p035_searchInsert(int[] nums, int target) {
+        int ret = 0;
+        int s = 0, e = nums.length - 1, mid;
+        while (s < e) {
+            mid = (s + e) / 2;
+            if (target == nums[mid])
+                return mid;
+            else if (target < nums[mid])
+                e = mid - 1;
+            else
+                s = mid + 1;
+        }
+        if (target <= nums[s])
+            ret = s;
+        else
+            ret = s + 1;
+        return ret;
+    }
+
+    /**
+     * P050. Pow(x, n)
+     */
+    public double p050_myPow(double x, int n) {
+        double ret = 1.0;
+        if (x == 0.0)
+            return n >= 0 ? x : Double.MAX_VALUE;
+        long p;
+        if (n < 0) {
+            p = -(long) n;
+            x = 1 / x;
+        } else
+            p = n;
+        while (p > 0) {
+            if ((p & 1) == 1)
+                ret *= x;
+            x = x * x;
+            p >>= 1;
+        }
+        return ret;
+    }
+
+    /**
      * P075. Sort Colors
      */
     public void p075_sortColors(int[] nums) {
