@@ -1014,6 +1014,43 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P081. Search in Rotated Sorted Array II
+     */
+    public boolean p081_search(int[] nums, int target) {
+        boolean ret = false;
+        int low = 0, high = nums.length - 1, mid = 0;
+        while (low <= high) {
+            mid = (low + high) / 2;
+            if (target == nums[mid]) {
+                ret = true;
+                break;
+            }
+            boolean dup = false;
+            if (low <= mid && nums[low] == nums[mid]) {
+                dup = true;
+                low++;
+            }
+            if (mid <= high && nums[mid] == nums[high]) {
+                dup = true;
+                high--;
+            }
+            if (dup)
+                continue;
+
+            if (nums[low] < nums[mid])
+                if (target >= nums[low] && target < nums[mid])
+                    high = mid - 1;
+                else
+                    low = mid + 1;
+            else if (target > nums[mid] && target <= nums[high])
+                low = mid + 1;
+            else
+                high = mid - 1;
+        }
+        return ret;
+    }
+
+    /**
      * P088. Merge Sorted Array
      */
     public void p088_merge(int[] nums1, int m, int[] nums2, int n) {
