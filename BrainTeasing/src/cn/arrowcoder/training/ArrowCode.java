@@ -2454,6 +2454,25 @@ public class ArrowCode {
     }
 
     /**
+     * P069. Sqrt(x)
+     */
+    public int p069_mySqrt(int x) {
+        if (x < 0)
+            return -1;
+        int low = 0, high = x, m = (low + high) / 2;
+        while (low < high) {
+            int mid = x / m;
+            if (m == mid)
+                break;
+            else if (m > mid)
+                high = m;
+            else
+                low = m;
+        }
+        return m;
+    }
+
+    /**
      * Problem #70 Climbing Stairs DP, current solution is the sum of the
      * previous two
      */

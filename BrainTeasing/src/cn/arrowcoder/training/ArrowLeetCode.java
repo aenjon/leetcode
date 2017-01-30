@@ -969,6 +969,28 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P069. Sqrt(x)
+     */
+    public int p069_mySqrt(int x) {
+        if (x < 0)
+            return -1;
+        if (x == 1)
+            return 1;
+        int low = 0, high = x, m = (low + high) / 2;
+        while (high - low > 1) {
+            int mid = x / m;
+            if (m == mid)
+                break;
+            else if (m > mid)
+                high = m;
+            else
+                low = m;
+            m = (low + high) / 2;
+        }
+        return m;
+    }
+
+    /**
      * P075. Sort Colors
      */
     public void p075_sortColors(int[] nums) {
