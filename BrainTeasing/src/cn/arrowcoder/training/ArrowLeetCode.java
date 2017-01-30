@@ -1248,6 +1248,23 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P153. Find Minimum in Rotated Sorted Array
+     */
+    public int p153_findMin(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return Integer.MIN_VALUE;
+        int low = 0, high = nums.length, mid = (low + high) / 2;
+        while (high - low > 1) {
+            if (nums[mid] < nums[high])
+                high = mid;
+            else
+                low = mid;
+            mid = (low + high) / 2;
+        }
+        return nums[low] < nums[high] ? nums[low] : nums[high];
+    }
+
+    /**
      * P204. Count Primes
      */
     public int p204_countPrimes(int n) {
