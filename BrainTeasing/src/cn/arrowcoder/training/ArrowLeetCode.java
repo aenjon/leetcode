@@ -947,6 +947,33 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P038. Count and Say
+     */
+    public String p038_countAndSay(int n) {
+
+       if (n <= 0) return "";
+   		String ret = "1";
+       for (int i=1;i<n;i++){
+    	   char curChar = ret.charAt(0);
+    	   int counter = 1;
+    	   StringBuilder tmp = new StringBuilder();
+    	   for (int j=1; j<ret.length(); j++){
+    		   if (curChar == ret.charAt(j))
+    			   counter++;
+    		   else {
+    			   tmp += String.valueOf(counter) + String.valueOf(curChar);
+    			   curChar = ret.charAt(j);
+    			   counter = 1;
+    		   }
+    	   }
+    	   tmp += String.valueOf(counter) + String.valueOf(curChar);
+    	   ret = tmp;
+       }
+       return ret;
+       
+    }
+    
+    /**
      * P050. Pow(x, n)
      */
     public double p050_myPow(double x, int n) {
