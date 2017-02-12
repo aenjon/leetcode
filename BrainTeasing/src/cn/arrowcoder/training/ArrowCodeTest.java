@@ -502,7 +502,7 @@ public class ArrowCodeTest {
         System.out.println("start test");
         long[] l1 = { 13, -90, 90, 8 };
         long[] l2 = { 100, 2 };
-        long[] l3 = arrowcode.sort(l1, l2);
+        long[] l3 = arrowcode.p_1000Sort(l1, l2);
         TeasingUtil.printList(l3);
         /**
          * Problem #77 Combinations

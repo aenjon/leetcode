@@ -1003,6 +1003,37 @@ public class ArrowLeetCode {
     }
 
     /**
+     * 40. Combination Sum II
+     */
+    public List<List<Integer>> p040_combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (candidates == null || candidates.length == 0)
+            return ret;
+        Arrays.sort(candidates);
+        p040_aux(ret, new LinkedList<Integer>(), 0, candidates, target);
+        return ret;
+    }
+
+    private void p040_aux(List<List<Integer>> ret, List<Integer> item, int index, int[] nums, int target) {
+        if (target == 0) {
+            ret.add(item);
+            return;
+        }
+        for (int i = index; i < nums.length; i++) {
+            int subtarget = target - nums[i];
+            if (subtarget >= 0) {
+                List<Integer> newitem = new LinkedList<Integer>(item);
+                newitem.add(nums[i]);
+                p040_aux(ret, newitem, i + 1, nums, subtarget);
+                while (i < nums.length - 1 && nums[i] == nums[i + 1])
+                    i++;
+            } else {
+                break;
+            }
+        }
+    }
+
+    /**
      * P050. Pow(x, n)
      */
     public double p050_myPow(double x, int n) {
