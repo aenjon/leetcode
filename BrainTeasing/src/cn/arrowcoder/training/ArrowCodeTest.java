@@ -498,7 +498,12 @@ public class ArrowCodeTest {
         /**
          * P050. Pow(x, n)
          */
-        System.out.println(arrowcode.p050_myPow(2.0, -2147483648));
+        // System.out.println(arrowcode.p050_myPow(2.0, -2147483648));
+        System.out.println("start test");
+        long[] l1 = { 13, -90, 90, 8 };
+        long[] l2 = { 100, 2 };
+        long[] l3 = arrowcode.sort(l1, l2);
+        TeasingUtil.printList(l3);
         /**
          * Problem #77 Combinations
          */

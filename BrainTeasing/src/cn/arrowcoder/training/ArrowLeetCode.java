@@ -950,29 +950,58 @@ public class ArrowLeetCode {
      * P038. Count and Say
      */
     public String p038_countAndSay(int n) {
-
-       if (n <= 0) return "";
-   		String ret = "1";
-       for (int i=1;i<n;i++){
-    	   char curChar = ret.charAt(0);
-    	   int counter = 1;
-    	   StringBuilder tmp = new StringBuilder();
-    	   for (int j=1; j<ret.length(); j++){
-    		   if (curChar == ret.charAt(j))
-    			   counter++;
-    		   else {
-    			   tmp += String.valueOf(counter) + String.valueOf(curChar);
-    			   curChar = ret.charAt(j);
-    			   counter = 1;
-    		   }
-    	   }
-    	   tmp += String.valueOf(counter) + String.valueOf(curChar);
-    	   ret = tmp;
-       }
-       return ret;
-       
+        if (n <= 0)
+            return "";
+        String ret = "1";
+        for (int i = 1; i < n; i++) {
+            char curChar = ret.charAt(0);
+            int counter = 1;
+            StringBuilder tmp = new StringBuilder();
+            for (int j = 1; j < ret.length(); j++) {
+                if (curChar == ret.charAt(j))
+                    counter++;
+                else {
+                    tmp.append(counter).append(curChar);
+                    curChar = ret.charAt(j);
+                    counter = 1;
+                }
+            }
+            tmp.append(counter).append(curChar);
+            ret = tmp.toString();
+        }
+        return ret;
     }
-    
+
+    /**
+     * P039. Combination Sum
+     */
+
+    public List<List<Integer>> p039_combinationSum(int[] candidates, int target) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (candidates == null || candidates.length == 0)
+            return ret;
+        Arrays.sort(candidates);
+        p039_aux(ret, new LinkedList<Integer>(), 0, candidates, target);
+        return ret;
+    }
+
+    private void p039_aux(List<List<Integer>> ret, List<Integer> item, int index, int[] nums, int target) {
+        if (target == 0) {
+            ret.add(item);
+            return;
+        }
+        for (int i = index; i < nums.length; i++) {
+            int subtarget = target - nums[i];
+            if (subtarget >= 0) {
+                List<Integer> newitem = new LinkedList<Integer>(item);
+                newitem.add(nums[i]);
+                p039_aux(ret, newitem, i, nums, subtarget);
+            } else {
+                break;
+            }
+        }
+    }
+
     /**
      * P050. Pow(x, n)
      */
@@ -1525,5 +1554,61 @@ public class ArrowLeetCode {
          * low++; } } }
          */
         return sum == target;
+    }
+
+    public long[] p_1000Sort(long[] l1, long[] l2) {
+        quickSort(l1, 0, l1.length - 1);
+        quickSort(l2, 0, l2.length - 1);
+        long[] ret = new long[l1.length + l2.length];
+        for (int i = 0; i < l1.length; i++) {
+            ret[i] = l1[i];
+        }
+        this.merge(ret, l1.length, l2, l2.length);
+        return ret;
+    }
+
+    public void quickSort(long[] A, int start, int end) {
+        if (start < end) {
+            int q = partition(A, start, end);
+            quickSort(A, start, q - 1);
+            quickSort(A, q + 1, end);
+        }
+    }
+
+    public int partition(long[] A, int start, int end) {
+        int equal = 0;
+        long x = A[end];
+        int i = start - 1;
+        long temp;
+        for (int j = start; j < end; ++j) {
+
+            if (A[j] == x)
+                ++equal;
+            if (A[j] <= x) {
+                ++i;
+                temp = A[i];
+                A[i] = A[j];
+                A[j] = temp;
+            }
+        }
+        temp = A[i + 1];
+        A[i + 1] = A[end];
+        A[end] = temp;
+
+        if (equal == (end - start))
+            return i + 1 - equal / 2;
+        else
+            return i + 1;
+    }
+
+    public void merge(long[] nums1, int m, long[] nums2, int n) {
+        int len = m + n;
+        while (m > 0 && n > 0)
+            if (nums1[m - 1] > nums2[n - 1])
+                nums1[--len] = nums1[--m];
+            else
+                nums1[--len] = nums2[--n];
+        while (n > 0)
+            nums1[--len] = nums2[--n];
     }
 }
