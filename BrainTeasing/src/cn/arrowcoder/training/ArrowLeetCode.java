@@ -1066,7 +1066,7 @@ public class ArrowLeetCode {
     /**
      * P046. Permutations
      */
-    public List<List<Integer>> permute(int[] nums) {
+    public List<List<Integer>> p046_permute(int[] nums) {
         List<List<Integer>> ret = new LinkedList<List<Integer>>();
         if (nums == null || nums.length == 0)
             return ret;
@@ -1083,6 +1083,56 @@ public class ArrowLeetCode {
                 }
             }
             ret = tmp;
+        }
+        return ret;
+    }
+
+    public List<List<Integer>> p046_permute2(int[] nums) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (nums == null || nums.length == 0)
+            return ret;
+        boolean[] used = new boolean[nums.length];
+        p046_aux(ret, new ArrayList<Integer>(), used, nums);
+        return ret;
+    }
+
+    private void p046_aux(List<List<Integer>> ret, List<Integer> item, boolean[] used, int[] nums) {
+        if (nums.length == item.size()) {
+            ret.add(item);
+            return;
+        }
+        for (int i = 0; i < nums.length; i++) {
+            if (used[i])
+                continue;
+            List<Integer> newitem = new ArrayList<Integer>(item);
+            newitem.add(nums[i]);
+            used[i] = true;
+            p046_aux(ret, newitem, used, nums);
+            used[i] = false;
+        }
+    }
+
+    /**
+     * P047. Permutations II
+     */
+    public List<List<Integer>> p047_permuteUnique(int[] nums) {
+        List<List<Integer>> ret = new ArrayList<List<Integer>>();
+        if (nums == null || nums.length == 0)
+            return ret;
+        List<Integer> first = new ArrayList<Integer>();
+        first.add(nums[0]);
+        ret.add(first);
+        for (int i = 1; i < nums.length; i++) {
+            HashSet<List<Integer>> tmp = new HashSet<List<Integer>>();
+            for (List<Integer> item : ret) {
+                for (int j = 0; j <= item.size(); j++) {
+                    List<Integer> newitem = new ArrayList<Integer>(item);
+                    newitem.add(j, nums[i]);
+                    tmp.add(newitem);
+                }
+            }
+            ret = new ArrayList<List<Integer>>();
+            ret.addAll(tmp);
         }
         return ret;
     }
