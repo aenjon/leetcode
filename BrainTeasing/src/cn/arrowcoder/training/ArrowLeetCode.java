@@ -1138,6 +1138,40 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P049. Group Anagrams
+     */
+    public List<List<String>> p049_groupAnagrams(String[] strs) {
+        List<List<String>> ret = new ArrayList<List<String>>();
+        if (strs == null || strs.length == 0)
+            return ret;
+        int[] PRIMES = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97,
+                101, 107 };
+        HashMap<Long, List<Integer>> hm = new HashMap<Long, List<Integer>>();
+        for (int i = 0; i < strs.length; i++) {
+            String cur = strs[i];
+            if (cur == null)
+                continue;
+            long product = 1;
+            for (int j = 0; j < cur.length(); j++)
+                product *= PRIMES[cur.charAt(j) - 'a'];
+            List<Integer> list = hm.get(product);
+            if (list == null) {
+                list = new ArrayList<Integer>();
+                hm.put(product, list);
+            }
+            list.add(i);
+        }
+        for (Long product : hm.keySet()) {
+            List<Integer> list = hm.get(product);
+            List<String> item = new ArrayList<String>();
+            for (Integer i : list)
+                item.add(strs[i.intValue()]);
+            ret.add(item);
+        }
+        return ret;
+    }
+
+    /**
      * P050. Pow(x, n)
      */
     public double p050_myPow(double x, int n) {
