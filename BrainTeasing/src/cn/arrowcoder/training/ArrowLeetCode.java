@@ -1064,6 +1064,30 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P046. Permutations
+     */
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> ret = new LinkedList<List<Integer>>();
+        if (nums == null || nums.length == 0)
+            return ret;
+        List<Integer> first = new LinkedList<Integer>();
+        first.add(nums[0]);
+        ret.add(first);
+        for (int i = 1; i < nums.length; i++) {
+            List<List<Integer>> tmp = new LinkedList<List<Integer>>();
+            for (List<Integer> item : ret) {
+                for (int j = 0; j <= item.size(); j++) {
+                    List<Integer> newitem = new LinkedList<Integer>(item);
+                    newitem.add(j, nums[i]);
+                    tmp.add(newitem);
+                }
+            }
+            ret = tmp;
+        }
+        return ret;
+    }
+
+    /**
      * P050. Pow(x, n)
      */
     public double p050_myPow(double x, int n) {
