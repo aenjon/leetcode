@@ -1249,6 +1249,20 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P058. Length of Last Word
+     */
+    public int p058_lengthOfLastWord(String s) {
+        int ret = 0;
+        if (s == null || s.isEmpty())
+            return ret;
+        for (int i = s.length()-1; i>=0; i--){
+            if (s.charAt(i) == ' ')
+                con
+        }
+        return ret;
+    }
+
+    /**
      * P069. Sqrt(x)
      */
     public int p069_mySqrt(int x) {
