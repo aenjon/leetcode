@@ -1209,6 +1209,46 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P056. Merge Intervals
+     */
+    public class Interval {
+        int start;
+        int end;
+
+        Interval() {
+            start = 0;
+            end = 0;
+        }
+
+        Interval(int s, int e) {
+            start = s;
+            end = e;
+        }
+    }
+
+    public List<Interval> p056_merge(List<Interval> intervals) {
+        int n = intervals.size();
+        int[] starts = new int[n];
+        int[] ends = new int[n];
+        int k = 0;
+        for (Interval interval : intervals) {
+            starts[k] = interval.start;
+            ends[k] = interval.end;
+            k++;
+        }
+        Arrays.sort(starts);
+        Arrays.sort(ends);
+        List<Interval> ret = new ArrayList<Interval>();
+        for (int i = 0, j = 0; i < n; i++) {
+            if (i == n - 1 || starts[i + 1] > ends[i]) {
+                ret.add(new Interval(starts[j], ends[i]));
+                j = i + 1;
+            }
+        }
+        return ret;
+    }
+
+    /**
      * P069. Sqrt(x)
      */
     public int p069_mySqrt(int x) {
