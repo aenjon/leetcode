@@ -1194,6 +1194,21 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P053. Maximum Sub-array
+     */
+    public int p053_maxSubArray(int[] nums) {
+        if (nums == null || nums.length == 0)
+            return -1;
+        int maxsum = Integer.MIN_VALUE, cursum = 0;
+        for (int i = 0; i < nums.length; i++) {
+            cursum += nums[i];
+            maxsum = maxsum > cursum ? maxsum : cursum;
+            cursum = cursum < 0 ? 0 : cursum;
+        }
+        return maxsum;
+    }
+
+    /**
      * P069. Sqrt(x)
      */
     public int p069_mySqrt(int x) {
