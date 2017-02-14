@@ -1488,6 +1488,21 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P152. Maximum Product Subarray
+     */
+    public int p152_maxProduct(int[] nums) {
+        int ret = nums[0];
+        for (int i = 1, imax = ret, imin = ret; i < nums.length; i++) {
+            if (nums[i] < 0)
+                imax = imax ^ imin ^ (imin = imax);
+            imax = Math.max(nums[i], imax * nums[i]);
+            imin = Math.min(nums[i], imin * nums[i]);
+            ret = Math.max(ret, imax);
+        }
+        return ret;
+    }
+
+    /**
      * P153. Find Minimum in Rotated Sorted Array
      */
     public int p153_findMin(int[] nums) {
