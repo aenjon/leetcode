@@ -1255,9 +1255,17 @@ public class ArrowLeetCode {
         int ret = 0;
         if (s == null || s.isEmpty())
             return ret;
-        for (int i = s.length()-1; i>=0; i--){
+        boolean start = false;
+        for (int i = s.length() - 1; i >= 0; i--) {
             if (s.charAt(i) == ' ')
-                con
+                if (!start)
+                    continue;
+                else
+                    break;
+            else {
+                start = true;
+                ret++;
+            }
         }
         return ret;
     }
