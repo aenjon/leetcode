@@ -1267,6 +1267,19 @@ public class ArrowLeetCode {
 
     /**
      * P060. Permutation Sequence
+     *
+     * Create a list of 1, 2, ... n.
+     *
+     * There are n-1 numbers starting with "1", n-1 numbers starting with "2",
+     * ... n-1 numbers starting with "n". k/(n-1) is the index of first digit of
+     * the sequence in the list. Pick the digit and remove it from the list.
+     *
+     * Then calculate k % (n-1) / (n-2), which is the index of the second digit
+     * of the sequence in the (rest) list. Also pick the digit and remove it
+     * from the list.
+     *
+     * Repeat until the last number
+     *
      */
     public String p060_getPermutation(int n, int k) {
         LinkedList<Integer> nums = new LinkedList<Integer>();
