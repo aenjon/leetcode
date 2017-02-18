@@ -1255,19 +1255,33 @@ public class ArrowLeetCode {
         int ret = 0;
         if (s == null || s.isEmpty())
             return ret;
-        boolean start = false;
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (s.charAt(i) == ' ')
-                if (!start)
-                    continue;
-                else
-                    break;
-            else {
-                start = true;
-                ret++;
-            }
+        int i = s.length() - 1;
+        while (i >= 0 && s.charAt(i) == ' ')
+            i--;
+        while (i >= 0 && s.charAt(i) != ' ') {
+            i--;
+            ret++;
         }
         return ret;
+    }
+
+    /**
+     * P060. Permutation Sequence
+     */
+    public String p060_getPermutation(int n, int k) {
+        LinkedList<Integer> nums = new LinkedList<Integer>();
+        int fact = 1;
+        for (int i = 1; i <= n; i++) {
+            nums.add(i);
+            fact *= i;
+        }
+        StringBuffer ret = new StringBuffer();
+        for (k--; n > 0; n--) {
+            fact /= n;
+            ret.append(nums.remove(k / fact));
+            k %= fact;
+        }
+        return ret.toString();
     }
 
     /**
