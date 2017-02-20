@@ -1298,6 +1298,27 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P061. Rotate List
+     */
+    public ListNode p061_rotateRight(ListNode head, int k) {
+        if (head == null || head.next == null || k <= 0)
+            return head;
+        int len = 1;
+        ListNode node = head;
+        while (node.next != null) {
+            node = node.next;
+            len++;
+        }
+        node.next = head;
+        k = len - k % len;
+        while (k-- > 0)
+            node = node.next;
+        head = node.next;
+        node.next = null;
+        return head;
+    }
+
+    /**
      * P069. Sqrt(x)
      */
     public int p069_mySqrt(int x) {
