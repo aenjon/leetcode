@@ -1380,6 +1380,29 @@ public class ArrowLeetCode {
     }
 
     /**
+     * P066. Plus One
+     */
+    public int[] p066_plusOne(int[] digits) {
+        int[] ret = null;
+        int c = 1, sum = 0;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            sum = digits[i] + c;
+            c = sum / 10;
+            digits[i] = sum % 10;
+        }
+        if (c == 0)
+            return ret = digits;
+        else {
+            ret = new int[digits.length + 1];
+            for (int i = digits.length - 1; i >= 0; i--) {
+                ret[i + 1] = digits[i];
+            }
+            ret[0] = c;
+        }
+        return ret;
+    }
+
+    /**
      * P069. Sqrt(x)
      */
     public int p069_mySqrt(int x) {
